@@ -1,0 +1,3 @@
+jugendstadtplan:
+    resource: "@KjrbJugendstadtplanBundle/Controller"
+    type: annotation
