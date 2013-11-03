@@ -14,6 +14,13 @@
     {% endstylesheets %}
 </head>
 <body>
+    {% for type, flashes in app.session.flashbag.all %}
+        <div class="flash-{{ type }}">
+            {% for flashMessage in flashes %}
+                {{ flashMessage }}
+            {% endfor %}
+        </div>
+    {% endfor %}
     {% block content %}{% endblock %}
     {% javascripts
             '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'
