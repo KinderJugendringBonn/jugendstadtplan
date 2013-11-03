@@ -13,6 +13,7 @@ class OrtType extends AbstractType {
             ->add('beschreibung', 'textarea', array('required' => false))
             ->add('longitude')
             ->add('latitude')
+            ->add('traeger', 'entity', array('class' => 'KjrbJugendstadtplanBundle:Traeger', 'property' => 'titel'))
             ->add('speichern', 'submit')
         ;
     }
