@@ -8,5 +8,13 @@
 </head>
 <body>
     {% block content %}{% endblock %}
+    {% javascripts
+            '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'
+            '@KjrbJugendstadtplanBundle/Resources/views/Public/js/*'
+
+        output='js/compiled/jugenstadtplan.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 </body>
 </html>
