@@ -1,1 +1,7 @@
 {% extends "KjrbJugendstadtplanBundle:Layout:base.html.twig" %}
+
+{% block content %}
+    <div>Zu den <a href="{{ path('kjrb_jugendstadtplan_angebot_index') }}">Angeboten</a></div>
+    <div>Zu den <a href="{{ path('kjrb_jugendstadtplan_ort_index') }}">Orten</a></div>
+    <div>Zu den <a href="{{ path('kjrb_jugendstadtplan_traeger_index') }}">Trägern</a></div>
+{% endblock %}
