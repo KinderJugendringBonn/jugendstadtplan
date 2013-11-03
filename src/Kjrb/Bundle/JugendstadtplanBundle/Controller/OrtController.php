@@ -52,7 +52,7 @@ class OrtController extends Controller {
     public function erstellenAction(Request $request) {
         $ort = new Ort();
 
-        $form = $this->createForm(new OrtType(), $ort);
+        $form = $this->createForm(new OrtType($this->get('translator')), $ort);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

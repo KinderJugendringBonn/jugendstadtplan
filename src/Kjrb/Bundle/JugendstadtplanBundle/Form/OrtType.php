@@ -4,8 +4,15 @@ namespace Kjrb\Bundle\JugendstadtplanBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class OrtType extends AbstractType {
+
+    protected $translator;
+
+    public function __construct(TranslatorInterface $translator) {
+        $this->translator = $translator;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
@@ -13,7 +20,12 @@ class OrtType extends AbstractType {
             ->add('beschreibung', 'textarea', array('required' => false))
             ->add('longitude')
             ->add('latitude')
-            ->add('traeger', 'entity', array('class' => 'KjrbJugendstadtplanBundle:Traeger', 'property' => 'titel'))
+            ->add('traeger', 'entity', array(
+                'class' => 'KjrbJugendstadtplanBundle:Traeger',
+                'property' => 'titel',
+                'empty_value' => $this->translator->trans('ort.option.kein_traeger'),
+                'required' => false
+            ))
             ->add('speichern', 'submit')
         ;
     }
