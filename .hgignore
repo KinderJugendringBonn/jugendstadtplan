@@ -3,6 +3,9 @@ syntax: glob
 .DS_Store
 .idea/
 web/bundles/
+web/css/
+web/js/
+web/compiled/
 app/bootstrap.php.cache
 app/cache/*
 app/config/parameters.yml
