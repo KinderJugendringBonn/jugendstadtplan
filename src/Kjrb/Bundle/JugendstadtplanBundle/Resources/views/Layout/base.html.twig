@@ -5,6 +5,10 @@
 
     <meta charset="utf-8"/>
     <meta name="robots" content="index, follow"/>
+
+    {% stylesheets '@KjrbJugendstadtplanBundle/Resources/views/Public/css/*' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
 </head>
 <body>
     {% block content %}{% endblock %}
