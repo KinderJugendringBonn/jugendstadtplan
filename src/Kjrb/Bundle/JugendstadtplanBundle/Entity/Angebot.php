@@ -91,5 +91,33 @@ class Angebot {
         return $this->beschreibung;
     }
 
+    /**
+     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort $ort
+     */
+    public function setOrt($ort) {
+        $this->ort = $ort;
+    }
+
+    /**
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort
+     */
+    public function getOrt() {
+        return $this->ort;
+    }
+
+    /**
+     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger $traeger
+     */
+    public function setTraeger($traeger) {
+        $this->traeger = $traeger;
+    }
+
+    /**
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger
+     */
+    public function getTraeger() {
+        return $this->traeger;
+    }
+
 }
  

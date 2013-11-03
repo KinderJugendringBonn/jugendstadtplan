@@ -93,5 +93,33 @@ class Traeger {
         return $this->beschreibung;
     }
 
+    /**
+     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot $angebote
+     */
+    public function setAngebote($angebote) {
+        $this->angebote = $angebote;
+    }
+
+    /**
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot
+     */
+    public function getAngebote() {
+        return $this->angebote;
+    }
+
+    /**
+     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort $orte
+     */
+    public function setOrte($orte) {
+        $this->orte = $orte;
+    }
+
+    /**
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort
+     */
+    public function getOrte() {
+        return $this->orte;
+    }
+
 }
  

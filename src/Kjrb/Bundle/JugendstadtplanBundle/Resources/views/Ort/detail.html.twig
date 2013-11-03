@@ -1,0 +1,21 @@
+{% extends "KjrbJugendstadtplanBundle:Layout:base.html.twig" %}
+
+{% import "KjrbJugendstadtplanBundle:Traeger:macros.html.twig" as traegerMacros %}
+{% import "KjrbJugendstadtplanBundle:Angebot:macros.html.twig" as angebotMacros %}
+
+{% block content %}
+    <h2>Ort {{ ort.titel }}</h2>
+
+    {% if ort.angebote is not empty %}
+        <div>
+            Angebote:
+            {{ angebotMacros.shortList(ort.angebote) }}
+        </div>
+    {% endif %}
+    {% if ort.traeger is not empty %}
+        <div>
+            Träger:
+            {{ traegerMacros.shortList(ort.traeger) }}
+        </div>
+    {% endif %}
+{% endblock %}

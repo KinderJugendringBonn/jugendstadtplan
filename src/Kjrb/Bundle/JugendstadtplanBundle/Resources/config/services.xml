@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="kjrb.jugendstadtplan.angebot_repository"
+                 class="Kjrb\Bundle\JugendstadtplanBundle\Entity\AngebotRepository"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>KjrbJugendstadtplanBundle:Angebot</argument>
+        </service>
+
+        <service id="kjrb.jugendstadtplan.ort_repository"
+                 class="Kjrb\Bundle\JugendstadtplanBundle\Entity\OrtRepository"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>KjrbJugendstadtplanBundle:Ort</argument>
+        </service>
+
+        <service id="kjrb.jugendstadtplan.traeger_repository"
+                 class="Kjrb\Bundle\JugendstadtplanBundle\Entity\TraegerRepository"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>KjrbJugendstadtplanBundle:Traeger</argument>
+        </service>
+
+    </services>
+</container>

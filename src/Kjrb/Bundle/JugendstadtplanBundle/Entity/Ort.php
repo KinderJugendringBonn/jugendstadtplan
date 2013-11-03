@@ -131,5 +131,33 @@ class Ort {
         return $this->longitude;
     }
 
+    /**
+     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot $angebote
+     */
+    public function setAngebote($angebote) {
+        $this->angebote = $angebote;
+    }
+
+    /**
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot
+     */
+    public function getAngebote() {
+        return $this->angebote;
+    }
+
+    /**
+     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger $traeger
+     */
+    public function setTraeger($traeger) {
+        $this->traeger = $traeger;
+    }
+
+    /**
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger
+     */
+    public function getTraeger() {
+        return $this->traeger;
+    }
+
 }
  

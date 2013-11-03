@@ -1,0 +1,16 @@
+{% macro shortList(orte, heading) %}
+    {% import _self as ortMacros %}
+    <ul>
+        {% for ort in orte %}
+            <li>
+                <{{ heading|default("h2") }}>
+                    {{ ortMacros.link(ort) }}
+                </{{ heading|default("h2") }}>
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% macro link(ort) %}
+    <a href="{{ path('kjrb_jugendstadtplan_ort_detail', {'id': ort.id}) }}">{{ ort.titel }}</a>
+{% endmacro %}

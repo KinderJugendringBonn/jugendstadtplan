@@ -1,0 +1,11 @@
+{% macro shortList(angebote, heading) %}
+    <ul>
+        {% for angebot in angebote %}
+            <li>
+                <{{ heading|default("h2") }}>
+                    <a href="{{ path('kjrb_jugendstadtplan_angebot_detail', {'id': angebot.id}) }}">{{ angebot.titel }}</a>
+                </{{ heading|default("h2") }}>
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
