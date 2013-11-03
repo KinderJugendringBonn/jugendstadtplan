@@ -3,6 +3,7 @@
 namespace Kjrb\Bundle\JugendstadtplanBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table()
@@ -22,6 +23,7 @@ class Ort {
     /**
      * @var string $titel
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="titel", type="string", length=255)
      */
     private $titel;
@@ -29,13 +31,14 @@ class Ort {
     /**
      * @var text $beschreibung
      *
-     * @ORM\Column(name="beschreibung", type="text")
+     * @ORM\Column(name="beschreibung", type="text", nullable=true)
      */
     private $beschreibung;
 
     /**
      * @var float $longitude
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="longitude", type="float")
      */
     private $longitude;
@@ -43,6 +46,7 @@ class Ort {
     /**
      * @var float $latitude
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="latitude", type="float")
      */
     private $latitude;
