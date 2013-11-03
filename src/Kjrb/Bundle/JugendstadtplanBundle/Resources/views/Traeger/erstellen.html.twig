@@ -1,0 +1,10 @@
+{% extends "KjrbJugendstadtplanBundle:Layout:base.html.twig" %}
+
+{% block title %}
+    <h1>Träger erstellen</h1>
+{% endblock %}
+
+{% block content %}
+    {{ form(form) }}
+    <a href="{{ path('kjrb_jugendstadtplan_traeger_index') }}" class="btn">abbrechen</a>
+{% endblock %}

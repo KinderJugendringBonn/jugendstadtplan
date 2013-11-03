@@ -29,7 +29,7 @@ class Traeger {
     /**
      * @var text $beschreibung
      *
-     * @ORM\Column(name="beschreibung", type="text")
+     * @ORM\Column(name="beschreibung", type="text", nullable=true)
      */
     private $beschreibung;
 
