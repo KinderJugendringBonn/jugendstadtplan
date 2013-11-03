@@ -2,9 +2,11 @@
 
 {% import "KjrbJugendstadtplanBundle:Ort:macros.html.twig" as ortMacros %}
 
-{% block content %}
-    <h2>Orte</h2>
+{% block title %}
+    <h1>Orte</h1>
+{% endblock %}
 
+{% block content %}
     {{ ortMacros.shortList(orte) }}
 
     <a href="{{ path('kjrb_jugendstadtplan_ort_erstellen') }}" class="btn btn-primary">Erstellen</a>

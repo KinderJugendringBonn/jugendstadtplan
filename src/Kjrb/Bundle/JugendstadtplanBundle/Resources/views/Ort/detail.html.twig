@@ -3,9 +3,11 @@
 {% import "KjrbJugendstadtplanBundle:Traeger:macros.html.twig" as traegerMacros %}
 {% import "KjrbJugendstadtplanBundle:Angebot:macros.html.twig" as angebotMacros %}
 
-{% block content %}
-    <h2>Ort {{ ort.titel }}</h2>
+{% block title %}
+    <h1>Ort {{ ort.titel }}</h1>
+{% endblock %}
 
+{% block content %}
     {% if ort.angebote is not empty %}
         <div>
             Angebote:

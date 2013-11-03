@@ -2,8 +2,10 @@
 
 {% import "KjrbJugendstadtplanBundle:Traeger:macros.html.twig" as traegerMacros %}
 
-{% block content %}
-    <h2>Träger</h2>
+{% block title %}
+    <h1>Träger</h1>
+{% endblock %}
 
+{% block content %}
     {{ traegerMacros.shortList(traeger) }}
 {% endblock %}

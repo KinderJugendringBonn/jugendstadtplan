@@ -14,6 +14,7 @@
     {% endstylesheets %}
 </head>
 <body>
+    {% block title %}{% endblock %}
     {% for type, flashes in app.session.flashbag.all %}
         <div class="flash-{{ type }}">
             {% for flashMessage in flashes %}

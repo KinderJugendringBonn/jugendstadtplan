@@ -2,8 +2,10 @@
 
 {% import "KjrbJugendstadtplanBundle:Angebot:macros.html.twig" as angebotMacros %}
 
-{% block content %}
-    <h2>Angebote</h2>
+{% block title %}
+    <h1>Angebote</h1>
+{% endblock %}
 
+{% block content %}
     {{ angebotMacros.shortList(angebote) }}
 {% endblock %}

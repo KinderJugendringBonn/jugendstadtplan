@@ -1,7 +1,10 @@
 {% extends "KjrbJugendstadtplanBundle:Layout:base.html.twig" %}
 
+{% block title %}
+    <h1>Ort erstellen</h1>
+{% endblock %}
+
 {% block content %}
-    <h3>Ort erstellen</h3>
     {{ form(form) }}
     <a href="{{ path('kjrb_jugendstadtplan_ort_index') }}" class="btn">abbrechen</a>
 {% endblock %}
