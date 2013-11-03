@@ -23,13 +23,15 @@
         </div>
     {% endfor %}
     {% block content %}{% endblock %}
+    <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
     {% javascripts
             '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'
             '@KjrbJugendstadtplanBundle/Resources/views/Public/js/*'
-
+            'http://www.openstreetmap.org/openlayers/OpenStreetMap.js'
         output='js/compiled/jugenstadtplan.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    {% block additionalJavascript %}{% endblock %}
 </body>
 </html>
