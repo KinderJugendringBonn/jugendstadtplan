@@ -52,7 +52,7 @@ class TraegerController extends Controller {
     public function erstellenAction(Request $request) {
         $traeger = new Traeger();
 
-        $form = $this->createForm(new TraegerType($this->get('translator')), $traeger);
+        $form = $this->createForm(new TraegerType(), $traeger);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

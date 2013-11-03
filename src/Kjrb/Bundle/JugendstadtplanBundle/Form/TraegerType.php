@@ -8,12 +8,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TraegerType extends AbstractType {
 
-    protected $translator;
-
-    public function __construct(TranslatorInterface $translator) {
-        $this->translator = $translator;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('titel')
