@@ -4,9 +4,6 @@ var layer_tah;
 var layer_markers;
 
 function drawmap() {
-    // Popup und Popuptext mit evtl. Grafik
-    var popuptext="<font color=\"black\"><b>Thomas Heiles<br>Stra&szlig;e 123<br>54290 Trier</b><p><img src=\"test.jpg\" width=\"180\" height=\"113\"></p></font>";
-
     OpenLayers.Lang.setCode('de');
 
     // Position und Zoomstufe der Karte

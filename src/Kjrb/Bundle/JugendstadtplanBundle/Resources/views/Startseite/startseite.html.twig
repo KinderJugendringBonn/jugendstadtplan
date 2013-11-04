@@ -20,6 +20,16 @@
     <script type="text/javascript">
         //<![CDATA[
         drawmap();
+
+        $(function() {
+            $.getJSON("{{ path('kjrb_jugendstadtplan_ort_jsonliste') }}", function(data) {
+                $.each(data, function(key, item) {
+                    console.log(item);
+                    addMarker(layer_markers, item.longitude, item.latitude, item.beschreibung, false, 0);
+                });
+            });
+        });
+
         //]]>
     </script>
 {% endblock %}

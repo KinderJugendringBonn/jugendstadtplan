@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class OrtController
@@ -65,6 +66,30 @@ class OrtController extends Controller {
         }
 
         return array('form' => $form->createView());
+    }
+
+    /**
+     * @Route("/json-liste")
+     */
+    public function jsonListeAction() {
+        $orte = $this->get('kjrb.jugendstadtplan.ort_repository')->findAll();
+
+        $result = array();
+        foreach ($orte as $ort) {
+            $currentArray = array();
+            $currentArray['id'] = $ort->getId();
+            $currentArray['titel'] = $ort->getTitel();
+            $currentArray['beschreibung'] = $ort->getBeschreibung();
+            $currentArray['longitude'] = $ort->getLongitude();
+            $currentArray['latitude'] = $ort->getLatitude();
+            $result[] = $currentArray;
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($result));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
 }
