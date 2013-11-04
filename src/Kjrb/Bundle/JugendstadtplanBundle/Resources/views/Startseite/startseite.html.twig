@@ -1,14 +1,14 @@
 {% extends "KjrbJugendstadtplanBundle:Layout:base.html.twig" %}
 
+{% import "KjrbJugendstadtplanBundle:Map:macros.html.twig" as mapMacros %}
+
 {% block title %}
     <h1>Jugendstadtplan</h1>
 {% endblock %}
 
 {% block content %}
-    <div id="map"></div>
-    <div id="osm">©<a href="http://www.openstreetmap.org">OpenStreetMap</a>
-        und <a href="http://www.openstreetmap.org/copyright">Mitwirkende</a>,
-        <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.de">CC-BY-SA</a>
+    <div class="big-map-container">
+        {{ mapMacros.drawMap() }}
     </div>
 
     <div>Zu den <a href="{{ path('kjrb_jugendstadtplan_angebot_index') }}">Angeboten</a></div>
@@ -17,19 +17,5 @@
 {% endblock %}
 
 {% block additionalJavascript %}
-    <script type="text/javascript">
-        //<![CDATA[
-        drawmap();
-
-        $(function() {
-            $.getJSON("{{ path('kjrb_jugendstadtplan_ort_jsonliste') }}", function(data) {
-                $.each(data, function(key, item) {
-                    console.log(item);
-                    addMarker(layer_markers, item.longitude, item.latitude, item.beschreibung, false, 0);
-                });
-            });
-        });
-
-        //]]>
-    </script>
+    {{ mapMacros.jsonData(path('kjrb_jugendstadtplan_ort_jsonliste')) }}
 {% endblock %}

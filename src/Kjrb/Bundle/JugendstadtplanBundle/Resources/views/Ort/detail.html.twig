@@ -2,12 +2,18 @@
 
 {% import "KjrbJugendstadtplanBundle:Traeger:macros.html.twig" as traegerMacros %}
 {% import "KjrbJugendstadtplanBundle:Angebot:macros.html.twig" as angebotMacros %}
+{% import "KjrbJugendstadtplanBundle:Map:macros.html.twig" as mapMacros %}
 
 {% block title %}
     <h1>Ort {{ ort.titel }}</h1>
 {% endblock %}
 
 {% block content %}
+    {% if ort.latitude is not empty %}
+        <div class="small-map-container">
+            {{ mapMacros.drawMap() }}
+        </div>
+    {% endif %}
     {% if ort.angebote is not empty %}
         <div>
             Angebote:
@@ -20,4 +26,8 @@
             {{ traegerMacros.shortList(ort.traeger) }}
         </div>
     {% endif %}
+{% endblock %}
+
+{% block additionalJavascript %}
+    {{ mapMacros.ortData(ort) }}
 {% endblock %}

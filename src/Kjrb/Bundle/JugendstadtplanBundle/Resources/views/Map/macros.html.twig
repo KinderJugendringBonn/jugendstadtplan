@@ -1,0 +1,38 @@
+{% macro drawMap() %}
+    <div id="map"></div>
+    <div id="osm">©<a href="http://www.openstreetmap.org">OpenStreetMap</a>
+        und <a href="http://www.openstreetmap.org/copyright">Mitwirkende</a>,
+        <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.de">CC-BY-SA</a>
+    </div>
+{% endmacro %}
+
+{% macro ortData(ort) %}
+    <script type="text/javascript">//<![CDATA[
+        drawmap();
+
+        $(function() {
+            console.log({{ ort.longitude }});
+            console.log({{ ort.latitude }});
+            addMarker(layer_markers, {{ ort.longitude }}, {{ ort.latitude }}, "{{ ort.beschreibung|raw }}", true, 0);
+            jumpTo({{ ort.longitude }}, {{ ort.latitude }}, 13);
+        });
+
+        //]]>
+    </script>
+{% endmacro %}
+
+{% macro jsonData(url) %}
+    <script type="text/javascript">//<![CDATA[
+        drawmap();
+
+        $(function() {
+            $.getJSON("{{ url }}", function(data) {
+                $.each(data, function(key, item) {
+                    addMarker(layer_markers, item.longitude, item.latitude, item.beschreibung, false, 0);
+                });
+            });
+        });
+
+        //]]>
+    </script>
+{% endmacro %}
