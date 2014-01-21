@@ -32,13 +32,6 @@ assetic:
     use_controller: false
     bundles:        [ KjrbJugendstadtplanBundle ]
     #java: /usr/bin/java
-    assets:
-        bootstrap_css:
-            inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap.min.css
-            filters:
-                - cssrewrite
-            output: css/bootstrap.css
     filters:
         cssrewrite: ~
         #closure:

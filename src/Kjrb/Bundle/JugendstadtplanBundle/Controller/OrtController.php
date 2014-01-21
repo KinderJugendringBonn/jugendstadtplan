@@ -74,15 +74,16 @@ class OrtController extends Controller {
     public function jsonListeAction() {
         $orte = $this->get('kjrb.jugendstadtplan.ort_repository')->findAll();
 
-        $result = array();
+        $result = new \stdClass();
         foreach ($orte as $ort) {
-            $currentArray = array();
-            $currentArray['id'] = $ort->getId();
-            $currentArray['titel'] = $ort->getTitel();
-            $currentArray['beschreibung'] = $ort->getBeschreibung();
-            $currentArray['longitude'] = $ort->getLongitude();
-            $currentArray['latitude'] = $ort->getLatitude();
-            $result[] = $currentArray;
+            $id = $ort->getId();
+            $current = new \stdClass();
+            $current->id = $ort->getId();
+            $current->title = $ort->getTitel();
+            $current->message = '<h2>' . $ort->getTitel() . '</h2>' . $ort->getBeschreibung();
+            $current->lng = $ort->getLongitude();
+            $current->lat = $ort->getLatitude();
+            $result->$id = $current;
         }
 
         $response = new Response();

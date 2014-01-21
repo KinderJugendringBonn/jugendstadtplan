@@ -1,0 +1,18 @@
+.big-map-container {
+  height: 600px;
+  width: 800px;
+}
+.small-map-container {
+  height: 300px;
+  width: 300px;
+}
+.angular-leaflet-map {
+  height: 100%;
+  width: 100%;
+  padding: 0; margin: 0;
+}
+#osm {
+  font-size: 0.7em;
+  font-style: italic;
+  margin-bottom: 20px;
+}

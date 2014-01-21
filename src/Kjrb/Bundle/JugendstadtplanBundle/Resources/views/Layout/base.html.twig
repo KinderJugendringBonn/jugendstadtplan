@@ -7,13 +7,22 @@
     <meta name="robots" content="index, follow"/>
 
     {% stylesheets
-            '@KjrbJugendstadtplanBundle/Resources/views/Public/css/*'
-            'css/bootstrap.css'
+            '../app/bower_components/leaflet/dist/leaflet.css'
     %}
         <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
     {% endstylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+
+    {% javascripts
+            'http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js'
+            '../app/bower_components/angular/angular.js'
+            '../app/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js'
+        output='js/compiled/jugenstadtplan_libs.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 </head>
-<body>
+<body ng-app="JugendstadtplanApp">
     {% block title %}{% endblock %}
     {% for type, flashes in app.session.flashbag.all %}
         <div class="flash-{{ type }}">
@@ -23,11 +32,8 @@
         </div>
     {% endfor %}
     {% block content %}{% endblock %}
-    <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
     {% javascripts
-            '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'
             '@KjrbJugendstadtplanBundle/Resources/views/Public/js/*'
-            'http://www.openstreetmap.org/openlayers/OpenStreetMap.js'
         output='js/compiled/jugenstadtplan.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
