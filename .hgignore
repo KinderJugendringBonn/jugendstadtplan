@@ -16,3 +16,6 @@ build/
 vendor/*
 bin/
 composer.phar
+meta/*
+conf/*
+logs/*
