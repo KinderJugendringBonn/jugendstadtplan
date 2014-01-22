@@ -22,7 +22,9 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'web',
+      dist_css: 'web/css',
+      dist_js: 'web/js',
+      dist_img: 'web/img',
       bundleSource: 'src/Kjrb/Bundle/JugendstadtplanBundle/Resources/views/Public'
     },
 
@@ -45,8 +47,8 @@ module.exports = function (grunt) {
             livereload: true
         },
         files: [
-          '<%= yeoman.dist %>/css/*.css',
-          '<%= yeoman.dist %>/img/*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.dist_css %>/*.css',
+          '<%= yeoman.dist_img %>/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
       gruntfile: {
@@ -61,8 +63,11 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
+            '<%= yeoman.dist_js %>/*',
+            '<%= yeoman.dist_img %>/*',
+            '<%= yeoman.dist_css %>/*',
+            '!<%= yeoman.dist %>/.git*',
+            '!<%= yeoman.dist %>/.hg*'
           ]
         }]
       },
@@ -89,9 +94,8 @@ module.exports = function (grunt) {
       dist: {
         files: {
           src: [
-            '<%= yeoman.bundleSource %>/js/{,*/}*.js',
-            '<%= yeoman.bundleSource %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.bundleSource %>/fonts/*'
+            '<%= yeoman.dist_js %>/{,*/}*.js',
+            '<%= yeoman.dist_img %>/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
           ]
         }
       }
@@ -104,7 +108,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.bundleSource %>/img',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/img'
+          dest: '<%= yeoman.dist_img %>'
         }]
       }
     },
@@ -114,43 +118,36 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.bundleSource %>/img',
           src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/img'
+          dest: '<%= yeoman.dist_img %>'
         }]
       }
     },
 
     // Allow the use of non-minsafe AngularJS files. Automatically makes it
     // minsafe compatible so Uglify does not destroy the ng references
-    ngmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
-        }]
-      }
-    },
+//    ngmin: {
+//      dist: {
+//        files: [{
+//          expand: true,
+//          cwd: '.tmp/concat/scripts',
+//          src: '*.js',
+//          dest: '.tmp/concat/scripts'
+//        }]
+//      }
+//    },
 
     sass: {
         dist: {
             files: {
-                '<%= yeoman.dist %>/css/screen.css': '<%= yeoman.bundleSource %>/scss/screen.scss'
+                '<%= yeoman.dist_css %>/screen.css': '<%= yeoman.bundleSource %>/scss/screen.scss'
             }
         }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-      server: [
-        'copy:styles'
-      ],
-      test: [
-        'copy:styles'
-      ],
       dist: [
         'sass:dist',
-        'copy:styles',
         'imagemin',
         'svgmin'
       ]
@@ -162,18 +159,12 @@ module.exports = function (grunt) {
     'clean:dist',
     'concurrent:dist',
     'autoprefixer',
-    'concat',
-    'ngmin',
-    'copy:dist',
-    'cdnify',
+//    'ngmin',
     'sass:dist',
-    'cssmin',
-    'uglify',
-    'rev'
+//    'rev'
   ]);
 
   grunt.registerTask('default', [
-    'test',
     'build'
   ]);
 };
