@@ -27,7 +27,7 @@ class Angebot {
     private $titel;
 
     /**
-     * @var text $beschreibung
+     * @var string $beschreibung
      *
      * @ORM\Column(name="beschreibung", type="text", nullable=true)
      */
@@ -78,23 +78,20 @@ class Angebot {
     }
 
     /**
-     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\text $beschreibung
+     * @param string $beschreibung
      */
     public function setBeschreibung($beschreibung) {
         $this->beschreibung = $beschreibung;
     }
 
     /**
-     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\text
+     * @return string
      */
     public function getBeschreibung() {
         return $this->beschreibung;
     }
 
-    /**
-     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort $ort
-     */
-    public function setOrt($ort) {
+    public function setOrt(Ort $ort) {
         $this->ort = $ort;
     }
 
@@ -105,10 +102,7 @@ class Angebot {
         return $this->ort;
     }
 
-    /**
-     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger $traeger
-     */
-    public function setTraeger($traeger) {
+    public function setTraeger(Traeger $traeger) {
         $this->traeger = $traeger;
     }
 

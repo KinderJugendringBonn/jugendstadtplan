@@ -2,6 +2,7 @@
 
 namespace Kjrb\Bundle\JugendstadtplanBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,7 +30,7 @@ class Ort {
     private $titel;
 
     /**
-     * @var text $beschreibung
+     * @var string $beschreibung
      *
      * @ORM\Column(name="beschreibung", type="text", nullable=true)
      */
@@ -54,16 +55,21 @@ class Ort {
     /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger $traeger
      *
-     * @ORM\ManyToMany(targetEntity="Traeger", mappedBy="orte")
+     * @ORM\ManyToMany(targetEntity="Traeger", mappedBy="orte", indexBy="id")
      */
     private $traeger;
 
     /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot $angebot
      *
-     * @ORM\OneToMany(targetEntity="Angebot", mappedBy="ort")
+     * @ORM\OneToMany(targetEntity="Angebot", mappedBy="ort", indexBy="id")
      */
     private $angebote;
+
+    public function __construct() {
+        $this->traeger = new ArrayCollection();
+        $this->angebote = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -94,14 +100,14 @@ class Ort {
     }
 
     /**
-     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\text $beschreibung
+     * @param string $beschreibung
      */
     public function setBeschreibung($beschreibung) {
         $this->beschreibung = $beschreibung;
     }
 
     /**
-     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\text
+     * @return string
      */
     public function getBeschreibung() {
         return $this->beschreibung;
@@ -136,28 +142,44 @@ class Ort {
     }
 
     /**
-     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot $angebote
+     * Convenience-Methode fuer das Symfony-Formularsystem.
      */
-    public function setAngebote($angebote) {
-        $this->angebote = $angebote;
+    public function setAngebote(Angebot $angebot) {
+        $this->addAngebot($angebot);
+    }
+
+    public function addAngebot(Angebot $angebot) {
+        $id = $angebot->getId();
+        if (!$this->angebote->containsKey($id)) {
+            $this->angebote->set($id, $angebot);
+            $angebot->setOrt($this);
+        }
     }
 
     /**
-     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot[]
      */
     public function getAngebote() {
         return $this->angebote;
     }
 
     /**
-     * @param \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger $traeger
+     * Convenience-Methode fuer das Symfony-Formularsystem.
      */
-    public function setTraeger($traeger) {
-        $this->traeger = $traeger;
+    public function setTraeger(Traeger $traeger) {
+        $this->addTraeger($traeger);
+    }
+
+    public function addTraeger(Traeger $traeger) {
+        $id = $traeger->getId();
+        if (!$this->traeger->containsKey($id)) {
+            $this->traeger->set($id, $traeger);
+            $traeger->addOrt($this);
+        }
     }
 
     /**
-     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger[]
      */
     public function getTraeger() {
         return $this->traeger;
