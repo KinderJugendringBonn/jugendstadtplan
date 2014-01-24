@@ -124,8 +124,10 @@ class Traeger {
     /**
      * Convenience-Methode fuer das Symfony-Formularsystem.
      */
-    public function setOrt(Ort $ort) {
-        $this->addOrt($ort);
+    public function setOrt(Ort $ort = null) {
+        if ($ort !== null) {
+            $this->addOrt($ort);
+        }
     }
 
     public function addOrt(Ort $ort) {

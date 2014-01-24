@@ -166,8 +166,10 @@ class Ort {
     /**
      * Convenience-Methode fuer das Symfony-Formularsystem.
      */
-    public function setTraeger(Traeger $traeger) {
-        $this->addTraeger($traeger);
+    public function setTraeger(Traeger $traeger = null) {
+        if ($traeger !== null) {
+            $this->addTraeger($traeger);
+        }
     }
 
     public function addTraeger(Traeger $traeger) {
