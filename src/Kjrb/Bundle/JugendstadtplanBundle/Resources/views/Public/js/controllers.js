@@ -1,4 +1,5 @@
 var app = angular.module("JugendstadtplanApp", ["leaflet-directive"]);
+
 app.controller("JugendstadtplanController", [ '$scope', '$http', function($scope, $http) {
 
     angular.extend($scope, {
@@ -25,4 +26,27 @@ app.controller("JugendstadtplanController", [ '$scope', '$http', function($scope
             console.log(data);
         })
     ;
+}]);
+
+app.controller("OrtErstellenController", [ '$scope', function($scope) {
+
+    angular.extend($scope, {
+        center: {
+            lat: 50.732829246726,
+            lng: 7.0937004090117,
+            zoom: 13
+        },
+        defaults: {
+            scrollWheelZoom: false
+        },
+        markers: {
+            Bonn: {
+                lat: 50.732829246726,
+                lng: 7.0937004090117,
+                message: "Schieb mich!",
+                focus: true,
+                draggable: true
+            }
+        }
+    });
 }]);

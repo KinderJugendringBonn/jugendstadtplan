@@ -5,6 +5,29 @@
 {% endblock %}
 
 {% block content %}
-    {{ form(form) }}
+    <form method="post" action="{{ path('kjrb_jugendstadtplan_ort_erstellen') }}">
+        {{ form_row(form.titel) }}
+        {{ form_row(form.beschreibung) }}
+
+        <div class="big-map-container">
+            <div ng-controller="OrtErstellenController" class="angular-leaflet-map">
+                <leaflet markers="markers" center="center"></leaflet>
+
+                <div><label for="kjrb_jugendstadtplanbundle_ort_longitude" class="required">Longitude</label>
+                    <input
+                            type="text" id="kjrb_jugendstadtplanbundle_ort_longitude"
+                            name="kjrb_jugendstadtplanbundle_ort[longitude]" required="required" ng-model="markers.Bonn.lat"/>
+                </div>
+                <div><label for="kjrb_jugendstadtplanbundle_ort_latitude" class="required">Latitude</label>
+                    <input
+                            type="text" id="kjrb_jugendstadtplanbundle_ort_latitude"
+                            name="kjrb_jugendstadtplanbundle_ort[latitude]" required="required" ng-model="markers.Bonn.lng" />
+                </div>
+            </div>
+        </div>
+        {{ form_row(form.traeger) }}
+        {{ form_row(form.speichern) }}
+        {{ form_row(form._token) }}
+    </form>
     <a href="{{ path('kjrb_jugendstadtplan_ort_index') }}" class="btn">abbrechen</a>
 {% endblock %}
