@@ -14,9 +14,9 @@
     <script type="text/javascript" src="/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
 </head>
 <body data-ng-app="JugendstadtplanApp">
-    <object data="/img/iconmonstr-rocket-11-icon.svg" type="image/svg+xml">
-        <img src="/img/iconmonstr-rocket-11-icon.png" />
-    </object>
+    <a href="{{ path('kjrb_jugendstadtplan_startseite_startseite') }}">
+        <img src="/img/iconmonstr-rocket-11-icon.svg" />
+    </a>
     {% block title %}{% endblock %}
     {% for type, flashes in app.session.flashbag.all %}
         <div class="flash-{{ type }}">
