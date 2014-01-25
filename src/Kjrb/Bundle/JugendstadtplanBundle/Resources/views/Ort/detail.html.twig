@@ -10,8 +10,17 @@
 {% block content %}
     {% if ort.latitude is not empty %}
         <div class="small-map-container">
-            <div data-ng-controller="JugendstadtplanController" class="angular-leaflet-map">
-                <leaflet markers="markers" center="center"></leaflet>
+            <div data-ng-controller="OrtDetailseiteController" class="angular-leaflet-map">
+                <leaflet markers="markers"
+                         center="center"
+                         data-ng-init="
+                            center.lng={{ ort.longitude }};
+                            center.lat={{ ort.latitude }};
+                            markers.default_marker.lng={{ ort.longitude }};
+                            markers.default_marker.lat={{ ort.latitude }};
+                            markers.default_marker.message='{{ ort.titel }}{{ ort.beschreibung }}';
+                          ">
+                </leaflet>
             </div>
         </div>
     {% endif %}
