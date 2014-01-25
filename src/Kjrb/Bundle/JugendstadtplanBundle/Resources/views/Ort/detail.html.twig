@@ -2,7 +2,6 @@
 
 {% import "KjrbJugendstadtplanBundle:Traeger:macros.html.twig" as traegerMacros %}
 {% import "KjrbJugendstadtplanBundle:Angebot:macros.html.twig" as angebotMacros %}
-{% import "KjrbJugendstadtplanBundle:Map:macros.html.twig" as mapMacros %}
 
 {% block title %}
     <h1>Ort {{ ort.titel }}</h1>
@@ -11,7 +10,9 @@
 {% block content %}
     {% if ort.latitude is not empty %}
         <div class="small-map-container">
-            {{ mapMacros.drawMap() }}
+            <div data-ng-controller="JugendstadtplanController" class="angular-leaflet-map">
+                <leaflet markers="markers" center="center"></leaflet>
+            </div>
         </div>
     {% endif %}
     {% if ort.angebote is not empty %}
@@ -26,8 +27,4 @@
             {{ traegerMacros.shortList(ort.traeger) }}
         </div>
     {% endif %}
-{% endblock %}
-
-{% block additionalJavascript %}
-    {{ mapMacros.ortData(ort) }}
 {% endblock %}

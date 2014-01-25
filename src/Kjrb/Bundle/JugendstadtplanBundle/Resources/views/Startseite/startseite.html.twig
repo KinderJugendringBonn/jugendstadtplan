@@ -1,21 +1,17 @@
 {% extends "KjrbJugendstadtplanBundle:Layout:base.html.twig" %}
 
-{% import "KjrbJugendstadtplanBundle:Map:macros.html.twig" as mapMacros %}
-
 {% block title %}
     <h1>Jugendstadtplan</h1>
 {% endblock %}
 
 {% block content %}
     <div class="big-map-container">
-        {{ mapMacros.drawMap() }}
+        <div data-ng-controller="JugendstadtplanController" class="angular-leaflet-map">
+            <leaflet markers="markers" center="center"></leaflet>
+        </div>
     </div>
 
     <div>Zu den <a href="{{ path('kjrb_jugendstadtplan_angebot_index') }}">Angeboten</a></div>
     <div>Zu den <a href="{{ path('kjrb_jugendstadtplan_ort_index') }}">Orten</a></div>
     <div>Zu den <a href="{{ path('kjrb_jugendstadtplan_traeger_index') }}">Trägern</a></div>
-{% endblock %}
-
-{% block additionalJavascript %}
-    {{ mapMacros.jsonData(path('kjrb_jugendstadtplan_ort_jsonliste')) }}
 {% endblock %}
