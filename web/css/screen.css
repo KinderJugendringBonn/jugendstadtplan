@@ -156,5 +156,8 @@ table {
   font-style: italic;
   margin-bottom: 20px; }
 
+body {
+  margin: 30px; }
+
 .hidden {
   display: none; }
