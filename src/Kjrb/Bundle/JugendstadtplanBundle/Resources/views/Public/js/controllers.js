@@ -39,16 +39,22 @@ app.controller("OrtErstellenController", [ '$scope', function($scope) {
         defaults: {
             scrollWheelZoom: false
         },
-        markers: {
-            Bonn: {
-                lat: 50.732829246726,
-                lng: 7.0937004090117,
-                message: "Schieb mich!",
-                focus: true,
-                draggable: true
-            }
-        }
+        events: {}
     });
+
+    $scope.markers = new Array();
+
+    $scope.$on("leafletDirectiveMap.click", function(event, args){
+        var leafEvent = args.leafletEvent;
+
+        $scope.markers[0] = {
+            lat: leafEvent.latlng.lat,
+            lng: leafEvent.latlng.lng,
+            draggable: true,
+            focus: true
+        };
+    });
+
 }]);
 
 app.controller("OrtDetailseiteController", [ '$scope', function($scope) {

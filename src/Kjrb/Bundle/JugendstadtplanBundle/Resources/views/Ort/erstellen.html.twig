@@ -11,15 +11,15 @@
 
         <div class="big-map-container">
             <div data-ng-controller="OrtErstellenController" class="angular-leaflet-map">
-                <leaflet markers="markers" defaults="defaults" center="center"></leaflet>
+                <leaflet markers="markers" defaults="defaults" center="center" markers="markers" event-broadcast="events"></leaflet>
 
-                <div>
+                <div class="hidden">
                     <label for="kjrb_jugendstadtplanbundle_ort_longitude" class="required">Longitude</label>
-                    <input type="text" id="kjrb_jugendstadtplanbundle_ort_longitude" name="kjrb_jugendstadtplanbundle_ort[longitude]" required="required" class="hidden" data-ng-model="markers.Bonn.lng"/>
+                    <input type="text" id="kjrb_jugendstadtplanbundle_ort_longitude" name="kjrb_jugendstadtplanbundle_ort[longitude]" required="required" data-ng-model="markers[0].lng"/>
                 </div>
-                <div>
+                <div class="hidden">
                     <label for="kjrb_jugendstadtplanbundle_ort_latitude" class="required">Latitude</label>
-                    <input type="text" id="kjrb_jugendstadtplanbundle_ort_latitude" name="kjrb_jugendstadtplanbundle_ort[latitude]" required="required" class="hidden" data-ng-model="markers.Bonn.lat" />
+                    <input type="text" id="kjrb_jugendstadtplanbundle_ort_latitude" name="kjrb_jugendstadtplanbundle_ort[latitude]" required="required" data-ng-model="markers[0].lat" />
                 </div>
             </div>
         </div>
