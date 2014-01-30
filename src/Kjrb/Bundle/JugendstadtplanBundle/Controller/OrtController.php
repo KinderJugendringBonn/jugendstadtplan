@@ -6,7 +6,6 @@ use Kjrb\Bundle\JugendstadtplanBundle\Form\OrtType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,37 +13,29 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class OrtController
  * @package Kjrb\Bundle\JugendstadtplanBundle\Controller
- *
- * @Route("/ort")
  */
-class OrtController extends Controller {
+class OrtController extends BaseController {
 
     /**
-     * @Route()
-     * @Template()
-     *
-     * @return array
+     * @Route("/orte")
      */
     public function indexAction() {
-        return array(
-            'orte' => $this->get('kjrb.jugendstadtplan.ort_repository')->findAll()
-        );
+        return $this->sendJsonResponse($this->getOrtRepository()->findAll());
     }
 
     /**
-     * @Route("/{id}/detail")
+     * @Route("/ort/{id}/detail")
      * @ParamConverter("ort", class="KjrbJugendstadtplanBundle:Ort")
-     * @Template()
      *
      * @param Ort $ort
      * @return array
      */
     public function detailAction(Ort $ort) {
-        return array('ort' => $ort);
+        return $this->sendJsonResponse($ort);
     }
 
     /**
-     * @Route("/erstellen")
+     * @Route("/ort/erstellen")
      * @Template()
      *
      * @param Request $request
@@ -66,31 +57,6 @@ class OrtController extends Controller {
         }
 
         return array('form' => $form->createView());
-    }
-
-    /**
-     * @Route("/json-liste")
-     */
-    public function jsonListeAction() {
-        $orte = $this->get('kjrb.jugendstadtplan.ort_repository')->findAll();
-
-        $result = new \stdClass();
-        foreach ($orte as $ort) {
-            $id = $ort->getId();
-            $current = new \stdClass();
-            $current->id = $ort->getId();
-            $current->title = $ort->getTitel();
-            $current->message = '<h2>' . $ort->getTitel() . '</h2>' . $ort->getBeschreibung();
-            $current->lng = $ort->getLongitude();
-            $current->lat = $ort->getLatitude();
-            $result->$id = $current;
-        }
-
-        $response = new Response();
-        $response->setContent(json_encode($result));
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
     }
 
 }

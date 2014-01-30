@@ -15,7 +15,7 @@ module.controller("JugendstadtplanController", [ '$scope', '$http', function($sc
     });
 
 
-    $http.get('/ort/json-liste')
+    $http.get('/orte')
         .success(function(data) {
             angular.extend($scope, {
                 markers: data
