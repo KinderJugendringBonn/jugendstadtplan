@@ -20,7 +20,8 @@
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "kunstmaan/live-reload-bundle": "dev-master",
-        "symfony/debug": "~2.1"
+        "symfony/debug": "~2.1",
+        "zendframework/zend-json": "~2.2"
     },
     "scripts": {
         "post-install-cmd": [
