@@ -10,16 +10,22 @@ module.controller("JugendstadtplanController", [ '$scope', '$http', function($sc
         },
         defaults: {
             scrollWheelZoom: false
-        },
-        markers: {}
+        }
     });
 
+    $scope.markers = new Array();
 
-    $http.get('/orte')
+    $http.get('/backend/orte')
         .success(function(data) {
-            angular.extend($scope, {
-                markers: data
-            });
+            angular.forEach(data, function(item) {
+                var marker = {
+                    lat: item.latitude,
+                    lng: item.longitude,
+                    title: item.titel,
+                    message: '<h3>' + item.titel + '</h3>' + item.beschreibung
+                };
+                $scope.markers.push(marker);
+            })
         })
         .error(function(data, status) {
             console.log('Das hat leider nicht geklappt. :( ' + status);
