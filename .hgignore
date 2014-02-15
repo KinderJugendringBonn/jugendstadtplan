@@ -3,6 +3,10 @@ syntax: glob
 .DS_Store
 .idea/
 node_modules/
+web/spa/.git
+web/spa/.gitignore
+web/spa/.gitmodules
+web/spa/build
 web/bundles/
 web/css/
 web/js/
