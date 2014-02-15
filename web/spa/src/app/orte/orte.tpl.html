@@ -1,0 +1,14 @@
+<div class="row-fluid">
+  <h1 class="page-header">
+    Orte
+    <small>Hier geht was ab in Bonn.</small>
+  </h1>
+
+  <ul data-ng-repeat="ort in orte">
+    <li data-ng-click="edit(ort.$id())">
+      <h2>{{ ort.titel }}</h2>
+      <small data-ng-bind-html-unsafe="ort.beschreibung"></small>
+    </li>
+  </ul>
+ 
+</div>

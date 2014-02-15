@@ -1,10 +1,12 @@
 angular.module( 'ngBoilerplate', [
+  'ngResource',
+  'jugendstadtplan',
+  'ui.router',
   'templates-app',
   'templates-common',
   'ngBoilerplate.home',
-  'ngBoilerplate.about',
-  'ui.state',
-  'ui.route'
+  'ngBoilerplate.orte',
+  'ngBoilerplate.ort'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
@@ -23,4 +25,3 @@ angular.module( 'ngBoilerplate', [
 })
 
 ;
-
