@@ -1,5 +1,6 @@
 angular.module( 'ngBoilerplate', [
   'ngResource',
+  'ngSanitize',
   'jugendstadtplan',
   'ui.router',
   'templates-app',
