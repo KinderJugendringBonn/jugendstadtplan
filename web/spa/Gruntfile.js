@@ -98,6 +98,23 @@ module.exports = function ( grunt ) {
      * `build_dir`, and then to copy the assets to `compile_dir`.
      */
     copy: {
+      backend_htaccess: {
+        files: [
+          {
+            dot: true,
+            src: [ '<%= app_files.htaccess %>' ],
+            dest: '<%= build_dir %>/.htaccess'
+          }
+        ]
+      },
+      backend_php: {
+        files: [
+          {
+            src: [ '<%= app_files.php %>' ],
+            dest: '<%= build_dir %>/backend.php'
+          }
+        ]
+      },
       build_app_assets: {
         files: [
           { 
@@ -492,6 +509,15 @@ module.exports = function ( grunt ) {
         tasks: [ 'index:build' ]
       },
 
+      htaccess: {
+        files: [ '<%= app_files.htaccess %>'],
+        tasks: [ 'copy:backend_htaccess' ]
+      },
+      php: {
+        files: [ '<%= app_files.php %>' ],
+        tasks: [ 'copy:backend_php' ]
+      },
+
       /**
        * When our templates change, we only rewrite the template cache.
        */
@@ -564,7 +590,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'recess:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build'
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:backend_htaccess', 'copy:backend_php', 'index:build'
   ]);
 
   /**
@@ -572,7 +598,8 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'recess:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
+    'recess:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'copy:backend_htaccess',
+    'copy:backend_php', 'index:compile'
   ]);
 
   /**
