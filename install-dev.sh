@@ -15,6 +15,7 @@ fi
 sudo $COMPOSER_EXECUTABLE install
 
 ### Node Package Manager
+cd web/spa
 npm install
 
 
@@ -24,7 +25,7 @@ bower install
 ### Grunt
 grunt build
 
-
+cd -
 ### Bootstrap-Caching
 sudo touch app/bootstrap.php.cache
 
