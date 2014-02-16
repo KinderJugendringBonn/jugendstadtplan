@@ -1,6 +1,5 @@
 angular.module( 'ngBoilerplate.orte', [
   'ui.router',
-  'placeholders',
   'ui.bootstrap'
 ])
 
