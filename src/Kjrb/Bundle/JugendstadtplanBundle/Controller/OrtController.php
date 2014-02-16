@@ -12,19 +12,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class OrtController
+ * @Route("/orte")
  * @package Kjrb\Bundle\JugendstadtplanBundle\Controller
  */
 class OrtController extends BaseController {
 
     /**
-     * @Route("/orte")
-     */
+    * @Route("/")
+    */
     public function indexAction() {
         return $this->sendJsonResponse($this->getOrtRepository()->findAll());
     }
 
     /**
-     * @Route("/ort/{id}/detail")
+     * @Route("/{id}")
      * @ParamConverter("ort", class="KjrbJugendstadtplanBundle:Ort")
      *
      * @param Ort $ort
@@ -35,7 +36,7 @@ class OrtController extends BaseController {
     }
 
     /**
-     * @Route("/ort/erstellen")
+     * @Route("/erstellen")
      * @Template()
      *
      * @param Request $request
