@@ -5,8 +5,7 @@ angular.module( 'ngBoilerplate', [
   'templates-app',
   'templates-common',
   'ngBoilerplate.home',
-  'ngBoilerplate.orte',
-  'ngBoilerplate.ort'
+  'ngBoilerplate.orte'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
