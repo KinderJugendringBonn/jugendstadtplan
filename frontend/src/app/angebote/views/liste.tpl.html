@@ -1,0 +1,14 @@
+<div class="row-fluid">
+  <h1 class="page-header">
+    Angebote
+    <small>Diese Angebote gibt es in Bonn.</small>
+  </h1>
+
+  <ul>
+    <li data-ng-repeat="angebot in angebote | orderBy: 'titel'" data-ng-click="viewAngebot(angebot)">
+      <h2>{{ angebot.titel }}</h2>
+      <small data-ng-bind-html="angebot.beschreibung"></small>
+    </li>
+  </ul>
+ 
+</div>

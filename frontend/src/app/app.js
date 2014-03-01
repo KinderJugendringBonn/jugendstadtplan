@@ -11,6 +11,7 @@ angular.module( 'ngBoilerplate', [
   'jugendstadtplan.api',
   'jugendstadtplan.orte',
   'jugendstadtplan.traeger',
+  'jugendstadtplan.angebote',
   'jugendstadtplan.controllers'
 ])
 
