@@ -6,7 +6,6 @@ use Kjrb\Bundle\JugendstadtplanBundle\Form\AngebotType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,18 +15,16 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/angebot")
  */
-class AngebotController extends Controller {
+class AngebotController extends BaseController {
 
     /**
-     * @Route()
+     * @Route("/")
      * @Template()
      *
      * @return array
      */
     public function indexAction() {
-        return array(
-            'angebote' => $this->get('kjrb.jugendstadtplan.angebot_repository')->findAll()
-        );
+        return $this->sendJsonResponse($this->getAngebotRepository()->findAll());
     }
 
     /**
@@ -39,7 +36,7 @@ class AngebotController extends Controller {
      * @return array
      */
     public function detailAction(Angebot $angebot) {
-        return array('angebot' => $angebot);
+        return $this->sendJsonResponse($angebot);
     }
 
 

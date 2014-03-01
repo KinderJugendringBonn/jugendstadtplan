@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Zend\Json\Json;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\OrtRepository;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\TraegerRepository;
+use Kjrb\Bundle\JugendstadtplanBundle\Entity\AngebotRepository;
 
 class BaseController extends Controller {
 
@@ -34,6 +35,13 @@ class BaseController extends Controller {
     */
     protected function getTraegerRepository() {
         return $this->get('kjrb.jugendstadtplan.traeger_repository');
+    }
+
+    /**
+    * @return AngebotRepository
+    */
+    protected function getAngebotRepository() {
+        return $this->get('kjrb.jugendstadtplan.angebot_repository');
     }
 
 }
