@@ -6,7 +6,6 @@ use Kjrb\Bundle\JugendstadtplanBundle\Form\TraegerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,18 +15,16 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/traeger")
  */
-class TraegerController extends Controller {
+class TraegerController extends BaseController {
 
     /**
-     * @Route()
+     * @Route("/")
      * @Template()
      *
      * @return array
      */
     public function indexAction() {
-        return array(
-            'traeger' => $this->get('kjrb.jugendstadtplan.traeger_repository')->findAll()
-        );
+        return $this->sendJsonResponse($this->getTraegerRepository()->findAll());
     }
 
     /**
@@ -39,7 +36,7 @@ class TraegerController extends Controller {
      * @return array
      */
     public function detailAction(Traeger $traeger) {
-        return array('traeger' => $traeger);
+        return $this->sendJsonResponse($traeger);
     }
 
     /**

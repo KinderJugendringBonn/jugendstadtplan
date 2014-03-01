@@ -145,5 +145,9 @@ class Traeger {
         return $this->orte;
     }
 
+    public function toJson() {
+        return json_encode(get_object_vars($this));
+    }
+
 }
  
