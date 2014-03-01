@@ -28,7 +28,7 @@ class TraegerController extends BaseController {
     }
 
     /**
-     * @Route("/{id}/detail")
+     * @Route("/{id}")
      * @ParamConverter("traeger", class="KjrbJugendstadtplanBundle:Traeger")
      * @Template()
      *
