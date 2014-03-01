@@ -1,12 +1,16 @@
+var Jugendstadtplan = Jugendstadtplan || {};
+Jugendstadtplan.Controllers = angular.module('jugendstadtplan.controllers', []);
+
 angular.module( 'ngBoilerplate', [
   'ngResource',
   'ngSanitize',
-  'jugendstadtplan',
   'ui.router',
   'templates-app',
   'templates-common',
   'ngBoilerplate.home',
-  'ngBoilerplate.orte'
+  'jugendstadtplan.api',
+  'jugendstadtplan.orte',
+  'jugendstadtplan.controllers'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
