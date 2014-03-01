@@ -13,12 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
  * Class AngebotController
  * @package Kjrb\Bundle\JugendstadtplanBundle\Controller
  *
- * @Route("/angebot")
+ * @Route("/angebote")
  */
 class AngebotController extends BaseController {
 
     /**
-     * @Route("/")
+     * @Route()
      * @Template()
      *
      * @return array
@@ -28,7 +28,7 @@ class AngebotController extends BaseController {
     }
 
     /**
-     * @Route("/{id}/detail")
+     * @Route("/{id}")
      * @ParamConverter("angebot", class="KjrbJugendstadtplanBundle:Angebot")
      * @Template()
      *

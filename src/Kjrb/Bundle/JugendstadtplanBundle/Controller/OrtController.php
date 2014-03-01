@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 class OrtController extends BaseController {
 
     /**
-    * @Route("/")
+    * @Route()
     */
     public function indexAction() {
         return $this->sendJsonResponse($this->getOrtRepository()->findAll());

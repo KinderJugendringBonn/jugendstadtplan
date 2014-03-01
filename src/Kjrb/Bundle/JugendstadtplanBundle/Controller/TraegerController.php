@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 class TraegerController extends BaseController {
 
     /**
-     * @Route("/")
+     * @Route()
      * @Template()
      *
      * @return array
