@@ -10,6 +10,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.home',
   'jugendstadtplan.api',
   'jugendstadtplan.orte',
+  'jugendstadtplan.traeger',
   'jugendstadtplan.controllers'
 ])
 
