@@ -7,8 +7,9 @@ angular.module( 'ngBoilerplate', [
   'ui.router',
   'templates-app',
   'templates-common',
-  'ngBoilerplate.home',
+  'leaflet-directive',
   'jugendstadtplan.api',
+  'jugendstadtplan.startseite',
   'jugendstadtplan.orte',
   'jugendstadtplan.traeger',
   'jugendstadtplan.angebote',
@@ -16,7 +17,7 @@ angular.module( 'ngBoilerplate', [
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
-  $urlRouterProvider.otherwise( '/home' );
+  $urlRouterProvider.otherwise( '/startseite' );
 })
 
 .run( function run () {
