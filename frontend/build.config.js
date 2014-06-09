@@ -71,11 +71,14 @@ module.exports = {
       'vendor/angular-resource/angular-resource.min.js',
       'vendor/angular-sanitize/angular-sanitize.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.min.js',
-      'vendor/angular-ui-utils/ui-utils.min.js'
+      'vendor/angular-ui-utils/ui-utils.min.js',
+      'vendor/leaflet-dist/leaflet.js',
+      'vendor/angular-leaflet/dist/angular-leaflet-directive.min.js'
     ],
     css: [
+      'vendor/leaflet-dist/leaflet.css'
     ],
     assets: [
     ]
-  },
+  }
 };

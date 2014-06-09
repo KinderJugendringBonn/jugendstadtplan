@@ -123,7 +123,23 @@ module.exports = function ( grunt ) {
             cwd: 'src/assets',
             expand: true
           }
-       ]   
+       ]
+      },
+      build_vendor_css: {
+        files: [
+          {
+            src: [ '<%= vendor_files.css %>' ],
+            dest: '<%= build_dir %>/'
+          }
+       ]
+      },
+      leaflet_assets: {
+        files: [
+            {
+                src: ['vendor/leaflet-dist/images/*'],
+                dest: '<%= build_dir %>/'
+            }
+        ]
       },
       build_vendor_assets: {
         files: [
@@ -134,7 +150,7 @@ module.exports = function ( grunt ) {
             expand: true,
             flatten: true
           }
-       ]   
+       ]
       },
       build_appjs: {
         files: [
@@ -594,7 +610,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'recess:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:backend_htaccess', 'copy:backend_php', 'index:build'
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:backend_htaccess', 'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'index:build'
   ]);
 
   /**
@@ -603,7 +619,7 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'compile', [
     'recess:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'copy:backend_htaccess',
-    'copy:backend_php', 'index:compile'
+    'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'index:compile'
   ]);
 
   /**
