@@ -33,7 +33,7 @@ angular.module('jugendstadtplan.startseite').controller( 'StartseiteController',
                 lat: item.latitude,
                 lng: item.longitude,
                 title: item.titel,
-                message: '<h3>' + item.titel + '</h3>' + item.beschreibung
+                message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/ort/'+item.id + '">Mehr</a></small>'
             };
             $scope.markers.push(marker);
         });
