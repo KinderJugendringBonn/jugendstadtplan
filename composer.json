@@ -21,7 +21,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "kunstmaan/live-reload-bundle": "dev-master",
         "symfony/debug": "~2.1",
-        "zendframework/zend-json": "~2.2"
+        "willdurand/hateoas": "~2.3"
     },
     "scripts": {
         "post-install-cmd": [

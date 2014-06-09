@@ -2,9 +2,9 @@
 
 namespace Kjrb\Bundle\JugendstadtplanBundle\Controller;
 
+use Hateoas\HateoasBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Zend\Json\Json;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\OrtRepository;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\TraegerRepository;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\AngebotRepository;
@@ -12,12 +12,11 @@ use Kjrb\Bundle\JugendstadtplanBundle\Entity\AngebotRepository;
 class BaseController extends Controller {
 
     protected function sendJsonResponse($object) {
-        // Den Zend-Eigenen Encoder verwenden; KEIN Fallback auf json_encode!
-        Json::$useBuiltinEncoderDecoder = true;
+        $hateoas = HateoasBuilder::create()->build();
 
-        $json = Json::encode($object);
+        $json = $hateoas->serialize($object, 'json');
         $response = new Response();
-        $response->setContent(Json::prettyPrint($json));
+        $response->setContent($json);
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;

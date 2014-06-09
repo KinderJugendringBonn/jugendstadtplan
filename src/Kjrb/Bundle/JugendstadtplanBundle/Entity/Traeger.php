@@ -37,7 +37,7 @@ class Traeger {
     /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort $orte
      *
-     * @ORM\ManyToMany(targetEntity="Ort", inversedBy="traeger", indexBy="id")
+     * @ORM\ManyToMany(targetEntity="Ort", inversedBy="traeger", indexBy="id", fetch="EAGER")
      * @ORM\JoinTable(name="traeger_orte",
      *      joinColumns={@ORM\JoinColumn(name="traeger_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="ort_id", referencedColumnName="id")}
@@ -143,10 +143,6 @@ class Traeger {
      */
     public function getOrte() {
         return $this->orte;
-    }
-
-    public function toJson() {
-        return json_encode(get_object_vars($this));
     }
 
 }
