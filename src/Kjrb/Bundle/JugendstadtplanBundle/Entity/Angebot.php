@@ -44,7 +44,7 @@ class Angebot {
     /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort $ort
      *
-     * @ORM\ManyToOne(targetEntity="Ort", inversedBy="angebote")
+     * @ORM\ManyToOne(targetEntity="Ort", inversedBy="angebote", fetch="EAGER")
      * @ORM\JoinColumn(name="ort_id", referencedColumnName="id")
      */
     private $ort;
