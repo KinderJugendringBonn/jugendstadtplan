@@ -2,5 +2,11 @@
   <h1 class="page-header">Ort {{ ort.titel }}</h1>
 
   <small data-ng-bind-html="ort.beschreibung"></small>
+
+    <div class="small-map-container">
+        <div class="angular-leaflet-map">
+            <leaflet markers="markers" defaults="defaults" center="center"></leaflet>
+        </div>
+    </div>
  
 </div>
