@@ -35,15 +35,19 @@ Jugendstadtplan.Controllers.controller( 'AngebotDetailController', [ '$scope', '
                 }
             });
 
+            $scope.center = {
+                lat: ort.latitude,
+                lng: ort.longitude,
+                zoom: 15
+            };
+
             var marker = {
                 lat: ort.latitude,
                 lng: ort.longitude,
                 title: ort.titel,
                 focus: true,
                 message: '<h3>' + ort.titel + '</h3>' + ort.beschreibung,
-                zoom: 15
             };
-            $scope.center = marker;
             $scope.markers.push(marker);
         }, function() {
             angular.extend($scope, {
