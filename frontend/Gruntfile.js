@@ -8,6 +8,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-conventional-changelog');
@@ -87,6 +88,20 @@ module.exports = function ( grunt ) {
       '<%= build_dir %>', 
       '<%= compile_dir %>'
     ],
+
+    sass: {
+        options: {
+            loadPath: [
+                'vendor/'
+            ]
+        },
+        compressed: {
+            options: {
+                style: 'compressed'
+            },
+            files: { '<%= build_dir %>/assets/screen.css': 'src/assets/scss/screen.scss' }
+        }
+    },
 
     /**
      * The `copy` task just copies files from A to B. We use it here to copy
@@ -191,7 +206,7 @@ module.exports = function ( grunt ) {
       build_css: {
         src: [
           '<%= vendor_files.css %>',
-          '<%= app_files.css %>',
+          '<%= build_dir %>/assets/screen.css',
           '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
@@ -472,7 +487,7 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint',
+    'clean', 'html2js', 'jshint', 'sass',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:backend_htaccess', 'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'index:build'
   ]);
@@ -482,7 +497,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'copy:backend_htaccess',
+    'sass', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'copy:backend_htaccess',
     'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'index:compile'
   ]);
 
