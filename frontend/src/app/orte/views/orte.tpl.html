@@ -6,8 +6,10 @@
 
   <ul>
     <li data-ng-repeat="ort in orte | orderBy: 'titel'" data-ng-click="viewOrt(ort)">
-      <h2>{{ ort.titel }}</h2>
-      <small data-ng-bind-html="ort.beschreibung"></small>
+        <a href="#/ort/{{ort.id}}">
+            <h2>{{ ort.titel }}</h2>
+        </a>
+        <small data-ng-bind-html="ort.beschreibung"></small>
     </li>
   </ul>
  

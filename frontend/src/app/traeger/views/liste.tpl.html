@@ -6,7 +6,9 @@
 
   <ul>
     <li data-ng-repeat="currentTraeger in traeger | orderBy: 'titel'" data-ng-click="viewTraeger(currentTraeger)">
-      <h2>{{ currentTraeger.titel }}</h2>
+        <a href="#/traeger/{{currentTraeger.id}}">
+            <h2>{{ currentTraeger.titel }}</h2>
+        </a>
       <small data-ng-bind-html="currentTraeger.beschreibung"></small>
     </li>
   </ul>

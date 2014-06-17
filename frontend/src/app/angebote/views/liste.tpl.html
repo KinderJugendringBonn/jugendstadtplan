@@ -6,7 +6,9 @@
 
   <ul>
     <li data-ng-repeat="angebot in angebote | orderBy: 'titel'" data-ng-click="viewAngebot(angebot)">
-      <h2>{{ angebot.titel }}</h2>
+        <a href="#/angebot/{{angebot.id}}">
+            <h2>{{ angebot.titel }}</h2>
+        </a>
       <small data-ng-bind-html="angebot.beschreibung"></small>
     </li>
   </ul>
