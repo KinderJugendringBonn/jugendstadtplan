@@ -13,3 +13,7 @@
 //}
 
 @include grid(16, $prefix:layout-large, $gutterWidth: 8);
+
+@media (min-width:240px) {
+  @include grid(4, $prefix: nav-large, $gutterWidth: 0);
+}

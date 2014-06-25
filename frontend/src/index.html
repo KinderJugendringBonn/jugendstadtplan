@@ -26,32 +26,33 @@
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
   <body>
+    <div class="wrapper">
     <div class="container">
       <div class="masthead">
         <h1>Jugendstadtplan</h1>
         <div class="navbar">
           <div class="navbar-inner">
             <div class="container">
-              <ul class="nav">
-                <li ui-route="/startseite" ng-class="{active:$uiRoute}" class="layout-large-1-2">
+              <ul class="nav grid-row">
+                <li data-ui-route="/startseite" data-ng-class="{active:$uiRoute}" class="nav-large-1">
                   <a href="#/startseite">
                     <i class="icon-home"></i>
                     Startseite
                   </a>
                 </li>
-                <li ui-route="/orte" ng-class="{active:$uiRoute}" class="layout-large-3-4">
+                <li data-ui-route="/orte" data-ng-class="{active:$uiRoute}" class="nav-large-2">
                   <a href="#/orte">
                     <i class="icon-info-sign"></i>
                     Orte
                   </a>
                 </li>
-                <li ui-route="/traeger" ng-class="{active:$uiRoute}" class="layout-large-5-6">
+                <li data-ui-route="/traeger" data-ng-class="{active:$uiRoute}" class="nav-large-3">
                   <a href="#/traeger">
                     <i class="icon-info-sign"></i>
                     Träger
                   </a>
                 </li>
-                <li ui-route="/angebote" ng-class="{active:$uiRoute}" class="layout-large-7-8">
+                <li data-ui-route="/angebote" data-ng-class="{active:$uiRoute}" class="nav-large-4">
                   <a href="#/angebote">
                     <i class="icon-info-sign"></i>
                     Angebote
@@ -75,5 +76,6 @@
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
       { "parsetags": "explicit" }
     </script>
+    </div>
   </body>
 </html>
