@@ -13,7 +13,7 @@ angular.module('jugendstadtplan.startseite').config(function config( $stateProvi
 
 });
 
-angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'OrteApi', function StartseiteController( $scope, $location, $orteApi ) {
+angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Ort', function StartseiteController( $scope, $location, Ort ) {
      angular.extend($scope, {
         center: {
             lat: 50.732829246726,
@@ -27,7 +27,7 @@ angular.module('jugendstadtplan.startseite').controller( 'StartseiteController',
 
     $scope.markers = [];
 
-    $orteApi.query(function(orte) {
+    Ort.query(function(orte) {
         angular.forEach(orte, function(item) {
             var marker = {
                 lat: item.latitude,

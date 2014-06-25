@@ -13,8 +13,8 @@ angular.module('jugendstadtplan.orte').config(function config( $stateProvider ) 
 
 });
 
-Jugendstadtplan.Controllers.controller( 'OrteController', [ '$scope', '$location', 'OrteApi', function OrteController( $scope, $location, $orteApi ) {
-    $scope.orte = $orteApi.query();
+Jugendstadtplan.Controllers.controller( 'OrteController', [ '$scope', '$location', 'Ort', function OrteController( $scope, $location, Ort ) {
+    $scope.orte = Ort.query();
 
     $scope.viewOrt = function (ort) {
       $location.path('/ort/'+ort.id);

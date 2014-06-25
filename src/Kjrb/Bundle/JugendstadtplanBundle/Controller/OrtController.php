@@ -6,6 +6,7 @@ use Kjrb\Bundle\JugendstadtplanBundle\Form\OrtType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,60 @@ class OrtController extends BaseController {
     */
     public function indexAction() {
         return $this->sendJsonResponse($this->getOrtRepository()->findAll());
+    }
+
+    /**
+     * @Route("/create", name = "api_ort_create")
+     *
+     * @param Request $request
+     */
+    public function createAction(Request $request) {
+        $ort = new Ort();
+        $this->setDataFromJson($ort);
+
+        // TODO: Checks!
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($ort);
+        $em->flush();
+
+        return $this->sendJsonResponse($ort);
+    }
+
+    /**
+     * @Route("/update/{id}", name = "api_ort_update")
+     * @ParamConverter("ort", class="KjrbJugendstadtplanBundle:Ort")
+     */
+    public function updateAction(Ort $ort) {
+        $this->setDataFromJson($ort);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($ort);
+        $em->flush();
+
+        return $this->sendJsonResponse($ort);
+    }
+
+    private function setDataFromJson(Ort $ort) {
+        $data = file_get_contents("php://input");
+        $ortData = json_decode($data);
+
+        $ort->setTitel($ortData->titel);
+        $ort->setBeschreibung($ortData->beschreibung);
+        $ort->setLatitude($ortData->markers[0]->lat);
+        $ort->setLongitude($ortData->markers[0]->lng);
+    }
+
+    /**
+     * @Route("/delete/{id}", name = "api_ort_update")
+     * @ParamConverter("ort", class="KjrbJugendstadtplanBundle:Ort")
+     */
+    public function deleteAction(Ort $ort) {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($ort);
+        $em->flush();
+
+        return new Response();
     }
 
     /**

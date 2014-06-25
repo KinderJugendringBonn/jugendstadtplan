@@ -9,8 +9,8 @@ angular.module('jugendstadtplan.orte').config(function config( $stateProvider ) 
       }
     },
     resolve: {
-      ortDetail: [ '$stateParams', 'OrteApi', function($stateParams, $orteApi) {
-        return $orteApi.get({},{id: $stateParams.id});
+      ortDetail: [ '$stateParams', 'Ort', function($stateParams, Ort) {
+        return Ort.get({},{id: $stateParams.id});
       }]
     },
     data:{ pageTitle: 'Ort' }
