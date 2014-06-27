@@ -2,18 +2,26 @@ var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
 
 jugendstadtplanApi.provider('Ort', function() {
     this.$get = ['$resource', function ($resource) {
-        var Ort = $resource('/backend/orte/:id', {}, {
+        var backendUrl = '/backend/orte';
+        var Ort = $resource(backendUrl, {}, {
+            get: {
+                method: 'GET',
+                url: backendUrl + '/:id',
+                params: { id:'@id'}
+            },
             update: {
                 method: 'PUT',
-                url: '/backend/orte/update/:id'
+                url: backendUrl + '/update/:id',
+                params: { id:'@id'}
             },
             save: {
                 method: 'POST',
-                url: '/backend/orte/create'
+                url: backendUrl + '/create'
             },
             delete: {
                 method: 'DELETE',
-                url: '/backend/orte/delete/:id'
+                url: backendUrl + '/delete/:id',
+                params: { id:'@id'}
             }
         });
         return Ort;

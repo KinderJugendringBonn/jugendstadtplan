@@ -49,7 +49,7 @@ Jugendstadtplan.Controllers.controller( 'OrtFormController', [ '$scope', '$locat
 
     $scope.save = function() {
         if ($scope.ort.id) {
-            Ort.update({id: $scope.ort.id}, $scope.ort);
+            Ort.update($scope.ort);
         } else {
             $scope.ort.$save().then(function(response) {
                 $scope.orte.push(response);
@@ -70,9 +70,13 @@ Jugendstadtplan.Controllers.controller( 'OrtFormController', [ '$scope', '$locat
         $scope.editing = true;
     };
 
-    $scope.remove = function(ort, $index) {
-        Ort.delete(ort);
-        $scope.orte.splice($index, 1);
+    $scope.remove = function(ort) {
+        Ort.delete(ort, function() {
+            var index = $scope.orte.indexOf(ort);
+            if (index != -1) {
+                $scope.orte.splice(index, 1);
+            }
+        });
     };
 
 }]);
