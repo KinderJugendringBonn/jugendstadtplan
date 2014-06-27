@@ -1,9 +1,11 @@
 <div>
     <h3>Bisherige Orte:</h3>
     <ul data-ng-show="orte.length">
-        <li data-ng-repeat="ort in orte | orderBy: 'titel'" data-ng-click="setActiveOrt(ort)">
-            <h2>{{ ort.titel }}</h2>
-            <small data-ng-bind-html="ort.beschreibung"></small>
+        <li data-ng-repeat="ort in orte | orderBy: 'titel'">
+            <div data-ng-click="setActiveOrt(ort)">
+                <h2>{{ ort.titel }}</h2>
+                <small data-ng-bind-html="ort.beschreibung"></small>
+            </div>
             <button class="btn btn-danger" data-ng-click="remove(ort, $index)">Löschen</button>
         </li>
     </ul>
