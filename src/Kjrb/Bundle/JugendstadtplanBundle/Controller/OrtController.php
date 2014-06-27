@@ -68,7 +68,7 @@ class OrtController extends BaseController {
     }
 
     /**
-     * @Route("/delete/{id}", name = "api_ort_update")
+     * @Route("/delete/{id}", name = "api_ort_delete")
      * @ParamConverter("ort", class="KjrbJugendstadtplanBundle:Ort")
      */
     public function deleteAction(Ort $ort) {
