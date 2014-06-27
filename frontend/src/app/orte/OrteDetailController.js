@@ -19,7 +19,6 @@ angular.module('jugendstadtplan.orte').config(function config( $stateProvider ) 
 });
 
 Jugendstadtplan.Controllers.controller( 'OrtDetailController', [ '$scope', 'ortDetail', function OrtDetailController( $scope, ortDetail ) {
-    $scope.ort = ortDetail;
     $scope.markers = [];
     $scope.center = {
         lat: 50.732829246726,
@@ -28,6 +27,8 @@ Jugendstadtplan.Controllers.controller( 'OrtDetailController', [ '$scope', 'ortD
     };
 
     ortDetail.$promise.then(function() {
+            $scope.ort = ortDetail;
+
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false
