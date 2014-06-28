@@ -2,7 +2,7 @@ var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
 
 jugendstadtplanApi.provider('Pin', function() {
     this.$get = ['$resource', function ($resource) {
-        var backendUrl = '/backend/orte';
+        var backendUrl = '/backend/pins';
         var Pin = $resource(backendUrl, {}, {
             get: {
                 method: 'GET',

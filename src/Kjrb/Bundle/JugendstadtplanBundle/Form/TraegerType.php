@@ -12,8 +12,8 @@ class TraegerType extends AbstractType {
         $builder
             ->add('titel')
             ->add('beschreibung', 'textarea', array('required' => false))
-            ->add('orte', 'entity', array(
-                'class' => 'KjrbJugendstadtplanBundle:Ort',
+            ->add('pins', 'entity', array(
+                'class' => 'KjrbJugendstadtplanBundle:Pin',
                 'property' => 'titel',
                 'multiple' => true,
                 'expanded' => true,

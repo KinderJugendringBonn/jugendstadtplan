@@ -35,18 +35,18 @@ class Traeger {
     private $beschreibung;
 
     /**
-     * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort $orte
+     * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Pin $pins
      *
-     * @ORM\ManyToMany(targetEntity="Ort", inversedBy="traeger", indexBy="id", fetch="EAGER")
-     * @ORM\JoinTable(name="traeger_orte",
+     * @ORM\ManyToMany(targetEntity="Pin", inversedBy="traeger", indexBy="id", fetch="EAGER")
+     * @ORM\JoinTable(name="traeger_pins",
      *      joinColumns={@ORM\JoinColumn(name="traeger_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="ort_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="pin_id", referencedColumnName="id")}
      * )
      */
-    private $orte;
+    private $pins;
 
     public function __construct() {
-        $this->orte = new ArrayCollection();
+        $this->pins = new ArrayCollection();
         $this->angebote = new ArrayCollection();
     }
 
@@ -95,25 +95,25 @@ class Traeger {
     /**
      * Convenience-Methode fuer das Symfony-Formularsystem.
      */
-    public function setOrt(Ort $ort = null) {
-        if ($ort !== null) {
-            $this->addOrt($ort);
+    public function setPin(Pin $pin = null) {
+        if ($pin !== null) {
+            $this->addPin($pin);
         }
     }
 
-    public function addOrt(Ort $ort) {
-        $id = $ort->getId();
-        if (!$this->orte->containsKey($id)) {
-            $this->orte->set($id, $ort);
-            $ort->addTraeger($this);
+    public function addPin(Pin $pin) {
+        $id = $pin->getId();
+        if (!$this->pins->containsKey($id)) {
+            $this->pins->set($id, $pin);
+            $pin->addTraeger($this);
         }
     }
 
     /**
-     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Ort[]
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Pin[]
      */
-    public function getOrte() {
-        return $this->orte;
+    public function getPins() {
+        return $this->pins;
     }
 
 }

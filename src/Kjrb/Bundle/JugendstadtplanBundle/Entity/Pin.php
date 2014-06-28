@@ -8,9 +8,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Kjrb\Bundle\JugendstadtplanBundle\Entity\OrtRepository")
+ * @ORM\Entity(repositoryClass="Kjrb\Bundle\JugendstadtplanBundle\Entity\PinRepository")
  */
-class Ort {
+class Pin {
 
     /**
      * @var integer $id
@@ -55,7 +55,7 @@ class Ort {
     /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger $traeger
      *
-     * @ORM\ManyToMany(targetEntity="Traeger", mappedBy="orte", indexBy="id")
+     * @ORM\ManyToMany(targetEntity="Traeger", mappedBy="pins", indexBy="id")
      */
     private $traeger;
 
@@ -147,7 +147,7 @@ class Ort {
         $id = $traeger->getId();
         if (!$this->traeger->containsKey($id)) {
             $this->traeger->set($id, $traeger);
-            $traeger->addOrt($this);
+            $traeger->addPin($this);
         }
     }
 

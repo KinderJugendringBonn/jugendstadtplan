@@ -5,7 +5,7 @@ namespace Kjrb\Bundle\JugendstadtplanBundle\Controller;
 use Hateoas\HateoasBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Kjrb\Bundle\JugendstadtplanBundle\Entity\OrtRepository;
+use Kjrb\Bundle\JugendstadtplanBundle\Entity\PinRepository;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\TraegerRepository;
 
 class BaseController extends Controller {
@@ -22,10 +22,10 @@ class BaseController extends Controller {
     }
 
     /**
-     * @return OrtRepository
+     * @return PinRepository
      */
-    protected function getOrtRepository() {
-        return $this->get('kjrb.jugendstadtplan.ort_repository');
+    protected function getPinRepository() {
+        return $this->get('kjrb.jugendstadtplan.pin_repository');
     }
 
     /**

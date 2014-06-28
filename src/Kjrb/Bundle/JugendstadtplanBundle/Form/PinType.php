@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class OrtType extends AbstractType {
+class PinType extends AbstractType {
 
     protected $translator;
 
@@ -23,7 +23,7 @@ class OrtType extends AbstractType {
             ->add('traeger', 'entity', array(
                 'class' => 'KjrbJugendstadtplanBundle:Traeger',
                 'property' => 'titel',
-                'empty_value' => $this->translator->trans('ort.option.kein_traeger'),
+                'empty_value' => $this->translator->trans('pin.option.kein_traeger'),
                 'required' => false
             ))
             ->add('speichern', 'submit')
@@ -36,7 +36,7 @@ class OrtType extends AbstractType {
      * @return string The name of this type
      */
     public function getName() {
-        return 'kjrb_jugendstadtplanbundle_ort';
+        return 'kjrb_jugendstadtplanbundle_pin';
     }
 
 
