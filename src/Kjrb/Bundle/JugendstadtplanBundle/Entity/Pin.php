@@ -59,7 +59,6 @@ class Pin {
 
     public function __construct() {
         $this->traeger = new ArrayCollection();
-        $this->angebote = new ArrayCollection();
     }
 
     /**

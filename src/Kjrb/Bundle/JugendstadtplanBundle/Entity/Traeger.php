@@ -47,7 +47,6 @@ class Traeger {
 
     public function __construct() {
         $this->pins = new ArrayCollection();
-        $this->angebote = new ArrayCollection();
     }
 
     /**
