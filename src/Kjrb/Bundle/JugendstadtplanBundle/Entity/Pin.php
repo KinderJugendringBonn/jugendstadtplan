@@ -39,7 +39,6 @@ class Pin {
     /**
      * @var float $longitude
      *
-     * @Assert\NotBlank()
      * @ORM\Column(name="longitude", type="float")
      */
     private $longitude;
@@ -47,7 +46,6 @@ class Pin {
     /**
      * @var float $latitude
      *
-     * @Assert\NotBlank()
      * @ORM\Column(name="latitude", type="float")
      */
     private $latitude;

@@ -62,9 +62,14 @@ class PinController extends BaseController {
         $pinData = json_decode($data);
 
         $pin->setTitel($pinData->titel);
-        $pin->setBeschreibung($pinData->beschreibung);
-        $pin->setLatitude($pinData->markers[0]->lat);
-        $pin->setLongitude($pinData->markers[0]->lng);
+        if (isset($pinData->beschreibung)) {
+            $pin->setBeschreibung($pinData->beschreibung);
+        }
+
+        if (isset($pinData->markers) && isset($pinData->markers[0])) {
+            $pin->setLatitude($pinData->markers[0]->lat);
+            $pin->setLongitude($pinData->markers[0]->lng);
+        }
     }
 
     /**
