@@ -18,7 +18,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
 
 });
 
-Jugendstadtplan.Controllers.controller( 'TraegerDetailController', [ '$scope', 'traegerDetail', function OrtDetailController( $scope, traegerDetail ) {
+Jugendstadtplan.Controllers.controller( 'TraegerDetailController', [ '$scope', 'traegerDetail', function TraegerDetailController( $scope, traegerDetail ) {
     $scope.traeger = traegerDetail;
 
     angular.extend($scope, {
@@ -35,12 +35,12 @@ Jugendstadtplan.Controllers.controller( 'TraegerDetailController', [ '$scope', '
     $scope.markers = [];
 
     traegerDetail.$promise.then(function() {
-        angular.forEach(traegerDetail.orte, function(item, key) {
+        angular.forEach(traegerDetail.pins, function(item, key) {
             var marker = {
                 lat: item.latitude,
                 lng: item.longitude,
                 title: item.titel,
-                message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/ort/'+item.id + '">Mehr</a></small>'
+                message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/pin/'+item.id + '">Mehr</a></small>'
             };
             $scope.markers.push(marker);
         });

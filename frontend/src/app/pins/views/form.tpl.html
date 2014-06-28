@@ -1,0 +1,32 @@
+<div>
+    <h3>Bisherige Pins:</h3>
+    <ul data-ng-show="pins.length">
+        <li data-ng-repeat="pin in pins | orderBy: 'titel'">
+            <div data-ng-click="setActivePin(pin)">
+                <h2>{{ pin.titel }}</h2>
+                <small data-ng-bind-html="pin.beschreibung"></small>
+            </div>
+            <button class="btn btn-danger" data-ng-click="remove(pin, $index)">Löschen</button>
+        </li>
+    </ul>
+
+    <form data-ng-submit="save(pin)">
+        <label for="pin.titel">Titel</label>
+        <input id="pin.titel" type="text" data-ng-model="pin.titel" />
+        <label for="pin.beschreibung">Beschreibung</label>
+        <textarea id="pin.beschreibung" data-ng-model="pin.beschreibung"></textarea>
+        <div class="small-map-container">
+            <leaflet defaults="defaults" center="center" markers="pin.markers" event-broadcast="events"></leaflet>
+        </div>
+        <div class="hidden">
+            <label for="kjrb_jugendstadtplanbundle_pin_longitude" class="required">Longitude</label>
+            <input type="text" id="kjrb_jugendstadtplanbundle_pin_longitude" required="required" data-ng-model="pin.markers[0].lng"/>
+        </div>
+        <div class="hidden">
+            <label for="kjrb_jugendstadtplanbundle_pin_latitude" class="required">Latitude</label>
+            <input type="text" id="kjrb_jugendstadtplanbundle_pin_latitude" required="required" data-ng-model="pin.markers[0].lat" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <button data-ng-if="editing" class="btn btn-success" data-ng-click="newPin()">Neuen Pin anlegen</button>
+</div>

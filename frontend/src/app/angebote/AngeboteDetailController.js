@@ -28,7 +28,7 @@ Jugendstadtplan.Controllers.controller( 'AngebotDetailController', [ '$scope', '
     };
 
     angebotDetail.$promise.then(function() {
-            var ort = angebotDetail.ort;
+            var pin = angebotDetail.pin;
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false
@@ -36,17 +36,17 @@ Jugendstadtplan.Controllers.controller( 'AngebotDetailController', [ '$scope', '
             });
 
             $scope.center = {
-                lat: ort.latitude,
-                lng: ort.longitude,
+                lat: pin.latitude,
+                lng: pin.longitude,
                 zoom: 15
             };
 
             var marker = {
-                lat: ort.latitude,
-                lng: ort.longitude,
-                title: ort.titel,
+                lat: pin.latitude,
+                lng: pin.longitude,
+                title: pin.titel,
                 focus: true,
-                message: '<h3>' + ort.titel + '</h3>' + ort.beschreibung,
+                message: '<h3>' + pin.titel + '</h3>' + pin.beschreibung,
             };
             $scope.markers.push(marker);
         }, function() {

@@ -10,7 +10,7 @@ angular.module( 'ngBoilerplate', [
   'leaflet-directive',
   'jugendstadtplan.api',
   'jugendstadtplan.startseite',
-  'jugendstadtplan.orte',
+  'jugendstadtplan.pins',
   'jugendstadtplan.traeger',
   'jugendstadtplan.angebote',
   'jugendstadtplan.controllers'
