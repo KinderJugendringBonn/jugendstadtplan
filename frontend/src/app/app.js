@@ -12,7 +12,6 @@ angular.module( 'ngBoilerplate', [
   'jugendstadtplan.startseite',
   'jugendstadtplan.pins',
   'jugendstadtplan.traeger',
-  'jugendstadtplan.angebote',
   'jugendstadtplan.controllers'
 ])
 

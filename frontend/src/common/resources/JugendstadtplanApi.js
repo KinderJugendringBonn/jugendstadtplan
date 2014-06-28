@@ -31,7 +31,3 @@ jugendstadtplanApi.provider('Pin', function() {
 jugendstadtplanApi.factory('TraegerApi', ['$resource', function ($resource) {
 	return $resource('/backend/traeger/:id', { id:'@id'});
 }]);
-
-jugendstadtplanApi.factory('AngeboteApi', ['$resource', function ($resource) {
-	return $resource('/backend/angebote/:id', { id:'@id'});
-}]);

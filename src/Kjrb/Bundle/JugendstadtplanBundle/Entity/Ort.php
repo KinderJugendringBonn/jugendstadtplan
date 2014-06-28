@@ -59,13 +59,6 @@ class Ort {
      */
     private $traeger;
 
-    /**
-     * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot $angebot
-     *
-     * @ORM\OneToMany(targetEntity="Angebot", mappedBy="ort", indexBy="id")
-     */
-    private $angebote;
-
     public function __construct() {
         $this->traeger = new ArrayCollection();
         $this->angebote = new ArrayCollection();
@@ -139,28 +132,6 @@ class Ort {
      */
     public function getLongitude() {
         return $this->longitude;
-    }
-
-    /**
-     * Convenience-Methode fuer das Symfony-Formularsystem.
-     */
-    public function setAngebote(Angebot $angebot) {
-        $this->addAngebot($angebot);
-    }
-
-    public function addAngebot(Angebot $angebot) {
-        $id = $angebot->getId();
-        if (!$this->angebote->containsKey($id)) {
-            $this->angebote->set($id, $angebot);
-            $angebot->setOrt($this);
-        }
-    }
-
-    /**
-     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot[]
-     */
-    public function getAngebote() {
-        return $this->angebote;
     }
 
     /**

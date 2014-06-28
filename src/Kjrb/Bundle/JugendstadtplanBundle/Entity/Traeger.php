@@ -45,13 +45,6 @@ class Traeger {
      */
     private $orte;
 
-    /**
-     * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot $angebote
-     *
-     * @ORM\OneToMany(targetEntity="Angebot", mappedBy="traeger", indexBy="id")
-     */
-    private $angebote;
-
     public function __construct() {
         $this->orte = new ArrayCollection();
         $this->angebote = new ArrayCollection();
@@ -97,28 +90,6 @@ class Traeger {
      */
     public function getBeschreibung() {
         return $this->beschreibung;
-    }
-
-    /**
-     * Convenience-Methode fuer das Symfony-Formularsystem.
-     */
-    public function setAngebote(Angebot $angebot) {
-        $this->addAngebot($angebot);
-    }
-
-    public function addAngebot(Angebot $angebot) {
-        $id = $angebot->getId();
-        if (!$this->angebote->containsKey($id)) {
-            $this->angebote->set($id, $angebot);
-            $angebot->setTraeger($this);
-        }
-    }
-
-    /**
-     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Angebot[]
-     */
-    public function getAngebote() {
-        return $this->angebote;
     }
 
     /**
