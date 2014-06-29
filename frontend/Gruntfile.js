@@ -93,7 +93,8 @@ module.exports = function ( grunt ) {
         options: {
             loadPath: [
                 'vendor/',
-                'vendor/bootstrap-sass-official/assets/stylesheets/'
+                'vendor/bootstrap-sass-official/assets/stylesheets/',
+                'vendor/font-awesome/',
             ]
         },
         compressed: {
@@ -193,6 +194,17 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+      fonts: {
+          files: [
+              {
+                  src: [ 'vendor/font-awesome/fonts/*' ],
+                  dest: '<%= build_dir %>/fonts',
+                  cwd: '.',
+                  expand: true,
+                  flatten: true
+              }
+          ]
       }
     },
 
@@ -489,7 +501,7 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'sass',
-    'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
+    'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:fonts',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:backend_htaccess', 'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'index:build'
   ]);
 
@@ -498,7 +510,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'sass', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'copy:backend_htaccess',
+    'sass', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'copy:backend_htaccess', 'copy:fonts',
     'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'index:compile'
   ]);
 
