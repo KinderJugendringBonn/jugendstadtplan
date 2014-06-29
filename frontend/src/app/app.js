@@ -8,6 +8,7 @@ angular.module( 'ngBoilerplate', [
   'templates-app',
   'templates-common',
   'leaflet-directive',
+  'textAngular',
   'jugendstadtplan.api',
   'jugendstadtplan.startseite',
   'jugendstadtplan.pins',

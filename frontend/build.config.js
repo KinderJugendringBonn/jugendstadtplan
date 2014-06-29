@@ -70,7 +70,9 @@ module.exports = {
       'vendor/angular-ui-router/release/angular-ui-router.min.js',
       'vendor/angular-ui-utils/ui-utils.min.js',
       'vendor/leaflet-dist/leaflet.js',
-      'vendor/angular-leaflet/dist/angular-leaflet-directive.min.js'
+      'vendor/angular-leaflet/dist/angular-leaflet-directive.min.js',
+      'vendor/textAngular/dist/textAngular.min.js',
+      'vendor/textAngular/dist/textAngular-sanitize.min.js'
     ],
     css: [
       'vendor/leaflet-dist/leaflet.css'

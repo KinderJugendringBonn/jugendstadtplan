@@ -13,8 +13,7 @@
     <form data-ng-submit="save(pin)">
         <label for="pin.titel">Titel</label>
         <input id="pin.titel" type="text" data-ng-model="pin.titel" />
-        <label for="pin.beschreibung">Beschreibung</label>
-        <textarea id="pin.beschreibung" data-ng-model="pin.beschreibung"></textarea>
+        <text-angular data-ng-model="pin.beschreibung"></text-angular>
         <div class="small-map-container">
             <leaflet defaults="defaults" center="center" markers="pin.markers" event-broadcast="events"></leaflet>
         </div>
