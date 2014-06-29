@@ -14,6 +14,7 @@
     "angular-leaflet-directive": "~0.7.5",
     "angular-leaflet": "~0.7.5",
     "raster.gs": "~1.1.6",
-    "textAngular": "~1.2.1"
+    "textAngular": "~1.2.1",
+    "bootstrap-sass-official": "~3.2.0"
   }
 }

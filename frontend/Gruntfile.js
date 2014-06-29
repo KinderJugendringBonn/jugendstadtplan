@@ -92,7 +92,8 @@ module.exports = function ( grunt ) {
     sass: {
         options: {
             loadPath: [
-                'vendor/'
+                'vendor/',
+                'vendor/bootstrap-sass-official/assets/stylesheets/'
             ]
         },
         compressed: {
