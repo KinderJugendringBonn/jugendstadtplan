@@ -61,12 +61,14 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
     $scope.setActivePin = function(pin) {
         $scope.pin = pin;
         $scope.pin.markers = [];
-        $scope.pin.markers[0] = {
-            lat: pin.latitude,
-            lng: pin.longitude,
-            draggable: true,
-            focus: true
-        };
+        if (pin.longitude != null) {
+            $scope.pin.markers[0] = {
+                lat: pin.latitude,
+                lng: pin.longitude,
+                draggable: true,
+                focus: true
+            };
+        }
         $scope.editing = true;
     };
 

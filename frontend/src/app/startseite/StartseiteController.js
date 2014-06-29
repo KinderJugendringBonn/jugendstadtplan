@@ -29,13 +29,15 @@ angular.module('jugendstadtplan.startseite').controller( 'StartseiteController',
 
     Pin.query(function(pins) {
         angular.forEach(pins, function(item) {
-            var marker = {
-                lat: item.latitude,
-                lng: item.longitude,
-                title: item.titel,
-                message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/pin/'+item.id + '">Mehr</a></small>'
-            };
-            $scope.markers.push(marker);
+            if (item.longitude != null) {
+                var marker = {
+                    lat: item.latitude,
+                    lng: item.longitude,
+                    title: item.titel,
+                    message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/pin/' + item.id + '">Mehr</a></small>'
+                };
+                $scope.markers.push(marker);
+            }
         });
     });
 
