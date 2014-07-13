@@ -13,8 +13,8 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
 
 });
 
-Jugendstadtplan.Controllers.controller( 'TraegerController', [ '$scope', '$location', 'TraegerApi', function TraegerController( $scope, $location, $traegerApi ) {
-    $scope.traeger = $traegerApi.query();
+Jugendstadtplan.Controllers.controller( 'TraegerController', [ '$scope', '$location', 'Traeger', function TraegerController( $scope, $location, Traeger ) {
+    $scope.traeger = Traeger.query();
 
     $scope.viewTraeger = function (traeger) {
       $location.path('/traeger/'+traeger.id);

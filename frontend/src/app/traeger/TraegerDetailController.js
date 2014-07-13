@@ -9,8 +9,8 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
       }
     },
     resolve: {
-      traegerDetail: [ '$stateParams', 'TraegerApi', function($stateParams, $traegerApi) {
-        return $traegerApi.get({},{id: $stateParams.id});
+      traegerDetail: [ '$stateParams', 'Traeger', function($stateParams, Traeger) {
+        return Traeger.get({},{id: $stateParams.id});
       }]
     },
     data:{ pageTitle: 'Träger' }
