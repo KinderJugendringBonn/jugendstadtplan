@@ -10,12 +10,13 @@ use Kjrb\Bundle\JugendstadtplanBundle\Entity\TraegerRepository;
 
 class BaseController extends Controller {
 
-    protected function sendJsonResponse($object) {
+    protected function sendJsonResponse($object, $statusCode = 200) {
         $hateoas = HateoasBuilder::create()->build();
 
         $json = $hateoas->serialize($object, 'json');
         $response = new Response();
         $response->setContent($json);
+        $response->setStatusCode($statusCode);
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;

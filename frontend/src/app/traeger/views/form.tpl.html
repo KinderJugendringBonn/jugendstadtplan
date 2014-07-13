@@ -1,0 +1,24 @@
+<div>
+    <h3>Bisherige Träger:</h3>
+    <ul data-ng-show="traegers.length">
+        <li data-ng-repeat="traeger in traegers | orderBy: 'titel'">
+            <div data-ng-click="setActiveTraeger(traeger)">
+                <h2>{{ traeger.titel }}</h2>
+                <small data-ng-bind-html="traeger.beschreibung"></small>
+            </div>
+            <button class="btn btn-danger" data-ng-click="remove(traeger, $index)">Löschen</button>
+        </li>
+    </ul>
+
+    <form data-ng-submit="save(traeger)">
+        <label for="traeger.email">Email</label>
+        <input id="traeger.email" type="text" data-ng-model="traeger.email" />
+        <label for="traeger.passwort">Passwort</label>
+        <input id="traeger.passwort" type="password" data-ng-model="traeger.passwort" />
+        <label for="traeger.titel">Titel</label>
+        <input id="traeger.titel" type="text" data-ng-model="traeger.titel" />
+        <text-angular data-ng-model="traeger.beschreibung"></text-angular>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <button data-ng-if="editing" class="btn btn-success" data-ng-click="newTraeger()">Neuen Träger anlegen</button>
+</div>

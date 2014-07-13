@@ -21,6 +21,22 @@ class Traeger {
     private $id;
 
     /**
+     * @var string $email
+     *
+     * @ORM\Column()
+     */
+    private $email;
+
+    /**
+     * @var string hash
+     *
+     * @ORM\Column()
+     */
+    private $hash;
+
+    private $pepper = 'lkneeee# nn';
+
+    /**
      * @var string $titel
      *
      * @ORM\Column(name="titel", type="string", length=255)
@@ -45,7 +61,9 @@ class Traeger {
      */
     private $pins;
 
-    public function __construct() {
+    public function __construct($email, $password) {
+        $this->email = $email;
+        $this->hash = $this->getPasswordHash($password);
         $this->pins = new ArrayCollection();
     }
 
@@ -61,6 +79,34 @@ class Traeger {
      */
     public function setId($id) {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail() {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHash() {
+        return $this->hash;
+    }
+
+    /**
+     * @param string $hash
+     */
+    public function setHash($hash) {
+        $this->hash = $hash;
     }
 
     /**
@@ -113,6 +159,25 @@ class Traeger {
      */
     public function getPins() {
         return $this->pins;
+    }
+
+    public function setPassword($password) {
+        $this->setHash($this->getPasswordHash($password));
+    }
+
+    public function isValidPassword($password) {
+        return $this->getPasswordHash($password) == $this->hash;
+    }
+
+    private function getPasswordHash($password) {
+        // @see http://php.net/crypt zur Erläuterung des Blowfish-spezifischen $cryptSalt
+        $blowFishSignal = '$2a$';
+        $blowFishCostParameter = 10;
+        $salt = substr(uniqid() . uniqid(), 0, 22); // Salz via Zufallsgenerator; Länge auf 22 Zeichen begrenzt, da Blowfish nicht mehr verwendet
+        $cryptSalt = $blowFishSignal . $blowFishCostParameter . '$' . $salt;
+        $encrypted = crypt($password . $this->pepper, $cryptSalt);
+
+        return $encrypted;
     }
 
 }
