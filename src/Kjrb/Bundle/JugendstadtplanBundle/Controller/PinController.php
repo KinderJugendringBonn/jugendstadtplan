@@ -24,9 +24,10 @@ class PinController extends BaseController {
     }
 
     /**
-     * @Route("/create", name = "api_pin_create")
+     * @Route("/create", name="api_pin_create")
      *
      * @param Request $request
+     * @return Response
      */
     public function createAction(Request $request) {
         $pin = new Pin();
@@ -42,8 +43,10 @@ class PinController extends BaseController {
     }
 
     /**
-     * @Route("/update/{id}", name = "api_pin_update")
+     * @Route("/update/{id}", name="api_pin_update")
+     *
      * @ParamConverter("pin", class="KjrbJugendstadtplanBundle:Pin")
+     * @return Response
      */
     public function updateAction(Pin $pin) {
         $this->setDataFromJson($pin);
@@ -71,8 +74,10 @@ class PinController extends BaseController {
     }
 
     /**
-     * @Route("/delete/{id}", name = "api_pin_delete")
+     * @Route("/delete/{id}", name="api_pin_delete")
+     *
      * @ParamConverter("pin", class="KjrbJugendstadtplanBundle:Pin")
+     * @return Response
      */
     public function deleteAction(Pin $pin) {
         $em = $this->getDoctrine()->getManager();
@@ -87,11 +92,10 @@ class PinController extends BaseController {
      * @ParamConverter("pin", class="KjrbJugendstadtplanBundle:Pin")
      *
      * @param Pin $pin
-     * @return array
+     * @return Response
      */
     public function detailAction(Pin $pin) {
         return $this->sendJsonResponse($pin);
     }
 
 }
- 
