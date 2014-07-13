@@ -2,9 +2,7 @@
 
 namespace Kjrb\Bundle\JugendstadtplanBundle\Controller;
 
-use Kjrb\Bundle\JugendstadtplanBundle\Form\PinType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Pin;
