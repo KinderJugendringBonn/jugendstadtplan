@@ -95,30 +95,5 @@ class PinController extends BaseController {
         return $this->sendJsonResponse($pin);
     }
 
-    /**
-     * @Route("/erstellen")
-     * @Template()
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function erstellenAction(Request $request) {
-        $pin = new Pin();
-
-        $form = $this->createForm(new PinType($this->get('translator')), $pin);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($pin);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('pin_erfolgreich_angelegt'));
-            return $this->redirect($this->generateUrl('kjrb_jugendstadtplan_startseite_startseite'));
-        }
-
-        return array('form' => $form->createView());
-    }
-
 }
  
