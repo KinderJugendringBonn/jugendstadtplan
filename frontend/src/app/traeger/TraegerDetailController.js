@@ -1,7 +1,7 @@
 angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
   
   $stateProvider.state( 'Detail: Traeger', {
-    url: '/traeger/:id',
+    url: '/traeger/{id:[0-9]+}',
     views: {
       "main": {
         controller: 'TraegerDetailController',
