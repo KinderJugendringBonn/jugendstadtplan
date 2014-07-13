@@ -24,13 +24,19 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
 
     $scope.save = function() {
         if ($scope.traeger.id) {
-            Traeger.update($scope.traeger);
+            Traeger.update($scope.traeger).then(function() {
+                $scope.newTraeger();
+            }, function() {
+                alert('Ein Träger mit dieser Email-Adresse existiert bereits!');
+            });
         } else {
             $scope.traeger.$save().then(function(response) {
                 $scope.traegers.push(response);
+                $scope.newTraeger();
+            }, function() {
+                alert('Ein Träger mit dieser Email-Adresse existiert bereits!');
             });
         }
-        $scope.newTraeger();
     };
 
     $scope.setActiveTraeger = function(traeger) {
