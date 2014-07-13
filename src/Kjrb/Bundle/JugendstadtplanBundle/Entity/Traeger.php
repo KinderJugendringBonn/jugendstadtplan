@@ -53,11 +53,7 @@ class Traeger {
     /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Pin $pins
      *
-     * @ORM\ManyToMany(targetEntity="Pin", inversedBy="traeger", indexBy="id", fetch="EAGER")
-     * @ORM\JoinTable(name="traeger_pins",
-     *      joinColumns={@ORM\JoinColumn(name="traeger_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="pin_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(targetEntity="Pin", mappedBy="traeger", indexBy="id", orphanRemoval=true, fetch="EAGER")
      */
     private $pins;
 
@@ -150,7 +146,7 @@ class Traeger {
         $id = $pin->getId();
         if (!$this->pins->containsKey($id)) {
             $this->pins->set($id, $pin);
-            $pin->addTraeger($this);
+            $pin->setTraeger($this);
         }
     }
 

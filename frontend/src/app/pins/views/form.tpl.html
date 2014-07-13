@@ -4,6 +4,7 @@
         <li data-ng-repeat="pin in pins | orderBy: 'titel'">
             <div data-ng-click="setActivePin(pin)">
                 <h2>{{ pin.titel }}</h2>
+                <small>{{ pin.traeger.titel }}</small>
                 <small data-ng-bind-html="pin.beschreibung"></small>
             </div>
             <button class="btn btn-danger" data-ng-click="remove(pin, $index)">Löschen</button>
@@ -13,6 +14,7 @@
     <form data-ng-submit="save(pin)">
         <label for="pin.titel">Titel</label>
         <input id="pin.titel" type="text" data-ng-model="pin.titel" />
+        <select data-ng-model="pin.traeger" data-ng-options="traeger.id as traeger.titel for traeger in traegers"></select>
         <text-angular data-ng-model="pin.beschreibung"></text-angular>
         <div class="small-map-container">
             <leaflet defaults="defaults" center="center" markers="pin.markers" event-broadcast="events"></leaflet>

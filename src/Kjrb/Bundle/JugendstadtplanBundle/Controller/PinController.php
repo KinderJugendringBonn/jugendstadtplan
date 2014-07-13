@@ -59,17 +59,21 @@ class PinController extends BaseController {
     }
 
     private function setDataFromJson(Pin $pin) {
-        $data = file_get_contents("php://input");
-        $pinData = json_decode($data);
+        $rawData = file_get_contents("php://input");
+        $data = json_decode($rawData);
 
-        $pin->setTitel($pinData->titel);
-        if (isset($pinData->beschreibung)) {
-            $pin->setBeschreibung($pinData->beschreibung);
+        $pin->setTitel($data->titel);
+        if (isset($data->beschreibung)) {
+            $pin->setBeschreibung($data->beschreibung);
         }
 
-        if (isset($pinData->markers) && isset($pinData->markers[0])) {
-            $pin->setLatitude($pinData->markers[0]->lat);
-            $pin->setLongitude($pinData->markers[0]->lng);
+        if (isset($data->markers) && isset($data->markers[0])) {
+            $pin->setLatitude($data->markers[0]->lat);
+            $pin->setLongitude($data->markers[0]->lng);
+        }
+
+        if (isset($data->traeger) && $traeger = $this->getTraegerRepository()->find($data->traeger)) {
+            $pin->setTraeger($traeger);
         }
     }
 

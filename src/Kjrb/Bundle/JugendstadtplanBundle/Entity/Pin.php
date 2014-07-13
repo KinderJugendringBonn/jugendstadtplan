@@ -53,13 +53,9 @@ class Pin {
     /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger $traeger
      *
-     * @ORM\ManyToMany(targetEntity="Traeger", mappedBy="pins", indexBy="id")
+     * @ORM\ManyToOne(targetEntity="Traeger", inversedBy="pins", fetch="EAGER")
      */
     private $traeger;
-
-    public function __construct() {
-        $this->traeger = new ArrayCollection();
-    }
 
     /**
      * @return int
@@ -131,25 +127,12 @@ class Pin {
         return $this->longitude;
     }
 
-    /**
-     * Convenience-Methode fuer das Symfony-Formularsystem.
-     */
-    public function setTraeger(Traeger $traeger = null) {
-        if ($traeger !== null) {
-            $this->addTraeger($traeger);
-        }
-    }
-
-    public function addTraeger(Traeger $traeger) {
-        $id = $traeger->getId();
-        if (!$this->traeger->containsKey($id)) {
-            $this->traeger->set($id, $traeger);
-            $traeger->addPin($this);
-        }
+    public function setTraeger(Traeger $traeger) {
+        $this->traeger = $traeger;
     }
 
     /**
-     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger[]
+     * @return \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger
      */
     public function getTraeger() {
         return $this->traeger;
