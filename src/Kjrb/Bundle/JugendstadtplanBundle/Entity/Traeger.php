@@ -51,6 +51,34 @@ class Traeger {
     private $beschreibung;
 
     /**
+     * @var Kategorie
+     *
+     * @ORM\ManyToOne(targetEntity="Kategorie", fetch="EAGER")
+     */
+    private $kategorie;
+
+    /**
+     * @var Adresse[]
+     *
+     * @ORM\OneToMany(targetEntity="Adresse", mappedBy="traeger", cascade={"all"}, orphanRemoval=true, indexBy="id", fetch="EAGER")
+     */
+    private $adressen;
+
+    /**
+     * @var Ansprechpartner[]
+     *
+     * @ORM\OneToMany(targetEntity="Ansprechpartner", mappedBy="traeger", cascade={"all"}, orphanRemoval=true, indexBy="id", fetch="EAGER")
+     */
+    private $ansprechpartner;
+
+    /**
+     * @var Link[]
+     *
+     * @ORM\OneToMany(targetEntity="Link", mappedBy="traeger", indexBy="id", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
+     */
+    private $links;
+
+    /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Pin $pins
      *
      * @ORM\OneToMany(targetEntity="Pin", mappedBy="traeger", indexBy="id", orphanRemoval=true, fetch="EAGER")
@@ -61,6 +89,9 @@ class Traeger {
         $this->email = $email;
         $this->hash = $this->getPasswordHash($password);
         $this->pins = new ArrayCollection();
+        $this->adressen = new ArrayCollection();
+        $this->ansprechpartner = new ArrayCollection();
+        $this->links = new ArrayCollection();
     }
 
     /**
@@ -134,6 +165,92 @@ class Traeger {
     }
 
     /**
+     * @return Kategorie
+     */
+    public function getKategorie() {
+        return $this->kategorie;
+    }
+
+    /**
+     * @param Kategorie $kategorie
+     */
+    public function setKategorie(Kategorie $kategorie) {
+        $this->kategorie = $kategorie;
+    }
+
+    /**
+     * @return Adresse[]
+     */
+    public function getAdressen() {
+        return $this->adressen;
+    }
+
+    public function deleteAllAdressen() {
+        $this->adressen = new ArrayCollection();
+    }
+
+    /**
+     * @param Adresse[] $adressen
+     */
+    public function addAdresse(Adresse $adresse) {
+        $id = $adresse->getId();
+        if (!$id) {
+            $this->adressen->add($adresse);
+        } elseif (!$this->adressen->containsKey($id)) {
+            $this->adressen->set($id, $adresse);
+        }
+        $adresse->setTraeger($this);
+    }
+
+    /**
+     * @return Link[]
+     */
+    public function getLinks() {
+        return $this->links;
+    }
+
+    public function deleteAllLinks() {
+        $this->links = new ArrayCollection();
+    }
+
+    /**
+     * @param Link
+     */
+    public function addLink(Link $link) {
+        $id = $link->getId();
+        if (!$id) {
+            $this->links->add($link);
+        } elseif (!$this->links->containsKey($id)) {
+            $this->links->set($id, $link);
+        }
+        $link->setTraeger($this);
+    }
+
+    /**
+     * @return Ansprechpartner[]
+     */
+    public function getAnsprechpartner() {
+        return $this->ansprechpartner;
+    }
+
+    public function deleteAllAnsprechpartner() {
+        $this->ansprechpartner = new ArrayCollection();
+    }
+
+    /**
+     * @param Ansprechpartner $ansprechpartner
+     */
+    public function addAnsprechpartner(Ansprechpartner $ansprechpartner) {
+        $id = $ansprechpartner->getId();
+        if (!$id) {
+            $this->ansprechpartner->add($ansprechpartner);
+        } elseif(!$this->ansprechpartner->containsKey($id)) {
+            $this->ansprechpartner->set($id, $ansprechpartner);
+        }
+        $ansprechpartner->setTraeger($this);
+    }
+
+    /**
      * Convenience-Methode fuer das Symfony-Formularsystem.
      */
     public function setPin(Pin $pin = null) {
@@ -144,7 +261,7 @@ class Traeger {
 
     public function addPin(Pin $pin) {
         $id = $pin->getId();
-        if (!$this->pins->containsKey($id)) {
+        if (!$id || !$this->pins->containsKey($id)) {
             $this->pins->set($id, $pin);
             $pin->setTraeger($this);
         }

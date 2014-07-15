@@ -2,6 +2,10 @@
 
 namespace Kjrb\Bundle\JugendstadtplanBundle\Controller;
 
+use Kjrb\Bundle\JugendstadtplanBundle\Entity\Adresse;
+use Kjrb\Bundle\JugendstadtplanBundle\Entity\Ansprechpartner;
+use Kjrb\Bundle\JugendstadtplanBundle\Entity\Kategorie;
+use Kjrb\Bundle\JugendstadtplanBundle\Entity\Link;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger;
@@ -74,6 +78,52 @@ class TraegerController extends BaseController {
             }
             if (isset($data->passwort)) {
                 $traeger->setPassword($data->passwort);
+            }
+        }
+
+        // Ansprechpartner
+        if (isset($data->ansprechpartner)) {
+            // TODO: Unperformant und auch nicht besonders Elegant immer alle Ansprechpartner zu löschen...
+            $traeger->deleteAllAnsprechpartner(array());
+            foreach ($data->ansprechpartner as $rawAnsprechpartner) {
+                $ansprechpartner = new Ansprechpartner($rawAnsprechpartner->name, $rawAnsprechpartner->email);
+                if (isset($rawAnsprechpartner->telefonnummer)) {
+                    $ansprechpartner->setTelefonnummer($rawAnsprechpartner->telefonnummer);
+                }
+                if (isset($rawAnsprechpartner->mobilnummer)) {
+                    $ansprechpartner->setMobilnummer($rawAnsprechpartner->mobilnummer);
+                }
+                if (isset($rawAnsprechpartner->bemerkung)) {
+                    $ansprechpartner->setBemerkung($rawAnsprechpartner->bemerkung);
+                }
+                $traeger->addAnsprechpartner($ansprechpartner);
+            }
+        }
+
+        // Kategorie
+        if (isset($data->kategorie)) {
+            $kategorie = $this->getKategorieRepository()->find($data->kategorie);
+            $traeger->setKategorie($kategorie);
+        }
+
+        // Links
+        if (isset($data->links)) {
+            // TODO: Unelegant
+            $traeger->deleteAllLinks();
+            foreach ($data->links as $rawLink) {
+                $link = new Link($rawLink->titel, $rawLink->url);
+                $traeger->addLink($link);
+            }
+        }
+
+        // Adressen
+        if (isset($data->adressen)) {
+            // TODO: Unelegant
+            $traeger->deleteAllAdressen();
+            foreach ($data->adressen as $rawAdresse) {
+                $adresse = new Adresse($rawAdresse->strasse, $rawAdresse->ort);
+                $adresse->setPlz($rawAdresse->plz);
+                $traeger->addAdresse($adresse);
             }
         }
 

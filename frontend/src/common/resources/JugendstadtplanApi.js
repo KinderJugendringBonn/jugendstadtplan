@@ -53,3 +53,10 @@ jugendstadtplanApi.provider('Traeger', function() {
         });
     }];
 });
+
+jugendstadtplanApi.provider('Kategorie', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = '/backend/kategorie';
+        return $resource(backendUrl);
+    }];
+});
