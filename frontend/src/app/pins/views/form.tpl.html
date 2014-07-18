@@ -19,22 +19,12 @@
         <label for="pin.kategorie">Kategorie</label>
         <select id="pin.kategorie" data-ng-model="pin.kategorie" data-ng-options="kategorie.id as kategorie.name for kategorie in kategorien"></select>
         <div>
-            <p>Bisherige Adressen:</p>
-            <ul>
-                <li data-ng-repeat="adresse in pin.adressen">
-                    <p>{{ adresse.strasse }}</p>
-                    <p>{{ adresse.plz }}</p>
-                    <p>{{ adresse.ort }}</p>
-                </li>
-            </ul>
-            <p>Neue Adresse anlegen:</p>
-            <label for="pin.adresse.strasse">Straße / Hausnummer*:</label>
-            <input id="pin.adresse.strasse" type="text" data-ng-model="newAdresse.strasse" required />
+            <label for="pin.adresse.strasse">Straße / Hausnummer:</label>
+            <input id="pin.adresse.strasse" type="text" data-ng-model="pin.adresse.strasse" />
             <label for="pin.adresse.plz">PLZ:</label>
-            <input id="pin.adresse.plz" type="text" data-ng-model="newAdresse.plz" />
-            <label for="pin.adresse.ort">Ort*:</label>
-            <input id="pin.adresse.ort" type="text" data-ng-model="newAdresse.ort" />
-            <button type="button" data-ng-click="addAdresse()" data-ng-disabled="!isAdresseValid(newAdresse)">Hinzufügen</button>
+            <input id="pin.adresse.plz" type="text" data-ng-model="pin.adresse.plz" />
+            <label for="pin.adresse.ort">Ort:</label>
+            <input id="pin.adresse.ort" type="text" data-ng-model="pin.adresse.ort" />
         </div>
         <label for="pin.barrierefreiheit">Barrierefreiheit</label>
         <select id="pin.barrierefreiheit" data-ng-model="pin.barrierefreiheit" data-ng-options="barrierefreiheit for barrierefreiheit in barrierefreiheitsgrade"></select>

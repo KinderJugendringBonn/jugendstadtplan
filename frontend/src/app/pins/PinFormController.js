@@ -84,27 +84,6 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
     };
 
 
-    // Adressen
-    $scope.newAdresse = {};
-    $scope.addAdresse = function() {
-        if ($scope.pin.adressen === undefined) {
-            $scope.pin.adressen = [];
-        }
-        $scope.pin.adressen.push($scope.newAdresse);
-        $scope.newAdresse = {};
-    };
-
-    $scope.isAdresseValid = function(adresse) {
-        if (adresse.strasse === undefined || adresse.strasse.length === 0) {
-            return false;
-        }
-        if (adresse.ort === undefined || adresse.ort.length === 0) {
-            return false;
-        }
-        return true;
-    };
-
-
     // Barrierefreiheitsgrade
     $scope.barrierefreiheitsgrade = [ 'Gut', 'Teilweise', 'Nicht barrierefrei' ];
 
