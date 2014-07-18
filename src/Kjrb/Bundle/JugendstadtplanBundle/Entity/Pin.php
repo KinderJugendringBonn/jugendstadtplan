@@ -30,11 +30,26 @@ class Pin {
     private $titel;
 
     /**
+     * @var Kategorie
+     *
+     * @Assert\NotBlank()
+     * @ORM\OneToOne(targetEntity="Kategorie")
+     */
+    private $kategorie;
+
+    /**
      * @var string $beschreibung
      *
      * @ORM\Column(name="beschreibung", type="text", nullable=true)
      */
     private $beschreibung;
+
+    /**
+     * @var Adresse
+     *
+     * @ORM\OneToOne(targetEntity="Adresse")
+     */
+    private $adresse;
 
     /**
      * @var float $longitude
@@ -51,6 +66,76 @@ class Pin {
     private $latitude;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true)
+     */
+    private $barrierefreiheit;
+
+    /**
+     * @var string "Kostenlos" | "Kostenpflichtig"
+     *
+     * @ORM\Column(nullable=true)
+     */
+    private $kostenArt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $kostenBemerkung;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $anmeldepflichtig = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $anmeldepflichtBemerkung;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true)
+     */
+    private $mindestalter;
+
+    /**
+     * @var Ansprechpartner[]
+     *
+     * @ORM\OneToMany(targetEntity="Ansprechpartner", mappedBy="pin", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
+     */
+    private $ansprechpartner;
+
+    /**
+     * @var Termin[]
+     *
+     * @ORM\OneToMany(targetEntity="Termin", mappedBy="pin", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
+     */
+    private $termine;
+
+    /**
+     * @var Link[]
+     *
+     * @ORM\OneToMany(targetEntity="Link", mappedBy="pin", indexBy="id", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
+     */
+    private $links;
+
+    /**
+     * @var Bild[]
+     *
+     * @ORM\OneToMany(targetEntity="Bild", mappedBy="pin", indexBy="id", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
+     */
+    private $bilder;
+
+    /**
      * @var \Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger $traeger
      *
      * @ORM\ManyToOne(targetEntity="Traeger", inversedBy="pins", fetch="EAGER")
@@ -62,13 +147,6 @@ class Pin {
      */
     public function getId() {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id) {
-        $this->id = $id;
     }
 
     /**
@@ -86,6 +164,20 @@ class Pin {
     }
 
     /**
+     * @return Kategorie
+     */
+    public function getKategorie() {
+        return $this->kategorie;
+    }
+
+    /**
+     * @param Kategorie $kategorie
+     */
+    public function setKategorie(Kategorie $kategorie) {
+        $this->kategorie = $kategorie;
+    }
+
+    /**
      * @param string $beschreibung
      */
     public function setBeschreibung($beschreibung) {
@@ -97,6 +189,20 @@ class Pin {
      */
     public function getBeschreibung() {
         return $this->beschreibung;
+    }
+
+    /**
+     * @return Adresse
+     */
+    public function getAdresse() {
+        return $this->adresse;
+    }
+
+    /**
+     * @param Adresse $adresse
+     */
+    public function setAdresse(Adresse $adresse) {
+        $this->adresse = $adresse;
     }
 
     /**
@@ -127,6 +233,182 @@ class Pin {
         return $this->longitude;
     }
 
+    /**
+     * @return string
+     */
+    public function getBarrierefreiheit() {
+        return $this->barrierefreiheit;
+    }
+
+    /**
+     * @param string $barrierefreiheit
+     */
+    public function setBarrierefreiheit($barrierefreiheit) {
+        $this->barrierefreiheit = $barrierefreiheit;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKostenArt() {
+        return $this->kostenArt;
+    }
+
+    /**
+     * @param string $kostenArt "Kostenlos" | "Kostenpflichtig"
+     */
+    public function setKostenArt($kostenArt) {
+        $this->kostenArt = $kostenArt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKostenBemerkung() {
+        return $this->kostenBemerkung;
+    }
+
+    /**
+     * @param string $kostenBemerkung
+     */
+    public function setKostenBemerkung($kostenBemerkung) {
+        $this->kostenBemerkung = $kostenBemerkung;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAnmeldepflichtig() {
+        return $this->anmeldepflichtig;
+    }
+
+    /**
+     * @param boolean $anmeldepflichtig
+     */
+    public function setAnmeldepflichtig($anmeldepflichtig) {
+        $this->anmeldepflichtig = $anmeldepflichtig;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnmeldepflichtBemerkung() {
+        return $this->anmeldepflichtBemerkung;
+    }
+
+    /**
+     * @param string $anmeldepflichtBemerkung
+     */
+    public function setAnmeldepflichtBemerkung($anmeldepflichtBemerkung) {
+        $this->anmeldepflichtBemerkung = $anmeldepflichtBemerkung;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMindestalter() {
+        return $this->mindestalter;
+    }
+
+    /**
+     * @param string $mindestalter
+     */
+    public function setMindestalter($mindestalter) {
+        $this->mindestalter = $mindestalter;
+    }
+
+    /**
+     * @return Ansprechpartner[]
+     */
+    public function getAnsprechpartner() {
+        return $this->ansprechpartner;
+    }
+
+    public function deleteAllAnsprechpartner() {
+        $this->ansprechpartner = new ArrayCollection();
+    }
+
+    /**
+     * @param Ansprechpartner $ansprechpartner
+     */
+    public function addAnsprechpartner(Ansprechpartner $ansprechpartner) {
+        $id = $ansprechpartner->getId();
+        if (!$id) {
+            $this->ansprechpartner->add($ansprechpartner);
+        } elseif(!$this->ansprechpartner->containsKey($id)) {
+            $this->ansprechpartner->set($id, $ansprechpartner);
+        }
+        $ansprechpartner->setPin($this);
+    }
+
+    /**
+     * @return Termin[]
+     */
+    public function getTermine() {
+        return $this->termine;
+    }
+
+    /**
+     * @param Termin $termin
+     */
+    public function addTermine(Termin $termin) {
+        $id = $termin->getId();
+        if (!$id) {
+            $this->termine->add($termin);
+        } elseif (!$this->termine->containsKey($id)) {
+            $this->termine->set($id, $termin);
+        }
+        $termin->setPin($this);
+    }
+
+    /**
+     * @return Link[]
+     */
+    public function getLinks() {
+        return $this->links;
+    }
+
+    public function deleteAllLinks() {
+        $this->links = new ArrayCollection();
+    }
+
+    /**
+     * @param Link
+     */
+    public function addLink(Link $link) {
+        $id = $link->getId();
+        if (!$id) {
+            $this->links->add($link);
+        } elseif (!$this->links->containsKey($id)) {
+            $this->links->set($id, $link);
+        }
+        $link->setPin($this);
+    }
+
+    /**
+     * @return Bild[]
+     */
+    public function getBilder() {
+        return $this->bilder;
+    }
+
+    public function deleteAllBilder() {
+        $this->bilder = new ArrayCollection();
+    }
+
+    /**
+     * @param Bild
+     */
+    public function addBild(Bild $bild) {
+        $id = $bild->getId();
+        if (!$id) {
+            $this->bilder->add($bild);
+        } elseif (!$this->bilder->containsKey($id)) {
+            $this->bilder->set($id, $bild);
+        }
+        $bild->setPin($this);
+    }
+
     public function setTraeger(Traeger $traeger) {
         $this->traeger = $traeger;
     }
@@ -139,4 +421,3 @@ class Pin {
     }
 
 }
- 

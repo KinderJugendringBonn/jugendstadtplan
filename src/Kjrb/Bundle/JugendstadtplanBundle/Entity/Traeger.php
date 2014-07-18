@@ -102,13 +102,6 @@ class Traeger {
     }
 
     /**
-     * @param int $id
-     */
-    public function setId($id) {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getEmail() {
@@ -261,10 +254,12 @@ class Traeger {
 
     public function addPin(Pin $pin) {
         $id = $pin->getId();
-        if (!$id || !$this->pins->containsKey($id)) {
+        if (!$id) {
+            $this->pins->add($pin);
+        } elseif (!$this->pins->containsKey($id)) {
             $this->pins->set($id, $pin);
-            $pin->setTraeger($this);
         }
+        $pin->setTraeger($this);
     }
 
     /**

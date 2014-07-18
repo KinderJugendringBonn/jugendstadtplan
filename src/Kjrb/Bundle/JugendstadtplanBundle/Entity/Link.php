@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Kjrb\Bundle\JugendstadtplanBundle\Entity\LinkRepository")
+ * @ORM\Entity()
  */
 class Link {
 
@@ -36,6 +36,13 @@ class Link {
      * @ORM\Column()
      */
     private $url;
+
+    /**
+     * @var Pin
+     *
+     * @ORM\ManyToOne(targetEntity="Pin", inversedBy="links")
+     */
+    private $pin;
 
     /**
      * @var Traeger
@@ -91,6 +98,20 @@ class Link {
      */
     public function setUrl($url) {
         $this->url = $url;
+    }
+
+    /**
+     * @return Pin
+     */
+    public function getPin() {
+        return $this->pin;
+    }
+
+    /**
+     * @param Pin $pin
+     */
+    public function setPin(Pin $pin) {
+        $this->pin = $pin;
     }
 
     /**

@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Kjrb\Bundle\JugendstadtplanBundle\Entity\AnsprechpartnerRepository")
+ * @ORM\Entity()
  */
 class Ansprechpartner {
 
@@ -56,6 +56,13 @@ class Ansprechpartner {
      * @ORM\Column(type="text", nullable=true)
      */
     private $bemerkung;
+
+    /**
+     * @var Pin
+     *
+     * @ORM\ManyToOne(targetEntity="Pin", inversedBy="ansprechpartner")
+     */
+    private $pin;
 
     /**
      * @var Traeger
@@ -160,6 +167,20 @@ class Ansprechpartner {
      */
     public function setTelefonnummer($telefonnummer) {
         $this->telefonnummer = $telefonnummer;
+    }
+
+    /**
+     * @return Pin
+     */
+    public function getPin() {
+        return $this->pin;
+    }
+
+    /**
+     * @param Pin $pin
+     */
+    public function setPin(Pin $pin) {
+        $this->pin = $pin;
     }
 
     /**
