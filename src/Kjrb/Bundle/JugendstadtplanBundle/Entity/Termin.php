@@ -36,6 +36,13 @@ class Termin {
     private $ende;
 
     /**
+     * @var bool $ganztaegig
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $ganztaegig;
+
+    /**
      * @var TerminWiederholung[]
      *
      * @ORM\OneToMany(targetEntity="TerminWiederholung", mappedBy="termin", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
@@ -86,6 +93,20 @@ class Termin {
      */
     public function setEnde(\DateTime $ende) {
         $this->ende = $ende;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isGanztaegig() {
+        return $this->ganztaegig;
+    }
+
+    /**
+     * @param boolean $ganztaegig
+     */
+    public function setGanztaegig($ganztaegig) {
+        $this->ganztaegig = $ganztaegig;
     }
 
     /**
