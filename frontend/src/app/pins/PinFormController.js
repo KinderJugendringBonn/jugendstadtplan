@@ -13,7 +13,8 @@ angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) 
 
 });
 
-Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$location', 'Pin', 'Traeger', function PinFormController( $scope, $location, Pin, Traeger ) {
+Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$location', 'Pin', 'Traeger', 'Kategorie', function PinFormController( $scope, $location, Pin, Traeger, Kategorie ) {
+    $scope.kategorien = Kategorie.query();
     $scope.pin = new Pin();
     $scope.pins = Pin.query();
     $scope.traegers = Traeger.query();
@@ -80,6 +81,132 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
                 $scope.pins.splice(index, 1);
             }
         });
+    };
+
+
+    // Adressen
+    $scope.newAdresse = {};
+    $scope.addAdresse = function() {
+        if ($scope.pin.adressen === undefined) {
+            $scope.pin.adressen = [];
+        }
+        $scope.pin.adressen.push($scope.newAdresse);
+        $scope.newAdresse = {};
+    };
+
+    $scope.isAdresseValid = function(adresse) {
+        if (adresse.strasse === undefined || adresse.strasse.length === 0) {
+            return false;
+        }
+        if (adresse.ort === undefined || adresse.ort.length === 0) {
+            return false;
+        }
+        return true;
+    };
+
+
+    // Barrierefreiheitsgrade
+    $scope.barrierefreiheitsgrade = [ 'Gut', 'Teilweise', 'Nicht barrierefrei' ];
+
+
+    // Kostenarten
+    $scope.kostenarten = [ 'Kostenlos', 'Kostenpflichtig' ];
+
+
+    // Mindestalter
+    $scope.mindestalters = [ 'ab 12', 'ab 16', 'ab 18', 'ab 21' ];
+
+
+    // Ansprechpartner
+    $scope.newAnsprechpartner = {};
+    $scope.addAnsprechpartner = function() {
+        if ($scope.pin.ansprechpartner === undefined) {
+            $scope.pin.ansprechpartner = [];
+        }
+        $scope.pin.ansprechpartner.push($scope.newAnsprechpartner);
+        $scope.newAnsprechpartner = {};
+    };
+
+    $scope.isAnsprechpartnerValid = function(ansprechpartner) {
+        if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
+            return false;
+        }
+        if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
+            return false;
+        }
+        return true;
+    };
+
+
+    // Wochentage
+    $scope.wochentage = [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ];
+
+
+    // Termin
+    $scope.newTermin = {};
+    $scope.addTermin = function() {
+        if ($scope.pin.termine === undefined) {
+            $scope.pin.termine = [];
+        }
+        $scope.pin.termine.push($scope.newTermin);
+        $scope.newTermin = {};
+    };
+
+    $scope.isTerminValid = function(termin) {
+        if (termin.beginn === undefined || termin.beginn === 0) {
+            return false;
+        }
+        if (termin.ganztaegig !== true && (termin.beginnUhrzeit === undefined || termin.beginnUhrzeit === 0)) {
+            return false;
+        }
+        return true;
+    };
+
+
+    // Wiederholung
+    $scope.wocheDesMonats = [
+        { id: 0, label: 'Jede Woche' },
+        { id: 1, label: 'Jede 1. Woche' },
+        { id: 2, label: 'Jede 2. Woche' },
+        { id: 3, label: 'Jede 3. Woche' },
+        { id: 4, label: 'Jede 4. Woche' },
+        { id: 5, label: 'Jede 5. Woche' }
+    ];
+    $scope.newWiederholung = {};
+    $scope.addWiederholung = function() {
+        if ($scope.newTermin.wiederholungen === undefined) {
+            $scope.newTermin.wiederholungen = [];
+        }
+        $scope.newTermin.wiederholungen.push($scope.newWiederholung);
+        $scope.newWiederholung = {};
+    };
+
+    $scope.isWiederholungValid = function(wiederholung) {
+        if (wiederholung.wochentag === undefined || wiederholung.wochentag === 0) {
+            return false;
+        }
+        return true;
+    };
+
+
+    // Links
+    $scope.newLink = {};
+    $scope.addLink = function() {
+        if ($scope.pin.links === undefined) {
+            $scope.pin.links = [];
+        }
+        $scope.pin.links.push($scope.newLink);
+        $scope.newLink = {};
+    };
+
+    $scope.isLinkValid = function(link) {
+        if (link.titel === undefined || link.titel.length === 0) {
+            return false;
+        }
+        if (link.url === undefined || link.url.length === 0) {
+            return false;
+        }
+        return true;
     };
 
 }]);
