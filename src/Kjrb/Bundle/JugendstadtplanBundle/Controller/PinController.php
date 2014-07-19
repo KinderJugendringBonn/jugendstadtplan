@@ -141,29 +141,29 @@ class PinController extends BaseController {
             foreach ($data->termine as $rawTermin) {
                 $isGanztaegig = isset($rawTermin->ganztaegig) && $rawTermin->ganztaegig == true ?: false;
 
-                $beginnDatum = new \DateTime($rawTermin->beginn . ' ' . !$isGanztaegig ? $rawTermin->beginnUhrzeit :'');
+                $beginnDatum = new \DateTime($rawTermin->beginn . ' ' . !$isGanztaegig ? $rawTermin->beginn_uhrzeit :'');
 
                 $termin = new Termin($beginnDatum);
                 $termin->setGanztaegig($isGanztaegig);
 
                 if (isset($data->ende)) {
                     $endzeit = '';
-                    if (isset($data->endeUhrzeit)) {
-                        $endzeit = ' ' . $data->endeUhrzeit;
+                    if (isset($data->ende_uhrzeit)) {
+                        $endzeit = ' ' . $data->ende_uhrzeit;
                     }
                     $termin->setEnde(new \DateTime($data->ende . $endzeit));
                 }
 
                 foreach ($rawTermin->wiederholungen as $rawWiederholung) {
                     $wiederholung = new TerminWiederholung($rawWiederholung->wochentag);
-                    if (isset($rawWiederholung->wocheDesMonats)) {
-                        $wiederholung->setWocheDesMonats($rawWiederholung->wocheDesMonats);
+                    if (isset($rawWiederholung->woche_des_monats)) {
+                        $wiederholung->setWocheDesMonats($rawWiederholung->woche_des_monats);
                     }
-                    if (isset($rawWiederholung->auchAnFeiertagen)) {
-                        $wiederholung->setAuchAnFeiertagen($rawWiederholung->auchAnFeiertagen);
+                    if (isset($rawWiederholung->auch_an_feiertagen)) {
+                        $wiederholung->setAuchAnFeiertagen($rawWiederholung->auch_an_feiertagen);
                     }
-                    if (isset($rawWiederholung->auchInDenFerien)) {
-                        $wiederholung->setAuchInDenFerien($rawWiederholung->auchInDenFerien);
+                    if (isset($rawWiederholung->auch_in_den_ferien)) {
+                        $wiederholung->setAuchInDenFerien($rawWiederholung->auch_in_den_ferien);
                     }
                     $termin->addWiederholung($wiederholung);
                 }

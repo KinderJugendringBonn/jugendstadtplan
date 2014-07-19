@@ -135,7 +135,7 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
         if (termin.beginn === undefined || termin.beginn === 0) {
             return false;
         }
-        if (termin.ganztaegig !== true && (termin.beginnUhrzeit === undefined || termin.beginnUhrzeit === 0)) {
+        if (termin.ganztaegig !== true && (termin.beginn_uhrzeit === undefined || termin.beginn_uhrzeit === 0)) {
             return false;
         }
         return true;
@@ -143,7 +143,7 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
 
 
     // Wiederholung
-    $scope.wocheDesMonats = [
+    $scope.woche_des_monats = [
         { id: 0, label: 'Jede Woche' },
         { id: 1, label: 'Jede 1. Woche' },
         { id: 2, label: 'Jede 2. Woche' },

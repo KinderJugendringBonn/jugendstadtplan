@@ -70,16 +70,16 @@
             <ul>
                 <li data-ng-repeat="termin in pin.termine">
                     <p>{{ termin.beginn | date:'dd.MM.yyyy' }}</p>
-                    <p>{{ termin.beginnUhrzeit | date:'HH.mm' }}</p>
+                    <p>{{ termin.beginn_uhrzeit | date:'HH.mm' }}</p>
                     <p>{{ termin.ende | date:'dd.MM.yyyy' }}</p>
-                    <p>{{ termin.endeUhrzeit | date:'HH.mm' }}</p>
+                    <p>{{ termin.ende_uhrzeit | date:'HH.mm' }}</p>
                     <ul>
                         <li data-ng-repeat="wiederholung in termin.wiederholungen">
                             <p>{{ wiederholung.wochentag }}</p>
-                            <p data-ng-if="wiederholung.wocheDesMonats == 0">Jede Woche</p>
-                            <p data-ng-if="wiederholung.wocheDesMonats != 0">Jede {{ wiederholung.wocheDesMonats }}. Woche</p>
-                            <p data-ng-if="wiederholung.auchAnFeiertagen">Auch an Feiertagen</p>
-                            <p data-ng-if="wiederholung.auchInDenFerien">Auch in den Ferien</p>
+                            <p data-ng-if="wiederholung.woche_des_monats == 0">Jede Woche</p>
+                            <p data-ng-if="wiederholung.woche_des_monats != 0">Jede {{ wiederholung.woche_des_monats }}. Woche</p>
+                            <p data-ng-if="wiederholung.auch_an_feiertagen">Auch an Feiertagen</p>
+                            <p data-ng-if="wiederholung.auch_in_den_ferien">Auch in den Ferien</p>
                         </li>
                     </ul>
                 </li>
@@ -90,36 +90,36 @@
             <label for="pin.termin.ganztaegig">Ganztägig</label>
             <input id="pin.termin.ganztaegig" type="checkbox" data-ng-model="newTermin.ganztaegig" />
             <div data-ng-show="!newTermin.ganztaegig">
-                <label for="pin.termin.beginnUhrzeit">Uhrzeit:</label>
-                <input id="pin.termin.beginnUhrzeit" type="time" data-ng-model="newTermin.beginnUhrzeit" />
+                <label for="pin.termin.beginn_uhrzeit">Uhrzeit:</label>
+                <input id="pin.termin.beginn_uhrzeit" type="time" data-ng-model="newTermin.beginn_uhrzeit" />
             </div>
             <label for="pin.termin.ende">Ende:</label>
             <input id="pin.termin.ende" type="date" data-ng-model="newTermin.ende" />
             <div data-ng-show="!newTermin.ganztaegig">
-                <label for="pin.termin.endeUhrzeit">Endzeit:</label>
-                <input id="pin.termin.endeUhrzeit" type="time" data-ng-model="newTermin.endeUhrzeit" />
+                <label for="pin.termin.ende_uhrzeit">Endzeit:</label>
+                <input id="pin.termin.ende_uhrzeit" type="time" data-ng-model="newTermin.ende_uhrzeit" />
             </div>
             <div>
                 <p>Dieser Termin wiederholt sich:</p>
                 <ul>
                     <li data-ng-repeat="wiederholung in newTermin.wiederholungen">
                         <p>{{ wiederholung.wochentag }}</p>
-                        <p data-ng-if="wiederholung.wocheDesMonats == 0">Jede Woche</p>
-                        <p data-ng-if="wiederholung.wocheDesMonats != 0">Jede {{ wiederholung.wocheDesMonats }}. Woche</p>
-                        <p data-ng-if="wiederholung.auchAnFeiertagen == true">Auch an Feiertagen</p>
-                        <p data-ng-if="wiederholung.auchInDenFerien == true">Auch in den Ferien</p>
+                        <p data-ng-if="wiederholung.woche_des_monats == 0">Jede Woche</p>
+                        <p data-ng-if="wiederholung.woche_des_monats != 0">Jede {{ wiederholung.woche_des_monats }}. Woche</p>
+                        <p data-ng-if="wiederholung.auch_an_feiertagen == true">Auch an Feiertagen</p>
+                        <p data-ng-if="wiederholung.auch_in_den_ferien == true">Auch in den Ferien</p>
                     </li>
                 </ul>
                 <label for="pin.termin.wiederholung.wochentag">Wochentag</label>
                 <select id="pin.termin.wiederholung.wochentag" data-ng-model="newWiederholung.wochentag" data-ng-options="wochentag for wochentag in wochentage" required></select>
-                <label for="pin.termin.wiederholung.wocheDesMonats">Wiederholung</label>
-                <select id="pin.termin.wiederholung.wocheDesMonats" data-ng-model="newWiederholung.wocheDesMonats" data-ng-options="woche.id as woche.label for woche in wocheDesMonats"></select>
-                <label for="pin.termin.wiederholung.auchAnFeiertagen">Auch an Feiertagen</label>
-                <input id="pin.termin.wiederholung.auchAnFeiertagen" type="radio" data-ng-model="newWiederholung.auchAnFeiertagen" data-ng-value="true">Ja</input>
-                <input type="radio" data-ng-model="newWiederholung.auchAnFeiertagen" data-ng-value="false">Nein</input>
-                <label for="pin.termin.wiederholung.auchInDenFerien">Auch in den Ferien</label>
-                <input id="pin.termin.wiederholung.auchInDenFerien" type="radio" data-ng-model="newWiederholung.auchInDenFerien" data-ng-value="true">Ja</input>
-                <input type="radio" data-ng-model="newWiederholung.auchInDenFerien" data-ng-value="false">Nein</input>
+                <label for="pin.termin.wiederholung.woche_des_monats">Wiederholung</label>
+                <select id="pin.termin.wiederholung.woche_des_monats" data-ng-model="newWiederholung.woche_des_monats" data-ng-options="woche.id as woche.label for woche in woche_des_monats"></select>
+                <label for="pin.termin.wiederholung.auch_an_feiertagen">Auch an Feiertagen</label>
+                <input id="pin.termin.wiederholung.auch_an_feiertagen" type="radio" data-ng-model="newWiederholung.auch_an_feiertagen" data-ng-value="true">Ja</input>
+                <input type="radio" data-ng-model="newWiederholung.auch_an_feiertagen" data-ng-value="false">Nein</input>
+                <label for="pin.termin.wiederholung.auch_in_den_ferien">Auch in den Ferien</label>
+                <input id="pin.termin.wiederholung.auch_in_den_ferien" type="radio" data-ng-model="newWiederholung.auch_in_den_ferien" data-ng-value="true">Ja</input>
+                <input type="radio" data-ng-model="newWiederholung.auch_in_den_ferien" data-ng-value="false">Nein</input>
                 <button type="button" data-ng-click="addWiederholung()" data-ng-disabled="!isWiederholungValid(newWiederholung)">Hinzufügen</button>
             </div>
             <button type="button" data-ng-click="addTermin()" data-ng-disabled="!isTerminValid(newTermin)">Hinzufügen</button>
