@@ -84,7 +84,7 @@ class TraegerController extends BaseController {
         // Ansprechpartner
         if (isset($data->ansprechpartner)) {
             // TODO: Unperformant und auch nicht besonders Elegant immer alle Ansprechpartner zu löschen...
-            $traeger->deleteAllAnsprechpartner(array());
+            $traeger->deleteAllAnsprechpartner();
             foreach ($data->ansprechpartner as $rawAnsprechpartner) {
                 $ansprechpartner = new Ansprechpartner($rawAnsprechpartner->name, $rawAnsprechpartner->email);
                 if (isset($rawAnsprechpartner->telefonnummer)) {

@@ -31,7 +31,7 @@ class Termin {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $ende;
 
@@ -58,6 +58,7 @@ class Termin {
 
     public function __construct(\DateTime $beginn) {
         $this->beginn = $beginn;
+        $this->wiederholungen = new ArrayCollection();
     }
 
     /**

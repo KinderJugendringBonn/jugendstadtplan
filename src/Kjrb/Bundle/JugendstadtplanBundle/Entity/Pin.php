@@ -47,7 +47,7 @@ class Pin {
     /**
      * @var Adresse
      *
-     * @ORM\OneToOne(targetEntity="Adresse")
+     * @ORM\OneToOne(targetEntity="Adresse", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
      */
     private $adresse;
 
@@ -141,6 +141,13 @@ class Pin {
      * @ORM\ManyToOne(targetEntity="Traeger", inversedBy="pins", fetch="EAGER")
      */
     private $traeger;
+
+    public function __construct() {
+        $this->ansprechpartner = new ArrayCollection();
+        $this->termine = new ArrayCollection();
+        $this->links = new ArrayCollection();
+        $this->bilder = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -348,10 +355,14 @@ class Pin {
         return $this->termine;
     }
 
+    public function deleteAllTermine() {
+        $this->termine = new ArrayCollection();
+    }
+
     /**
      * @param Termin $termin
      */
-    public function addTermine(Termin $termin) {
+    public function addTermin(Termin $termin) {
         $id = $termin->getId();
         if (!$id) {
             $this->termine->add($termin);
