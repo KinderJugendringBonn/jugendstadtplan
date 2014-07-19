@@ -33,8 +33,8 @@
         <label for="pin.kostenbemerkung">Bemerkungen zu den Kosten</label>
         <textarea id="pin.kostenbemerkung" data-ng-model="pin.kostenbemerkung"></textarea>
         <label for="pin.anmeldepflichtig">Anmeldepflichtig</label>
-        <input id="pin.anmeldepflichtig" type="radio" data-ng-model="pin.anmeldepflichtig" value="true">Ja</input>
-        <input type="radio" data-ng-model="pin.anmeldepflichtig" value="false">Nein</input>
+        <input id="pin.anmeldepflichtig" type="radio" data-ng-model="pin.anmeldepflichtig" data-ng-value="true">Ja</input>
+        <input type="radio" data-ng-model="pin.anmeldepflichtig" data-ng-value="false">Nein</input>
         <label for="pin.anmeldepflichtbemerkung">Bemerkungen zur Anmeldepflicht</label>
         <textarea id="pin.anmeldepflichtbemerkung" data-ng-model="pin.anmeldepflichtbemerkung"></textarea>
         <label for="pin.mindestalter">Mindestalter</label>
@@ -115,11 +115,11 @@
                 <label for="pin.termin.wiederholung.wocheDesMonats">Wiederholung</label>
                 <select id="pin.termin.wiederholung.wocheDesMonats" data-ng-model="newWiederholung.wocheDesMonats" data-ng-options="woche.id as woche.label for woche in wocheDesMonats"></select>
                 <label for="pin.termin.wiederholung.auchAnFeiertagen">Auch an Feiertagen</label>
-                <input id="pin.termin.wiederholung.auchAnFeiertagen" type="radio" data-ng-model="newWiederholung.auchAnFeiertagen" value="true">Ja</input>
-                <input type="radio" data-ng-model="newWiederholung.auchAnFeiertagen" value="false">Nein</input>
+                <input id="pin.termin.wiederholung.auchAnFeiertagen" type="radio" data-ng-model="newWiederholung.auchAnFeiertagen" data-ng-value="true">Ja</input>
+                <input type="radio" data-ng-model="newWiederholung.auchAnFeiertagen" data-ng-value="false">Nein</input>
                 <label for="pin.termin.wiederholung.auchInDenFerien">Auch in den Ferien</label>
-                <input id="pin.termin.wiederholung.auchInDenFerien" type="radio" data-ng-model="newWiederholung.auchInDenFerien" value="true">Ja</input>
-                <input type="radio" data-ng-model="newWiederholung.auchInDenFerien" value="false">Nein</input>
+                <input id="pin.termin.wiederholung.auchInDenFerien" type="radio" data-ng-model="newWiederholung.auchInDenFerien" data-ng-value="true">Ja</input>
+                <input type="radio" data-ng-model="newWiederholung.auchInDenFerien" data-ng-value="false">Nein</input>
                 <button type="button" data-ng-click="addWiederholung()" data-ng-disabled="!isWiederholungValid(newWiederholung)">Hinzufügen</button>
             </div>
             <button type="button" data-ng-click="addTermin()" data-ng-disabled="!isTerminValid(newTermin)">Hinzufügen</button>
