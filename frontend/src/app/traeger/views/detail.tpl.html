@@ -1,7 +1,40 @@
 <div class="row-fluid">
-  <h1 class="page-header">Traeger {{ traeger.titel }}</h1>
+    <h1 class="page-header">Traeger {{ traeger.titel }}</h1>
+    <small>Hauptsächlich tätig in: {{ traeger.kategorie.name }}</small>
 
-  <small data-ng-bind-html="traeger.beschreibung"></small>
+    <div data-ng-bind-html="traeger.beschreibung"></div>
+
+    <div data-ng-if="traeger.ansprechpartner.length !== 0">
+        <h2>Ansprechpartner:</h2>
+        <ul>
+            <li data-ng-repeat="ansprechpartner in traeger.ansprechpartner">
+                <p>{{ ansprechpartner.name }}</p>
+                <small data-ng-if="ansprechpartner.telefonnummer">Fon: {{ ansprechpartner.telefonnummer }}</small>
+                <small data-ng-if="ansprechpartner.mobilnummer">Mobil: {{ ansprechpartner.mobilnummer }}</small>
+                <small data-ng-if="ansprechpartner.email">E-Mail: {{ ansprechpartner.email }}</small>
+            </li>
+        </ul>
+    </div>
+
+    <div data-ng-if="traeger.adressen.length !== 0">
+        <h2>Adressen:</h2>
+        <ul>
+            <li data-ng-repeat="adresse in traeger.adressen">
+                <p>{{ adresse.strasse }}</p>
+                <p>{{ adresse.plz }}</p>
+                <p>{{ adresse.ort }}</p>
+            </li>
+        </ul>
+    </div>
+
+    <div data-ng-if="traeger.links.length !== 0">
+        <h2>Links:</h2>
+        <ul>
+            <li data-ng-repeat="link in traeger.links">
+                <a data-ng-href="{{ link.url }}">{{ link.titel }}</a>
+            </li>
+        </ul>
+    </div>
 
     <div class="small-map-container">
         <div class="angular-leaflet-map">
