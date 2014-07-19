@@ -1,7 +1,80 @@
 <div class="row-fluid">
-  <h1 class="page-header">Pin {{ pin.titel }}</h1>
+    <h1 class="page-header">Pin {{ pin.titel }}</h1>
+    <small>{{ pin.kategorie.name }}</small>
 
-  <small data-ng-bind-html="pin.beschreibung"></small>
+    <div data-ng-bind-html="pin.beschreibung"></div>
+
+    <div data-ng-if="pin.adresse !== undefined">
+        <h2>Adresse:</h2>
+        <p>{{ pin.adresse.strasse }}</p>
+        <p>{{ pin.adresse.plz }}</p>
+        <p>{{ pin.adresse.ort }}</p>
+    </div>
+
+    <div data-ng-if="pin.barrierefreiheit !== undefined">
+        <h2>Barrierefreiheit</h2>
+        <p>{{ pin.barrierefreiheit }}</p>
+    </div>
+
+    <div data-ng-if="pin.kosten_art !== undefined">
+        <h2>Kosten</h2>
+        <p>{{ pin.kosten_art }}</p>
+        <p data-ng-if="pin.kosten_bemerkung !== undefined">{{ pin.kosten_bemerkung }}</p>
+    </div>
+
+    <div data-ng-if="pin.anmeldepflichtig !== undefined">
+        <h2>Anmeldepflicht</h2>
+        <p data-ng-show="pin.anmeldepflichtig">Vorherige Anmeldung erforderlich</p>
+        <p data-ng-hide="pin.anmeldepflichtig">Keine vorherige Anmeldung erforderlich</p>
+        <p data-ng-if="pin.anmeldepflicht_bemerkung !== undefined">{{ pin.anmeldepflicht_bemerkung }}</p>
+    </div>
+
+    <div data-ng-if="pin.mindestalter !== undefined">
+        <h2>Mindestalter</h2>
+        <p>{{ pin.mindestalter }}</p>
+    </div>
+
+    <div data-ng-if="pin.ansprechpartner.length !== 0">
+        <h2>Ansprechpartner:</h2>
+        <ul>
+            <li data-ng-repeat="ansprechpartner in pin.ansprechpartner">
+                <p>{{ ansprechpartner.name }}</p>
+                <small data-ng-if="ansprechpartner.telefonnummer">Fon: {{ ansprechpartner.telefonnummer }}</small>
+                <small data-ng-if="ansprechpartner.mobilnummer">Mobil: {{ ansprechpartner.mobilnummer }}</small>
+                <small data-ng-if="ansprechpartner.email">E-Mail: {{ ansprechpartner.email }}</small>
+            </li>
+        </ul>
+    </div>
+
+    <div data-ng-if="pin.termine.length !== 0">
+        <h2>Termine</h2>
+        <ul>
+            <li data-ng-repeat="termin in pin.termine">
+                <p data-ng-if="!termin.ganztaegig">{{ termin.beginn | date:'dd.MM.yyyy HH:mm' }} Uhr</p>
+                <p data-ng-if="termin.ganztaegig">{{ termin.beginn | date:'dd.MM.yyyy' }}</p>
+                <p data-ng-if="!termin.ganztaegig">{{ termin.ende | date:'dd.MM.yyyy HH:mm' }} Uhr</p>
+                <p data-ng-if="termin.ganztaegig">{{ termin.ende | date:'dd.MM.yyyy' }}</p>
+                <ul>
+                    <li data-ng-repeat="wiederholung in termin.wiederholungen">
+                        <p>{{ wiederholung.wochentag }}</p>
+                        <p data-ng-if="wiederholung.woche_des_monats === 0">Jede Woche</p>
+                        <p data-ng-if="wiederholung.woche_des_monats !== 0">Jede {{ wiederholung.woche_des_monats }}. Woche</p>
+                        <p data-ng-if="wiederholung.auch_an_feiertagen">Auch an Feiertagen</p>
+                        <p data-ng-if="wiederholung.auch_in_den_ferien">Auch in den Ferien</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div data-ng-if="pin.links.length !== 0">
+        <h2>Links:</h2>
+        <ul>
+            <li data-ng-repeat="link in pin.links">
+                <a data-ng-href="{{ link.url }}">{{ link.titel }}</a>
+            </li>
+        </ul>
+    </div>
 
     <div class="small-map-container">
         <div class="angular-leaflet-map">
