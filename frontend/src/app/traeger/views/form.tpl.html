@@ -11,71 +11,146 @@
     </ul>
 
     <form data-ng-submit="save(traeger)" novalidate="true">
-        <label for="traeger.email">Email</label>
-        <input id="traeger.email" type="text" data-ng-model="traeger.email" />
-        <label for="traeger.passwort">Passwort</label>
-        <input id="traeger.passwort" type="password" data-ng-model="traeger.passwort" />
-        <label for="traeger.kategorie">Kategorie</label>
-        <select id="traeger.kategorie" data-ng-model="traeger.kategorie" data-ng-options="kategorie.id as kategorie.name for kategorie in kategorien"></select>
-        <label for="traeger.titel">Titel</label>
-        <input id="traeger.titel" type="text" data-ng-model="traeger.titel" />
+        <fieldset>
+            <legend>Login-Daten</legend>
+            <div class="row">
+                <div class="large-8 columns">
+                    <label for="traeger.email">Email</label>
+                    <input id="traeger.email" type="text" data-ng-model="traeger.email" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-8 columns">
+                    <label for="traeger.passwort">Passwort</label>
+                    <input id="traeger.passwort" type="password" data-ng-model="traeger.passwort" required />
+                </div>
+            </div>
+        </fieldset>
 
-        <div>
-            <p>Bisherige Ansprechpartner:</p>
-            <ul>
-                <li data-ng-repeat="ansprechpartner in traeger.ansprechpartner">
-                    <p>{{ ansprechpartner.name }}</p>
-                    <small>{{ ansprechpartner.telefonnummer }}</small>
-                    <small>{{ ansprechpartner.mobilnummer }}</small>
-                    <small>{{ ansprechpartner.email }}</small>
-                </li>
-            </ul>
-            <p>Neuen Ansprechpartner anlegen:</p>
-            <label for="traeger.ansprechpartner.name">Name*:</label>
-            <input id="traeger.ansprechpartner.name" type="text" data-ng-model="newAnsprechpartner.name" required />
-            <label for="traeger.ansprechpartner.telefonnummer">Telefonnummer:</label>
-            <input id="traeger.ansprechpartner.telefonnummer" type="tel" data-ng-model="newAnsprechpartner.telefonnummer" />
-            <label for="traeger.ansprechpartner.mobilnummer">Handy:</label>
-            <input id="traeger.ansprechpartner.mobilnummer" type="tel" data-ng-model="newAnsprechpartner.mobilnummer" />
-            <label for="traeger.ansprechpartner.email">EMail*:</label>
-            <input id="traeger.ansprechpartner.email" type="email" data-ng-model="newAnsprechpartner.email" required />
-            <label for="traeger.ansprechpartner.bemerkung">Bemerkungen:</label>
-            <textarea id="traeger.ansprechpartner.bemerkung" data-ng-model="newAnsprechpartner.bemerkung"></textarea>
-            <button type="button" data-ng-click="addAnsprechpartner()" data-ng-disabled="!isAnsprechpartnerValid(newAnsprechpartner)">Hinzufügen</button>
-        </div>
-        <div>
-            <p>Bisherige Adressen:</p>
-            <ul>
-                <li data-ng-repeat="adresse in traeger.adressen">
-                    <p>{{ adresse.strasse }}</p>
-                    <p>{{ adresse.plz }}</p>
-                    <p>{{ adresse.ort }}</p>
-                </li>
-            </ul>
-            <p>Neue Adresse anlegen:</p>
-            <label for="traeger.adresse.strasse">Straße / Hausnummer*:</label>
-            <input id="traeger.adresse.strasse" type="text" data-ng-model="newAdresse.strasse" required />
-            <label for="traeger.adresse.plz">PLZ:</label>
-            <input id="traeger.adresse.plz" type="text" data-ng-model="newAdresse.plz" />
-            <label for="traeger.adresse.ort">Ort*:</label>
-            <input id="traeger.adresse.ort" type="text" data-ng-model="newAdresse.ort" />
-            <button type="button" data-ng-click="addAdresse()" data-ng-disabled="!isAdresseValid(newAdresse)">Hinzufügen</button>
-        </div>
-        <div>
-            <p>Bisherige Links:</p>
-            <ul>
-                <li data-ng-repeat="link in traeger.links">
-                    <a href="{{ link.url }}">{{ link.titel }}</a>
-                </li>
-            </ul>
-            <p>Link hinzufügen:</p>
-            <label for="traeger.link.titel">Titel*:</label>
-            <input id="traeger.link.titel" type="text" data-ng-model="newLink.titel" />
-            <label for="traeger.link.url">URL*:</label>
-            <input id="traeger.link.url" type="url" data-ng-model="newLink.url" />
-            <button type="button" data-ng-click="addLink()" data-ng-disabled="!isLinkValid(newLink)">Hinzufügen</button>
-        </div>
-        <text-angular data-ng-model="traeger.beschreibung"></text-angular>
+        <fieldset>
+            <legend>Stammdaten</legend>
+            <div class="row">
+                <div class="large-8 columns">
+                    <label for="traeger.kategorie">Kategorie</label>
+                    <select id="traeger.kategorie" data-ng-model="traeger.kategorie" data-ng-options="kategorie.id as kategorie.name for kategorie in kategorien" class="tiny dropdown"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-8 columns">
+                    <label for="traeger.titel">Titel</label>
+                    <input id="traeger.titel" type="text" data-ng-model="traeger.titel" required />
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Ansprechpartner</legend>
+            <div>
+                <p>Bisher</p>
+                <ul>
+                    <li data-ng-repeat="ansprechpartner in traeger.ansprechpartner">
+                        <p>{{ ansprechpartner.name }}</p>
+                        <small>{{ ansprechpartner.telefonnummer }}</small>
+                        <small>{{ ansprechpartner.mobilnummer }}</small>
+                        <small>{{ ansprechpartner.email }}</small>
+                    </li>
+                </ul>
+                <p>Neuen Ansprechpartner anlegen:</p>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.ansprechpartner.name">Name*:</label>
+                        <input id="traeger.ansprechpartner.name" type="text" data-ng-model="newAnsprechpartner.name" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.ansprechpartner.telefonnummer">Telefonnummer:</label>
+                        <input id="traeger.ansprechpartner.telefonnummer" type="tel" data-ng-model="newAnsprechpartner.telefonnummer" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.ansprechpartner.mobilnummer">Handy:</label>
+                        <input id="traeger.ansprechpartner.mobilnummer" type="tel" data-ng-model="newAnsprechpartner.mobilnummer" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.ansprechpartner.email">EMail*:</label>
+                        <input id="traeger.ansprechpartner.email" type="email" data-ng-model="newAnsprechpartner.email" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.ansprechpartner.bemerkung">Bemerkungen:</label>
+                        <textarea id="traeger.ansprechpartner.bemerkung" data-ng-model="newAnsprechpartner.bemerkung"></textarea>
+                    </div>
+                </div>
+                <button type="button" data-ng-click="addAnsprechpartner()" data-ng-disabled="!isAnsprechpartnerValid(newAnsprechpartner)">Hinzufügen</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Adressen</legend>
+            <div>
+                <p>Bisher</p>
+                <ul>
+                    <li data-ng-repeat="adresse in traeger.adressen">
+                        <p>{{ adresse.strasse }}</p>
+                        <p>{{ adresse.plz }}</p>
+                        <p>{{ adresse.ort }}</p>
+                    </li>
+                </ul>
+                <p>Neue Adresse anlegen:</p>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.adresse.strasse">Straße / Hausnummer*:</label>
+                        <input id="traeger.adresse.strasse" type="text" data-ng-model="newAdresse.strasse" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-4 columns">
+                        <label for="traeger.adresse.plz">PLZ:</label>
+                        <input id="traeger.adresse.plz" type="text" data-ng-model="newAdresse.plz" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.adresse.ort">Ort*:</label>
+                        <input id="traeger.adresse.ort" type="text" data-ng-model="newAdresse.ort" />
+                    </div>
+                </div>
+                <button type="button" data-ng-click="addAdresse()" data-ng-disabled="!isAdresseValid(newAdresse)">Hinzufügen</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Links</legend>
+            <div>
+                <p>Bisher</p>
+                <ul>
+                    <li data-ng-repeat="link in traeger.links">
+                        <a href="{{ link.url }}">{{ link.titel }}</a>
+                    </li>
+                </ul>
+                <p>Link hinzufügen:</p>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.link.titel">Titel*:</label>
+                        <input id="traeger.link.titel" type="text" data-ng-model="newLink.titel" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label for="traeger.link.url">URL*:</label>
+                        <input id="traeger.link.url" type="url" data-ng-model="newLink.url" />
+                    </div>
+                </div>
+                <button type="button" data-ng-click="addLink()" data-ng-disabled="!isLinkValid(newLink)">Hinzufügen</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Beschreibung</legend>
+            <text-angular data-ng-model="traeger.beschreibung"></text-angular>
+        </fieldset>
         <button type="submit" class="btn btn-primary">Träger speichern</button>
     </form>
     <button data-ng-if="editing" class="btn btn-success" data-ng-click="newTraeger()">Neuen Träger anlegen</button>

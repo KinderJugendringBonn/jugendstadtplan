@@ -13,9 +13,9 @@
     "angular-sanitize": "~1.2.13",
     "angular-leaflet-directive": "~0.7.5",
     "angular-leaflet": "~0.7.5",
-    "raster.gs": "~1.1.6",
     "textAngular": "~1.2.1",
-    "bootstrap-sass-official": "~3.2.0",
-    "font-awesome": "~4.1.0"
+    "font-awesome": "~4.1.0",
+    "angular-foundation": "~0.3.0",
+    "foundation": "~5.3.1"
   }
 }

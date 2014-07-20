@@ -7,17 +7,8 @@
     <meta name="fragment" content="!" />
 
     <!-- social media tags -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@joshdmiller">
-    <meta name="twitter:title" content="ngBoilerplate">
-    <meta name="twitter:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
-    <meta name="twitter:creator" content="@joshdmiller">
-    <meta name="twitter:image:src" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846">
-    <meta property="og:title" content="ngBoilerplate" />
+    <meta property="og:title" content="Jugendstadtplan" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://bit.ly/ngBoilerplate" />
-    <meta property="og:image" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846" />
-    <meta property="og:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
 
     <!-- font awesome from BootstrapCDN -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -26,40 +17,41 @@
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
   <body>
-    <div class="wrapper">
-    <div class="container">
-      <div class="masthead">
-        <h1>Jugendstadtplan</h1>
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="container">
-              <ul class="nav grid-row">
-                <li data-ui-route="/startseite" data-ng-class="{active:$uiRoute}" class="nav-large-1">
+        <div class="top-bar" role="navigation" data-topbar>
+            <ul class="title-area">
+                <li class="name">
+                    <h1>
+                        <a href="/">Jugendstadtplan</a>
+                    </h1>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+              <ul class="left">
+                <li data-ui-route="/startseite" data-ng-class="{active:$uiRoute}">
                   <a href="#/startseite">
                     <i class="icon-home"></i>
                     Startseite
                   </a>
                 </li>
-                <li data-ui-route="/pins" data-ng-class="{active:$uiRoute}" class="nav-large-2">
+                <li data-ui-route="/pins" data-ng-class="{active:$uiRoute}">
                   <a href="#/pins">
                     <i class="icon-info-sign"></i>
                     Pins
                   </a>
                 </li>
-                <li data-ui-route="/traeger" data-ng-class="{active:$uiRoute}" class="nav-large-3">
+                <li data-ui-route="/traeger" data-ng-class="{active:$uiRoute}">
                   <a href="#/traeger">
                     <i class="icon-info-sign"></i>
                     Träger
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
+            </section>
         </div>
-      </div>
-    </div>
 
-    <div class="container layout-large-1" ui-view="main"></div>
+    <div class="row">
+        <div class="large-12 columns" ui-view="main"></div>
+    </div>
 
     <footer class="footer">
     </footer>
