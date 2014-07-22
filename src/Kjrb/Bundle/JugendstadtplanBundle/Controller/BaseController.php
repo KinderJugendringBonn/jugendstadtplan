@@ -3,7 +3,6 @@
 namespace Kjrb\Bundle\JugendstadtplanBundle\Controller;
 
 use Hateoas\HateoasBuilder;
-use Kjrb\Bundle\JugendstadtplanBundle\Entity\KategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\PinRepository;
@@ -37,9 +36,6 @@ class BaseController extends Controller {
         return $this->get('kjrb.jugendstadtplan.traeger_repository');
     }
 
-    /**
-     * @return KategorieRepository
-     */
     protected function getKategorieRepository() {
         return $this->get('kjrb.jugendstadtplan.kategorie_repository');
     }
