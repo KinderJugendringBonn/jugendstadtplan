@@ -31,9 +31,16 @@ class Bild {
     /**
      * @var string $filePath
      *
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
     private $filePath;
+
+    /**
+     * @var string $fileType
+     *
+     * @ORM\Column(nullable=true)
+     */
+    private $fileType;
 
     /**
      * @var integer $fileSize
@@ -52,7 +59,7 @@ class Bild {
     /**
      * @var string $alt
      *
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
     private $alt;
 
@@ -69,6 +76,20 @@ class Bild {
      * @ORM\ManyToOne(targetEntity="Pin", inversedBy="bilder")
      */
     private $pin;
+
+    /**
+     * @var Traeger $traeger
+     *
+     * @ORM\ManyToOne(targetEntity="Traeger", inversedBy="bilder")
+     */
+    private $traeger;
+
+    /**
+     * @var string $tmpName
+     *
+     * Brauchen wir nur, um den temporaeren Namen der Bilddatei zu transportieren. Muss nicht persistiert werden.
+     */
+    private $tmpName;
 
     /**
      * @return int
@@ -143,6 +164,20 @@ class Bild {
     /**
      * @return string
      */
+    public function getFileType() {
+        return $this->fileType;
+    }
+
+    /**
+     * @param string $fileType
+     */
+    public function setFileType($fileType) {
+        $this->fileType = $fileType;
+    }
+
+    /**
+     * @return string
+     */
     public function getAlt() {
         return $this->alt;
     }
@@ -180,6 +215,34 @@ class Bild {
      */
     public function setPin(Pin $pin) {
         $this->pin = $pin;
+    }
+
+    /**
+     * @return Traeger
+     */
+    public function getTraeger() {
+        return $this->traeger;
+    }
+
+    /**
+     * @param Traeger $traeger
+     */
+    public function setTraeger(Traeger $traeger) {
+        $this->traeger = $traeger;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTmpName() {
+        return $this->tmpName;
+    }
+
+    /**
+     * @param string $tmpName
+     */
+    public function setTmpName($tmpName) {
+        $this->tmpName = $tmpName;
     }
 
 }

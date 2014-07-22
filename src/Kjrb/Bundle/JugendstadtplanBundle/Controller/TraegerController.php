@@ -4,6 +4,7 @@ namespace Kjrb\Bundle\JugendstadtplanBundle\Controller;
 
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Adresse;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Ansprechpartner;
+use Kjrb\Bundle\JugendstadtplanBundle\Entity\Bild;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Kategorie;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Link;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -43,6 +44,17 @@ class TraegerController extends BaseController {
             $em = $this->getDoctrine()->getManager();
             $em->persist($traeger);
             $em->flush();
+
+            if ($traeger->getBilder()) {
+                $imgFolder = $_SERVER['DOCUMENT_ROOT'] . '/img/';
+                if (!file_exists($imgFolder . $traeger->getId())) {
+                    mkdir($imgFolder . $traeger->getId());
+                }
+                foreach ($traeger->getBilder() as $bild) {
+                    rename($imgFolder . $bild->getTmpName() . '/' . $bild->getFileName(), $imgFolder . $traeger->getId() . '/' . $bild->getFileName());
+                    rmdir($imgFolder . $bild->getTmpName());
+                }
+            }
         } else {
             return $this->sendJsonResponse('Träger existiert bereits!', 409); // Send "Conflict"
         }
@@ -130,6 +142,20 @@ class TraegerController extends BaseController {
         $traeger->setTitel($data->titel);
         if (isset($data->beschreibung)) {
             $traeger->setBeschreibung($data->beschreibung);
+        }
+
+        if (isset($data->bilder)) {
+            // TODO: Unelegant
+            $traeger->deleteAllBilder();
+            foreach ($data->bilder as $rawBild) {
+                $bild = new Bild();
+                $bild->setFileName($rawBild->name);
+                $bild->setFileType($rawBild->type);
+                $bild->setFileChangetime(new \DateTime($rawBild->lastModifiedDate));
+                $bild->setFileSize($rawBild->size);
+                $bild->setTmpName($rawBild->tmp_name);
+                $traeger->addBild($bild);
+            }
         }
 
         return $traeger;

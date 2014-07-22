@@ -148,6 +148,11 @@
             </div>
         </fieldset>
         <fieldset>
+            <legend>Bilder</legend>
+                <input type="file" data-ng-file-select="onFileSelect($files)" multiple>
+                <button data-ng-click="upload.abort()">Cancel Upload</button>
+        </fieldset>
+        <fieldset>
             <legend>Beschreibung</legend>
             <text-angular data-ng-model="traeger.beschreibung"></text-angular>
         </fieldset>

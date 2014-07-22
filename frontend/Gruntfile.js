@@ -11,6 +11,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-conventional-changelog');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-ngmin');
@@ -102,6 +103,17 @@ module.exports = function ( grunt ) {
                 style: 'compressed'
             },
             files: { '<%= build_dir %>/assets/screen.css': 'src/assets/scss/screen.scss' }
+        }
+    },
+
+    symlink: {
+        // Enable overwrite to delete symlinks before recreating them
+        options: {
+            overwrite: false
+        },
+        explicit: {
+            src: 'img',
+            dest: 'build/img'
         }
     },
 
@@ -502,7 +514,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'sass',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:fonts',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:backend_htaccess', 'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'index:build'
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:backend_htaccess', 'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'symlink', 'index:build'
   ]);
 
   /**
@@ -511,7 +523,7 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'compile', [
     'sass', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'copy:backend_htaccess', 'copy:fonts',
-    'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'index:compile'
+    'copy:backend_php', 'copy:build_vendor_css', 'copy:leaflet_assets', 'symlink', 'index:compile'
   ]);
 
   /**

@@ -10,6 +10,7 @@ angular.module( 'ngBoilerplate', [
   'templates-common',
   'leaflet-directive',
   'textAngular',
+  'angularFileUpload',
   'jugendstadtplan.api',
   'jugendstadtplan.startseite',
   'jugendstadtplan.pins',

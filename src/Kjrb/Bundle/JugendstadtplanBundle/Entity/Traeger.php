@@ -85,6 +85,13 @@ class Traeger {
      */
     private $pins;
 
+    /**
+     * @var Bild[] $bilder
+     *
+     * @ORM\OneToMany(targetEntity="Bild", mappedBy="traeger", indexBy="id", cascade={"all"}, orphanRemoval=true, fetch="EAGER")
+     */
+    private $bilder;
+
     public function __construct($email, $password) {
         $this->email = $email;
         $this->hash = $this->getPasswordHash($password);
@@ -92,6 +99,7 @@ class Traeger {
         $this->adressen = new ArrayCollection();
         $this->ansprechpartner = new ArrayCollection();
         $this->links = new ArrayCollection();
+        $this->bilder = new ArrayCollection();
     }
 
     /**
@@ -286,6 +294,30 @@ class Traeger {
         $encrypted = crypt($password . $this->pepper, $cryptSalt);
 
         return $encrypted;
+    }
+
+    /**
+     * @return Bild[]
+     */
+    public function getBilder() {
+        return $this->bilder;
+    }
+
+    public function deleteAllBilder() {
+        $this->bilder = new ArrayCollection();
+    }
+
+    /**
+     * @param Bild $bild
+     */
+    public function addBild(Bild $bild) {
+        $id = $bild->getId();
+        if (!$id) {
+            $this->bilder->add($bild);
+        } elseif(!$this->bilder->containsKey($id)) {
+            $this->bilder->set($id, $bild);
+        }
+        $bild->setTraeger($this);
     }
 
 }
