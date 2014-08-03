@@ -17,6 +17,22 @@
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
   <body>
+  <div>
+      <div class="logo-container">
+        <a href="/"><img src="/assets/img/logo.png" alt="Logo des Jugendstadtplans" /></a>
+      </div>
+      <div class="sysnav-container">
+          <a href="#/kontakt">Kontakt</a>
+          <a href="#/impressum">Impressum</a>
+          <a href="#/login">Login</a>
+      </div>
+      <div class="social-media-container">
+          <a href="https://de-de.facebook.com/jugendstadtplanbonn">
+              <img src="/assets/img/facebook-icon_inaktiv.png" data-ng-mouseenter="active = true" data-ng-mouseleave="active = false" data-ng-hide="active" data-ng-init="active = false" />
+              <img src="/assets/img/facebook-icon_aktiv.png" data-ng-mouseenter="active = true" data-ng-mouseleave="active = false" data-ng-show="active" data-ng-init="active = false" />
+          </a>
+      </div>
+      </div>
         <div class="top-bar" role="navigation" data-topbar>
             <ul class="title-area">
                 <li class="name">
