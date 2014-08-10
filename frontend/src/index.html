@@ -34,6 +34,7 @@
           </a>
       </div>
   </div>
+  <div class="top-bar-wrapper">
         <div class="top-bar" role="navigation" data-topbar>
             <ul class="title-area">
                 <li class="name">
@@ -65,6 +66,7 @@
               </ul>
             </section>
         </div>
+    </div>
 
     <div class="row">
         <aside class="large-2 columns">
@@ -79,25 +81,25 @@
         </div>
     </div>
 
-    <div class="footer row">
-        <!--<div class="large-1 columns">&nbsp;</div>-->
-        <div class="social-media-container small-12 large-4 large-offset-1 columns">
-            <h3>Social Media</h3>
-            <a href="https://de-de.facebook.com/jugendstadtplanbonn">
-                <img src="/assets/img/facebook-icon_inaktiv.png" data-ng-mouseenter="active = true" data-ng-mouseleave="active = false" data-ng-hide="active" data-ng-init="active = false" />
-                <img src="/assets/img/facebook-icon_aktiv.png" data-ng-mouseenter="active = true" data-ng-mouseleave="active = false" data-ng-show="active" data-ng-init="active = false" />
-                Facebook
-            </a>
+    <div class="footer">
+        <div class="row">
+            <div class="social-media-container small-12 large-4 columns">
+                <h3>Social Media</h3>
+                <a href="https://de-de.facebook.com/jugendstadtplanbonn">
+                    <img src="/assets/img/facebook-icon_inaktiv.png" data-ng-mouseenter="active = true" data-ng-mouseleave="active = false" data-ng-hide="active" data-ng-init="active = false" />
+                    <img src="/assets/img/facebook-icon_aktiv.png" data-ng-mouseenter="active = true" data-ng-mouseleave="active = false" data-ng-show="active" data-ng-init="active = false" />
+                    Facebook
+                </a>
+            </div>
+            <div class="about small-12 large-4 columns">
+                <h3>Über den Jugendstadtplan Bonn</h3>
+                <p>Der interaktive Jugendstadtplan Bonn ist ein Modellprojekt des Kinder- und Jugendrings Bonn.<br />Unser Ziel ist die Einrichtung eines internetbasierten, interaktiven Jugendstadtplans von Bonn für Kinder.</p>
+                <a href="#/about">Erfahren Sie mehr..</a>
+            </div>
+            <div class="small-12 large-4 columns">
+                <img src="/assets/img/logo.png" alt="Logo des Jugendstadtplans" />
+            </div>
         </div>
-        <div class="about small-12 large-4 columns">
-            <h3>Über den Jugendstadtplan Bonn</h3>
-            <p>Der interaktive Jugendstadtplan Bonn ist ein Modellprojekt des Kinder- und Jugendrings Bonn.<br />Unser Ziel ist die Einrichtung eines internetbasierten, interaktiven Jugendstadtplans von Bonn für Kinder.</p>
-            <a href="#/about">Erfahren Sie mehr..</a>
-        </div>
-        <div class="small-12 large-4 columns">
-            <img src="/assets/img/logo.png" alt="Logo des Jugendstadtplans" />
-        </div>
-        <!--<div class="large-2 columns">&nbsp;</div>-->
     </div>
         <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
