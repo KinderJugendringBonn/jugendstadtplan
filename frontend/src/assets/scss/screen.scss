@@ -29,3 +29,14 @@
 .top-bar-wrapper {
   padding-top: 5px;
 }
+
+$action-claim-height: 200px;
+.action-claim {
+  background-color: #F5F5F5;
+  border-top: 1px solid #EAEEEA;
+  height: $action-claim-height;
+}
+
+.action-claim > div {
+  padding-top: $action-claim-height / 3;
+}
