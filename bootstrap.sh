@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#sudo apt-get update
+sudo apt-get update
 sudo apt-get install -y ruby mercurial php5-intl
 gem install sass
 

@@ -18,7 +18,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "symfony/debug": "~2.4",
         "willdurand/hateoas": "~2.3",
-        "dunglas/angular-csrf-bundle": "~0.1"
+        "dunglas/angular-csrf-bundle": "~0.1",
+        "sensio/distribution-bundle": "~3.0"
     },
     "scripts": {
         "post-install-cmd": [
