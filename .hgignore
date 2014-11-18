@@ -24,3 +24,6 @@ meta/*
 conf/*
 logs/*
 frontend/.sass-cache/*
+.vagrant
+npm-debug.log
+*.swp
