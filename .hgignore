@@ -27,3 +27,4 @@ frontend/.sass-cache/*
 .vagrant
 npm-debug.log
 *.swp
+*.orig
