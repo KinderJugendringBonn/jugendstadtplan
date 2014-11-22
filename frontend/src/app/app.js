@@ -5,7 +5,6 @@ angular.module( 'ngBoilerplate', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'ui.bootstrap',
   'templates-app',
   'templates-common',
   'leaflet-directive',
