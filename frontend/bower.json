@@ -17,6 +17,6 @@
     "font-awesome": "~4.1.0",
     "ng-file-upload": "~1.5.0",
     "angular-foundation": "~0.3.0",
-    "foundation": "~5.3.1"
+    "foundation": "zurb/bower-foundation#~5.4.7"
   }
 }
