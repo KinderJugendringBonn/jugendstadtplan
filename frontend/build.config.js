@@ -64,6 +64,8 @@ module.exports = {
     js: [
       'vendor/ng-file-upload/angular-file-upload-shim.min.js',
       'vendor/angular/angular.min.js',
+      'vendor/angular-foundation/mm-foundation.min.js',
+      'vendor/angular-foundation/mm-foundation-tpls.min.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
       'vendor/angular-resource/angular-resource.min.js',
