@@ -79,7 +79,7 @@ module.exports = {
       'vendor/ng-file-upload/angular-file-upload.min.js'
     ],
     css: [
-      'vendor/leaflet-dist/leaflet.css'
+      'vendor/leaflet/dist/leaflet.css'
     ],
     assets: [
     ]
