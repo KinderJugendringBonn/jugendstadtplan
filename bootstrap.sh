@@ -16,7 +16,7 @@ sudo ln -sf /var/www/conf/apache-vagrant.conf /etc/apache2/sites-enabled/010-jug
 cd /var/www 
 composer install
 php ./vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
-php app/console doctrine:database:create -q
+php app/console doctrine:database:create -qn
 php app/console doctrine:schema:update --force
 
 # Dateirecht fuer npm korrekt setzen
