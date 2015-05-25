@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Kjrb\Bundle\JugendstadtplanBundle\KjrbJugendstadtplanBundle(),
             new Dunglas\AngularCsrfBundle\DunglasAngularCsrfBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

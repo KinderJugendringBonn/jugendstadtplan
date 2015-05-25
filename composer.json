@@ -7,11 +7,11 @@
         "psr-0": { "": "src/" }
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": "~5.4",
         "symfony/symfony": "~2.4",
-        "doctrine/orm": ">=2.2.3,<2.4-dev",
-        "doctrine/doctrine-bundle": "1.2.*",
-        "twig/extensions": "1.0.*",
+        "doctrine/orm": "~2.5",
+        "doctrine/doctrine-bundle": "~1.2",
+        "twig/extensions": "~1.0",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/framework-extra-bundle": "~3.0",
@@ -19,7 +19,9 @@
         "symfony/debug": "~2.4",
         "willdurand/hateoas": "~2.3",
         "dunglas/angular-csrf-bundle": "~0.1",
-        "sensio/distribution-bundle": "~3.0"
+        "sensio/distribution-bundle": "~3.0",
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [
