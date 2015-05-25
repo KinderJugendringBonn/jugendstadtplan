@@ -5,7 +5,7 @@ angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) 
     views: {
       "main": {
         controller: 'PinsController',
-        templateUrl: 'pins/views/list.tpl.html'
+        templateUrl: 'src/app/pins/views/list.tpl.html'
       }
     },
     data:{ pageTitle: 'Pins' }

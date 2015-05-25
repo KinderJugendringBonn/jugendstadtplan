@@ -1,12 +1,10 @@
 var Jugendstadtplan = Jugendstadtplan || {};
 Jugendstadtplan.Controllers = angular.module('jugendstadtplan.controllers', []);
 
-angular.module( 'ngBoilerplate', [
+angular.module( 'jugendstadtplan', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'templates-app',
-  'templates-common',
   'leaflet-directive',
   'textAngular',
   'angularFileUpload',

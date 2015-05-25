@@ -5,7 +5,7 @@ angular.module('jugendstadtplan.startseite').config(function config( $stateProvi
     views: {
       "main": {
         controller: 'StartseiteController',
-        templateUrl: 'startseite/views/startseite.tpl.html'
+        templateUrl: 'src/app/startseite/views/startseite.tpl.html'
       }
     },
     data:{ pageTitle: 'Startseite' }

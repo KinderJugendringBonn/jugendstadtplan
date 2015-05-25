@@ -1,14 +1,13 @@
-@import "variables";
-@import "normalize";
+@import "modules/variables";
 
-@import "map";
+@import "modules/map";
 
-@import "grid";
-@import "form";
+@import "modules/grid";
+@import "modules/form";
 
-@import "scss/font-awesome";
+@import "font-awesome";
 
-@import "foundation/scss/foundation";
+@import "foundation";
 
 .hidden {
     display: none;
@@ -21,7 +20,7 @@
 }
 
 .top-bar-wrapper, .footer {
-    background-image: url("img/bunte_leiste.png");
+    background-image: url("/img/bunte_leiste.png");
     background-repeat: repeat-x;
     background-position: top;
 }

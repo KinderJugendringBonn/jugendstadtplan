@@ -1,5 +1,5 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    RewriteRule ^backend/(.*)$ /backend.php/$1 [P]
+    RewriteRule ^backend/(.*)$ /app_dev.php/$1 [P]
 </IfModule>
