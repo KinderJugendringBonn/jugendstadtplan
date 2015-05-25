@@ -148,9 +148,10 @@
     <script type="text/javascript" src="/vendor/textAngular/src/textAngular.js"></script>
     <script type="text/javascript" src="/vendor/textAngular/src/textAngularSetup.js"></script>
     <script type="text/javascript" src="/vendor/textAngular/src/textAngular-sanitize.js"></script>
+    <script type="text/javascript" src="/js/jugendstadtplan.js"></script>
   <?php } else { ?>
-  <?php } ?>
     <script type="text/javascript" src="/js/jugendstadtplan.min.js"></script>
+  <?php } ?>
 
     <!-- it's stupid to have to load it here, but this is for the +1 button -->
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">

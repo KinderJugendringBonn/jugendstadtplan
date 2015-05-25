@@ -20,8 +20,10 @@ var jsSources = [
 gulp.task('compile-javascripts', function() {
     gulp.src(jsSources)
         .pipe(sourcemaps.init())
-            .pipe(concat('jugendstadtplan.min.js'))
-            //.pipe(uglify())
+            .pipe(concat('jugendstadtplan.js'))
+            .pipe(gulp.dest(jsDestination))
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(uglify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(jsDestination));
 });
