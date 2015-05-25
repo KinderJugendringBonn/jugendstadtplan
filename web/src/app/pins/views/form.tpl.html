@@ -86,53 +86,8 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>Ansprechpartner</legend>
 
-            <div>
-                <p>Bisher</p>
-                <ul>
-                    <li data-ng-repeat="ansprechpartner in pin.ansprechpartner">
-                        <p>{{ ansprechpartner.name }}</p>
-                        <small>{{ ansprechpartner.telefonnummer }}</small>
-                        <small>{{ ansprechpartner.mobilnummer }}</small>
-                        <small>{{ ansprechpartner.email }}</small>
-                    </li>
-                </ul>
-                <p>Neuen Ansprechpartner anlegen:</p>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="pin.ansprechpartner.name">Name*:</label>
-                        <input id="pin.ansprechpartner.name" type="text" data-ng-model="newAnsprechpartner.name" required />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="pin.ansprechpartner.telefonnummer">Telefonnummer:</label>
-                        <input id="pin.ansprechpartner.telefonnummer" type="tel" data-ng-model="newAnsprechpartner.telefonnummer" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="pin.ansprechpartner.mobilnummer">Handy:</label>
-                        <input id="pin.ansprechpartner.mobilnummer" type="tel" data-ng-model="newAnsprechpartner.mobilnummer" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="pin.ansprechpartner.email">EMail*:</label>
-                        <input id="pin.ansprechpartner.email" type="email" data-ng-model="newAnsprechpartner.email" required />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label for="pin.ansprechpartner.bemerkung">Bemerkungen:</label>
-                        <textarea id="pin.ansprechpartner.bemerkung" data-ng-model="newAnsprechpartner.bemerkung"></textarea>
-                    </div>
-                </div>
-                <button type="button" data-ng-click="addAnsprechpartner()" data-ng-disabled="!isAnsprechpartnerValid(newAnsprechpartner)">Hinzufügen</button>
-            </div>
-        </fieldset>
+        <ng-include src="'/src/app/ansprechpartner/views/form.tpl.html'" data-ng-init="model = pin"></ng-include>
 
         <fieldset>
             <legend>Termine</legend>

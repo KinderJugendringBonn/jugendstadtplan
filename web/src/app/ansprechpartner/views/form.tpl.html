@@ -1,0 +1,46 @@
+<fieldset data-ng-controller="AnsprechpartnerFormController">
+    <legend>Ansprechpartner</legend>
+    <div>
+        <p>Bisher</p>
+        <ul>
+            <li data-ng-repeat="ansprechpartner in model.ansprechpartner">
+                <p>{{ ansprechpartner.name }}</p>
+                <small>{{ ansprechpartner.telefonnummer }}</small>
+                <small>{{ ansprechpartner.mobilnummer }}</small>
+                <small>{{ ansprechpartner.email }}</small>
+            </li>
+        </ul>
+        <p>Neuen Ansprechpartner anlegen:</p>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="ansprechpartner.name">Name*:</label>
+                <input id="ansprechpartner.name" type="text" data-ng-model="newAnsprechpartner.name" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="ansprechpartner.telefonnummer">Telefonnummer:</label>
+                <input id="ansprechpartner.telefonnummer" type="tel" data-ng-model="newAnsprechpartner.telefonnummer" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="ansprechpartner.mobilnummer">Handy:</label>
+                <input id="ansprechpartner.mobilnummer" type="tel" data-ng-model="newAnsprechpartner.mobilnummer" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="ansprechpartner.email">EMail*:</label>
+                <input id="ansprechpartner.email" type="email" data-ng-model="newAnsprechpartner.email" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="traeger.ansprechpartner.bemerkung">Bemerkungen:</label>
+                <textarea id="traeger.ansprechpartner.bemerkung" data-ng-model="newAnsprechpartner.bemerkung"></textarea>
+            </div>
+        </div>
+        <button type="button" data-ng-click="addAnsprechpartner()" data-ng-disabled="!isAnsprechpartnerValid(newAnsprechpartner)">Hinzufügen</button>
+    </div>
+</fieldset>

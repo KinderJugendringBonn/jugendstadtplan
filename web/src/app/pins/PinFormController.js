@@ -96,26 +96,6 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
     $scope.mindestalters = [ 'ab 12', 'ab 16', 'ab 18', 'ab 21' ];
 
 
-    // Ansprechpartner
-    $scope.newAnsprechpartner = {};
-    $scope.addAnsprechpartner = function() {
-        if ($scope.pin.ansprechpartner === undefined) {
-            $scope.pin.ansprechpartner = [];
-        }
-        $scope.pin.ansprechpartner.push($scope.newAnsprechpartner);
-        $scope.newAnsprechpartner = {};
-    };
-
-    $scope.isAnsprechpartnerValid = function(ansprechpartner) {
-        if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
-            return false;
-        } else if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
-            return false;
-        }
-        return true;
-    };
-
-
     // Wochentage
     $scope.wochentage = [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ];
 

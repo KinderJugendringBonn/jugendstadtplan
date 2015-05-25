@@ -43,52 +43,8 @@
             </div>
         </fieldset>
 
-        <fieldset>
-            <legend>Ansprechpartner</legend>
-            <div>
-                <p>Bisher</p>
-                <ul>
-                    <li data-ng-repeat="ansprechpartner in traeger.ansprechpartner">
-                        <p>{{ ansprechpartner.name }}</p>
-                        <small>{{ ansprechpartner.telefonnummer }}</small>
-                        <small>{{ ansprechpartner.mobilnummer }}</small>
-                        <small>{{ ansprechpartner.email }}</small>
-                    </li>
-                </ul>
-                <p>Neuen Ansprechpartner anlegen:</p>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="traeger.ansprechpartner.name">Name*:</label>
-                        <input id="traeger.ansprechpartner.name" type="text" data-ng-model="newAnsprechpartner.name" required />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="traeger.ansprechpartner.telefonnummer">Telefonnummer:</label>
-                        <input id="traeger.ansprechpartner.telefonnummer" type="tel" data-ng-model="newAnsprechpartner.telefonnummer" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="traeger.ansprechpartner.mobilnummer">Handy:</label>
-                        <input id="traeger.ansprechpartner.mobilnummer" type="tel" data-ng-model="newAnsprechpartner.mobilnummer" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="traeger.ansprechpartner.email">EMail*:</label>
-                        <input id="traeger.ansprechpartner.email" type="email" data-ng-model="newAnsprechpartner.email" required />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="traeger.ansprechpartner.bemerkung">Bemerkungen:</label>
-                        <textarea id="traeger.ansprechpartner.bemerkung" data-ng-model="newAnsprechpartner.bemerkung"></textarea>
-                    </div>
-                </div>
-                <button type="button" data-ng-click="addAnsprechpartner()" data-ng-disabled="!isAnsprechpartnerValid(newAnsprechpartner)">Hinzufügen</button>
-            </div>
-        </fieldset>
+        <ng-include src="'/src/app/ansprechpartner/views/form.tpl.html'" data-ng-init="model = traeger"></ng-include>
+
         <fieldset>
             <legend>Adressen</legend>
             <div>

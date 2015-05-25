@@ -1,14 +1,16 @@
+angular.module( 'jugendstadtplan.ansprechpartner', [
+]);
 angular.module( 'jugendstadtplan.links', [
 ]);
 angular.module( 'jugendstadtplan.pins', [
-  'ui.router', 'jugendstadtplan.links'
+  'ui.router', 'jugendstadtplan.links', 'jugendstadtplan.ansprechpartner'
 ]);
 angular.module( 'jugendstadtplan.startseite', [
   'ui.router',
   'leaflet-directive'
 ]);
 angular.module( 'jugendstadtplan.traeger', [
-  'ui.router', 'jugendstadtplan.links'
+  'ui.router', 'jugendstadtplan.links', 'jugendstadtplan.ansprechpartner'
 ]);
 var Jugendstadtplan = Jugendstadtplan || {};
 Jugendstadtplan.Controllers = angular.module('jugendstadtplan.controllers', []);
@@ -43,6 +45,29 @@ angular.module( 'jugendstadtplan', [
 }])
 
 ;
+Jugendstadtplan.Controllers.controller( 'AnsprechpartnerFormController', [ '$scope',
+    function($scope) {
+
+        // Ansprechpartner
+        $scope.newAnsprechpartner = {};
+        $scope.addAnsprechpartner = function() {
+            if ($scope.model.ansprechpartner === undefined) {
+                $scope.model.ansprechpartner = [];
+            }
+            $scope.model.ansprechpartner.push($scope.newAnsprechpartner);
+            $scope.newAnsprechpartner = {};
+        };
+
+        $scope.isAnsprechpartnerValid = function(ansprechpartner) {
+            if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
+                return false;
+            } else if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
+                return false;
+            }
+            return true;
+        };
+
+    }]);
 Jugendstadtplan.Controllers.controller( 'LinksFormController', [ '$scope',
     function($scope) {
         // Links
@@ -221,26 +246,6 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
 
     // Mindestalter
     $scope.mindestalters = [ 'ab 12', 'ab 16', 'ab 18', 'ab 21' ];
-
-
-    // Ansprechpartner
-    $scope.newAnsprechpartner = {};
-    $scope.addAnsprechpartner = function() {
-        if ($scope.pin.ansprechpartner === undefined) {
-            $scope.pin.ansprechpartner = [];
-        }
-        $scope.pin.ansprechpartner.push($scope.newAnsprechpartner);
-        $scope.newAnsprechpartner = {};
-    };
-
-    $scope.isAnsprechpartnerValid = function(ansprechpartner) {
-        if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
-            return false;
-        } else if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
-            return false;
-        }
-        return true;
-    };
 
 
     // Wochentage
@@ -524,26 +529,6 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
             var file = $files[i];
             $scope.upload = doUpload(file);
         }
-    };
-
-
-    // Ansprechpartner
-    $scope.newAnsprechpartner = {};
-    $scope.addAnsprechpartner = function() {
-        if ($scope.traeger.ansprechpartner === undefined) {
-            $scope.traeger.ansprechpartner = [];
-        }
-        $scope.traeger.ansprechpartner.push($scope.newAnsprechpartner);
-        $scope.newAnsprechpartner = {};
-    };
-
-    $scope.isAnsprechpartnerValid = function(ansprechpartner) {
-        if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
-            return false;
-        } else if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
-            return false;
-        }
-        return true;
     };
 
 
