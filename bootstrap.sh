@@ -23,14 +23,9 @@ php app/console doctrine:schema:update --force
 sudo chown -R vagrant:vagrant /home/vagrant/.npm
 
 # Frontend installieren
-cd /var/www/frontend
-mkdir build
+cd /var/www
 npm install
 bower install
 grunt -f build
-
-## mod_proxy aktivieren, damit die Rewrites fuer das Backend funktionieren
-sudo a2enmod proxy
-sudo a2enmod proxy_http
 
 sudo apache2ctl restart
