@@ -4,7 +4,7 @@
         <p>Bisher</p>
         <ul>
             <li data-ng-repeat="link in model.links">
-                <a href="{{ link.url }}">{{ link.titel }}</a>
+                <a data-ng-href="{{ link.url }}">{{ link.titel }}</a>
             </li>
         </ul>
         <p>Link hinzufügen:</p>
