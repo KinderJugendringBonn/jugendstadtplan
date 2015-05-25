@@ -13,8 +13,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "scotch/box"
   config.vm.provision :shell, path: "bootstrap.sh", privileged: false
 
+  config.dns.tld = "dev"
+  config.vm.hostname = "jugendstadtplan"
+  config.dns.patterns = [/^.*\.jugendstadtplan\.dev$/, /^jugendstadtplan.dev$/]
+
   config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.hostname = "scotchbox"
   config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
 
 #config.vm.provider :virtualbox do |vb|
