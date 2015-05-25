@@ -28,3 +28,4 @@ frontend/.sass-cache/*
 npm-debug.log
 *.swp
 *.orig
+web/environment.php
