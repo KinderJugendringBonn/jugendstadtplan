@@ -109,8 +109,7 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
     $scope.isAnsprechpartnerValid = function(ansprechpartner) {
         if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
             return false;
-        }
-        if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
+        } else if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
             return false;
         }
         return true;
@@ -134,8 +133,7 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
     $scope.isTerminValid = function(termin) {
         if (termin.beginn === undefined || termin.beginn === 0) {
             return false;
-        }
-        if (termin.ganztaegig !== true && (termin.beginn_uhrzeit === undefined || termin.beginn_uhrzeit === 0)) {
+        } else if (termin.ganztaegig !== true && (termin.beginn_uhrzeit === undefined || termin.beginn_uhrzeit === 0)) {
             return false;
         }
         return true;
@@ -181,8 +179,7 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
     $scope.isLinkValid = function(link) {
         if (link.titel === undefined || link.titel.length === 0) {
             return false;
-        }
-        if (link.url === undefined || link.url.length === 0) {
+        } else if (link.url === undefined || link.url.length === 0) {
             return false;
         }
         return true;

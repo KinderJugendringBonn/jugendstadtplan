@@ -107,8 +107,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     $scope.isAnsprechpartnerValid = function(ansprechpartner) {
         if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
             return false;
-        }
-        if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
+        } else if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
             return false;
         }
         return true;
@@ -128,8 +127,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     $scope.isLinkValid = function(link) {
         if (link.titel === undefined || link.titel.length === 0) {
             return false;
-        }
-        if (link.url === undefined || link.url.length === 0) {
+        } else if (link.url === undefined || link.url.length === 0) {
             return false;
         }
         return true;
@@ -149,8 +147,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     $scope.isAdresseValid = function(adresse) {
         if (adresse.strasse === undefined || adresse.strasse.length === 0) {
             return false;
-        }
-        if (adresse.ort === undefined || adresse.ort.length === 0) {
+        } else if (adresse.ort === undefined || adresse.ort.length === 0) {
             return false;
         }
         return true;
