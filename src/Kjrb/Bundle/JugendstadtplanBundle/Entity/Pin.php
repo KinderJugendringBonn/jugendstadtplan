@@ -33,7 +33,7 @@ class Pin {
      * @var Kategorie
      *
      * @Assert\NotBlank()
-     * @ORM\OneToOne(targetEntity="Kategorie")
+     * @ORM\ManyToOne(targetEntity="Kategorie", fetch="EAGER")
      */
     private $kategorie;
 
