@@ -58,7 +58,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     $scope.onFileSelect = function($files) {
         var doUpload = function(file) {
             $upload.upload({
-                url: 'backend/img/upload', //upload.php script, node.js route, or servlet url
+                url: 'app_dev.php/img/upload', //upload.php script, node.js route, or servlet url
                 // method: 'POST' or 'PUT',
                 method: 'POST',
                 // headers: {'header-key': 'header-value'},

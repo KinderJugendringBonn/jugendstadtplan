@@ -490,7 +490,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     $scope.onFileSelect = function($files) {
         var doUpload = function(file) {
             $upload.upload({
-                url: 'backend/img/upload', //upload.php script, node.js route, or servlet url
+                url: 'app_dev.php/img/upload', //upload.php script, node.js route, or servlet url
                 // method: 'POST' or 'PUT',
                 method: 'POST',
                 // headers: {'header-key': 'header-value'},
@@ -607,9 +607,11 @@ angular.module( 'plusOne', [] )
 
 var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
 
+var backendPrefix = '/app_dev.php';
+
 jugendstadtplanApi.provider('Pin', function() {
     this.$get = ['$resource', function ($resource) {
-        var backendUrl = '/backend/pins';
+        var backendUrl = backendPrefix + '/pins';
         return $resource(backendUrl, {}, {
             get: {
                 method: 'GET',
@@ -636,7 +638,7 @@ jugendstadtplanApi.provider('Pin', function() {
 
 jugendstadtplanApi.provider('Traeger', function() {
     this.$get = ['$resource', function ($resource) {
-        var backendUrl = '/backend/traeger';
+        var backendUrl = backendPrefix + '/traeger';
         return $resource(backendUrl, {}, {
             get: {
                 method: 'GET',
@@ -663,7 +665,7 @@ jugendstadtplanApi.provider('Traeger', function() {
 
 jugendstadtplanApi.provider('Kategorie', function() {
     this.$get = ['$resource', function ($resource) {
-        var backendUrl = '/backend/kategorie';
+        var backendUrl = backendPrefix + '/kategorie';
         return $resource(backendUrl);
     }];
 });
