@@ -1,0 +1,25 @@
+<fieldset data-ng-controller="LinksFormController">
+    <legend>Links</legend>
+    <div>
+        <p>Bisher</p>
+        <ul>
+            <li data-ng-repeat="link in model.links">
+                <a href="{{ link.url }}">{{ link.titel }}</a>
+            </li>
+        </ul>
+        <p>Link hinzufügen:</p>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="link.titel">Titel*:</label>
+                <input id="link.titel" type="text" data-ng-model="newLink.titel" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="link.url">URL*:</label>
+                <input id="link.url" type="url" data-ng-model="newLink.url" />
+            </div>
+        </div>
+        <button type="button" data-ng-click="addLink()" data-ng-disabled="!isLinkValid(newLink)">Hinzufügen</button>
+    </div>
+</fieldset>

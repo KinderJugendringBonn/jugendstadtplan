@@ -1,3 +1,3 @@
 angular.module( 'jugendstadtplan.pins', [
-  'ui.router'
+  'ui.router', 'jugendstadtplan.links'
 ]);

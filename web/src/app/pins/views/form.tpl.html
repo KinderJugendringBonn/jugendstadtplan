@@ -256,30 +256,17 @@
                 <label for="kjrb_jugendstadtplanbundle_pin_latitude" class="required">Latitude</label>
                 <input type="text" id="kjrb_jugendstadtplanbundle_pin_latitude" data-ng-model="pin.markers[0].lat" />
             </div>
-
-            <div>
-                <p>Bisherige Links:</p>
-                <ul>
-                    <li data-ng-repeat="link in pin.links">
-                        <a href="{{ link.url }}">{{ link.titel }}</a>
-                    </li>
-                </ul>
-                <p>Link hinzufügen:</p>
-                <label for="pin.link.titel">Titel*:</label>
-                <input id="pin.link.titel" type="text" data-ng-model="newLink.titel" />
-                <label for="pin.link.url">URL*:</label>
-                <input id="pin.link.url" type="url" data-ng-model="newLink.url" />
-                <button type="button" data-ng-click="addLink()" data-ng-disabled="!isLinkValid(newLink)" class="small button">Hinzufügen</button>
-            </div>
-
-            <ul class="button-group">
-                <li>
-                    <button type="submit" class="button">Submit</button>
-                </li>
-                <li>
-                    <button data-ng-if="editing" class="button secondary" data-ng-click="newPin()">Neuen Pin anlegen</button>
-                </li>
-            </ul>
         </fieldset>
+
+        <ng-include src="'/src/app/links/views/form.tpl.html'" data-ng-init="model = pin"></ng-include>
+
+        <ul class="button-group">
+            <li>
+                <button type="submit" class="button">Submit</button>
+            </li>
+            <li>
+                <button data-ng-if="editing" class="button secondary" data-ng-click="newPin()">Neuen Pin anlegen</button>
+            </li>
+        </ul>
     </form>
 </div>

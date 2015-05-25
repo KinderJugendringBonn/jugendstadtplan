@@ -122,31 +122,9 @@
                 <button type="button" data-ng-click="addAdresse()" data-ng-disabled="!isAdresseValid(newAdresse)">Hinzufügen</button>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>Links</legend>
-            <div>
-                <p>Bisher</p>
-                <ul>
-                    <li data-ng-repeat="link in traeger.links">
-                        <a href="{{ link.url }}">{{ link.titel }}</a>
-                    </li>
-                </ul>
-                <p>Link hinzufügen:</p>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="traeger.link.titel">Titel*:</label>
-                        <input id="traeger.link.titel" type="text" data-ng-model="newLink.titel" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <label for="traeger.link.url">URL*:</label>
-                        <input id="traeger.link.url" type="url" data-ng-model="newLink.url" />
-                    </div>
-                </div>
-                <button type="button" data-ng-click="addLink()" data-ng-disabled="!isLinkValid(newLink)">Hinzufügen</button>
-            </div>
-        </fieldset>
+
+        <ng-include src="'/src/app/links/views/form.tpl.html'" data-ng-init="model = traeger"></ng-include>
+
         <fieldset>
             <legend>Bilder</legend>
                 <input type="file" data-ng-file-select="onFileSelect($files)" multiple>

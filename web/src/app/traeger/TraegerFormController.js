@@ -114,26 +114,6 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     };
 
 
-    // Links
-    $scope.newLink = {};
-    $scope.addLink = function() {
-        if ($scope.traeger.links === undefined) {
-            $scope.traeger.links = [];
-        }
-        $scope.traeger.links.push($scope.newLink);
-        $scope.newLink = {};
-    };
-
-    $scope.isLinkValid = function(link) {
-        if (link.titel === undefined || link.titel.length === 0) {
-            return false;
-        } else if (link.url === undefined || link.url.length === 0) {
-            return false;
-        }
-        return true;
-    };
-
-
     // Adressen
     $scope.newAdresse = {};
     $scope.addAdresse = function() {
