@@ -1,0 +1,104 @@
+<fieldset data-ng-controller="TerminFormController">
+    <legend>Termine</legend>
+    <div>
+        <p>Bisher</p>
+        <ul>
+            <li data-ng-repeat="termin in model.termine">
+                <p>{{ termin.beginn | date:'dd.MM.yyyy' }}</p>
+                <p>{{ termin.beginn_uhrzeit | date:'HH.mm' }}</p>
+                <p>{{ termin.ende | date:'dd.MM.yyyy' }}</p>
+                <p>{{ termin.ende_uhrzeit | date:'HH.mm' }}</p>
+                <ul>
+                    <li data-ng-repeat="wiederholung in termin.wiederholungen">
+                        <p>{{ wiederholung.wochentag }}</p>
+                        <p data-ng-if="wiederholung.woche_des_monats == 0">Jede Woche</p>
+                        <p data-ng-if="wiederholung.woche_des_monats != 0">Jede {{ wiederholung.woche_des_monats }}. Woche</p>
+                        <p data-ng-if="wiederholung.auch_an_feiertagen">Auch an Feiertagen</p>
+                        <p data-ng-if="wiederholung.auch_in_den_ferien">Auch in den Ferien</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p>Neuen Termin anlegen:</p>
+        <div class="row">
+            <div class="large-4 columns">
+                <label for="termin.beginn">Beginn*:</label>
+                <input id="termin.beginn" type="date" data-ng-model="newTermin.beginn" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-8 columns">
+                <div class="switch small">
+                    <span>Ganztägig</span>
+                    <input id="termin.ganztaegig" type="checkbox" data-ng-model="newTermin.ganztaegig" />
+                    <label for="termin.ganztaegig"></label>
+                </div>
+            </div>
+        </div>
+        <div data-ng-show="!newTermin.ganztaegig" class="row">
+            <div class="large-4 columns">
+                <label for="termin.beginn_uhrzeit">Uhrzeit:</label>
+                <input id="termin.beginn_uhrzeit" type="time" data-ng-model="newTermin.beginn_uhrzeit" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-4 columns">
+                <label for="termin.ende">Ende:</label>
+                <input id="termin.ende" type="date" data-ng-model="newTermin.ende" />
+            </div>
+        </div>
+        <div data-ng-show="!newTermin.ganztaegig" class="row">
+            <div class="large-8 columns">
+                <label for="termin.ende_uhrzeit">Endzeit:</label>
+                <input id="termin.ende_uhrzeit" type="time" data-ng-model="newTermin.ende_uhrzeit" />
+            </div>
+        </div>
+        <div>
+            <p>Dieser Termin wiederholt sich:</p>
+            <ul>
+                <li data-ng-repeat="wiederholung in newTermin.wiederholungen">
+                    <p>{{ wiederholung.wochentag }}</p>
+                    <p data-ng-if="wiederholung.woche_des_monats == 0">Jede Woche</p>
+                    <p data-ng-if="wiederholung.woche_des_monats != 0">Jede {{ wiederholung.woche_des_monats }}. Woche</p>
+                    <p data-ng-if="wiederholung.auch_an_feiertagen == true">Auch an Feiertagen</p>
+                    <p data-ng-if="wiederholung.auch_in_den_ferien == true">Auch in den Ferien</p>
+                </li>
+            </ul>
+            <fieldset>
+                <legend>Wiederholung</legend>
+                <div class="row">
+                    <div class="large-4 columns">
+                        <label for="termin.wiederholung.wochentag">Wochentag</label>
+                        <select id="termin.wiederholung.wochentag" data-ng-model="newWiederholung.wochentag" data-ng-options="wochentag for wochentag in wochentage" required class="tiny dropdown"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-4 columns">
+                        <label for="termin.wiederholung.woche_des_monats">Wiederholung</label>
+                        <select id="termin.wiederholung.woche_des_monats" data-ng-model="newWiederholung.woche_des_monats" data-ng-options="woche.id as woche.label for woche in woche_des_monats" class="tiny dropdown"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <div class="switch small">
+                            <span>Auch an Feiertagen</span>
+                            <input id="termin.wiederholung.auch_an_feiertagen" type="checkbox" data-ng-model="newWiederholung.auch_an_feiertagen" />
+                            <label for="termin.wiederholung.auch_an_feiertagen"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <div class="switch small">
+                            <span>Auch in den Ferien</span>
+                            <input id="termin.wiederholung.auch_in_den_ferien" type="checkbox" data-ng-model="newWiederholung.auch_in_den_ferien" />
+                            <label for="termin.wiederholung.auch_in_den_ferien"></label>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" data-ng-click="addWiederholung()" data-ng-disabled="!isWiederholungValid(newWiederholung)" class="tiny button">Wiederholung hinzufügen</button>
+            </fieldset>
+        </div>
+        <button type="button" data-ng-click="addTermin()" data-ng-disabled="!isTerminValid(newTermin)" class="small button">Termin hinzufügen</button>
+    </div>
+</fieldset>
