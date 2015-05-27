@@ -1,6 +1,6 @@
 Jugendstadtplan.Controllers.controller( 'LinksFormController', [ '$scope',
     function($scope) {
-        // Links
+
         // Links
         $scope.newLink = {};
         $scope.addLink = function() {
@@ -19,4 +19,5 @@ Jugendstadtplan.Controllers.controller( 'LinksFormController', [ '$scope',
             }
             return true;
         };
+
     }]);
