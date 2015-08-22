@@ -7,14 +7,15 @@ var sourcemaps = require('gulp-sourcemaps');
 
 var documentRoot = 'web';
 var jsSourceRoot = documentRoot + '/src';
-var jsDestination = documentRoot + '/js';
+var destinationDir = documentRoot + '/assets';
+var jsDestination = destinationDir + '/js';
 var scssSourceRoot = 'scss';
-var cssDestination = documentRoot + '/css';
+var cssDestination = destinationDir + '/css';
 
 var jsSources = [
     jsSourceRoot + '/**/*Module.js',
     jsSourceRoot + '/**/*!(Module).js',
-    jsSourceRoot + '/app.js',
+    jsSourceRoot + '/app.js'
 ];
 
 gulp.task('compile-javascripts', function() {

@@ -22,7 +22,7 @@
     <!--<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
 
     <link rel="stylesheet" type="text/css" href="/vendor/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
   </head>
   <body>
   <div class="logo-wrapper row">
@@ -148,9 +148,9 @@
     <script type="text/javascript" src="/vendor/textAngular/src/textAngular.js"></script>
     <script type="text/javascript" src="/vendor/textAngular/src/textAngularSetup.js"></script>
     <script type="text/javascript" src="/vendor/textAngular/src/textAngular-sanitize.js"></script>
-    <script type="text/javascript" src="/js/jugendstadtplan.js"></script>
+    <script type="text/javascript" src="/assets/js/jugendstadtplan.js"></script>
   <?php } else { ?>
-    <script type="text/javascript" src="/js/jugendstadtplan.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jugendstadtplan.min.js"></script>
   <?php } ?>
 
     <!-- it's stupid to have to load it here, but this is for the +1 button -->

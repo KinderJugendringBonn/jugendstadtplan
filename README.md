@@ -14,7 +14,7 @@ Für die Installation des Projektes sind eine Reihe von Befehlen notwendig.
     - `vagrant dns --start` - DNS-Resolver starten
 
 2. Um die virtuelle Maschine hochzufahren reicht ein `vagrant up`. Der erste Start wird recht lange dauern, da dann erst noch das Image gezogen werden muss. 
-Mit einem `vagrant ssh` kann man sich dann in die virtuelle Maschine per SSH einloggen. Die Arbeitskopie wird in das Standard-Webserver-Verzeichnis von Ubuntu gemountet `/var/www`.
+Mit einem `vagrant ssh` kann man sich dann in die virtuelle Maschine per SSH einloggen. Die Arbeitskopie wird in das Standard-Webserver-Verzeichnis von Ubuntu `/var/www` per RSYNC kopiert. Ein `gulp watch` führt man also innerhalb der virtuellen Maschine aus.
 
 3. Das Backend lässt sich einfach per `composer install` betriebsfertig machen. Der Befehl muss natürlich im Webserver-Verzeichnis ausgeführt werden.
 
