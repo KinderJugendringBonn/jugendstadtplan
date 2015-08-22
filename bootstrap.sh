@@ -4,6 +4,12 @@ sudo apt-get update
 sudo apt-get install -y ruby mercurial php5-intl
 gem install sass
 
+# NFS performance-boost
+sudo apt-get install cachefilesd
+sudo chmod 666 /etc/default/cachefilesd
+sudo echo "RUN=yes" >> /etc/default/cachefilesd
+sudo /etc/init.d/cachefilesd restart
+
 echo I am: $(whoami)
 
 echo "Following gems are installed:"
