@@ -32,6 +32,6 @@ sudo chown -R vagrant:vagrant /home/vagrant/.npm
 cd /var/www
 npm install
 bower install
-grunt -f build
+gulp
 
 sudo apache2ctl restart
