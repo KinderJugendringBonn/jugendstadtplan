@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 sudo apt-get update
-sudo apt-get install -y ruby mercurial php5-intl
-gem install sass
+sudo apt-get install -y mercurial php5-intl
 
 # NFS performance-boost
 sudo apt-get install cachefilesd
@@ -12,14 +11,11 @@ sudo /etc/init.d/cachefilesd restart
 
 echo I am: $(whoami)
 
-echo "Following gems are installed:"
-gem list
-
 sudo rm -fr /etc/apache2/sites-enabled/000-default.conf
 sudo ln -sf /var/www/conf/apache-vagrant.conf /etc/apache2/sites-enabled/010-jugendstadtplan.conf
 
 # Backend installieren
-cd /var/www 
+cd /var/www
 composer install
 php ./vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
 php app/console doctrine:database:create -qn
