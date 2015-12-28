@@ -21,3 +21,5 @@ npm-debug.log
 *.swp
 *.orig
 web/environment.php
+app/SymfonyRequirements.php
+app/check.php
