@@ -119,9 +119,6 @@
         </div>
     </div>
 
-  <?php
-  if ($environment == 'development') {
-  ?>
     <script type="text/javascript" src="/vendor/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="/vendor/jquery.cookie/jquery.cookie.js"></script>
     <script type="text/javascript" src="/vendor/jquery-placeholder/jquery.placeholder.js"></script>
@@ -140,6 +137,10 @@
     <script type="text/javascript" src="/vendor/textAngular/dist/textAngular-rangy.min.js"></script>
     <script type="text/javascript" src="/vendor/textAngular/dist/textAngular-sanitize.min.js"></script>
     <script type="text/javascript" src="/vendor/textAngular/dist/textAngular.min.js"></script>
+
+  <?php
+  if ($environment == 'development') {
+      ?>
     <script type="text/javascript" src="/assets/js/jugendstadtplan.js"></script>
   <?php } else { ?>
     <script type="text/javascript" src="/assets/js/jugendstadtplan.min.js"></script>
