@@ -13,7 +13,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
 
 });
 
-Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$location', 'Traeger', 'Kategorie', '$upload', function TraegerFormController( $scope, $location, Traeger, Kategorie, $upload ) {
+Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$location', 'Traeger', 'Kategorie', 'Upload', function TraegerFormController( $scope, $location, Traeger, Kategorie, Upload ) {
     $scope.kategorien = Kategorie.query();
     $scope.traeger = new Traeger();
     $scope.traegers = Traeger.query();
@@ -57,7 +57,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     // Bilder
     $scope.onFileSelect = function($files) {
         var doUpload = function(file) {
-            $upload.upload({
+            Upload.upload({
                 url: 'app_dev.php/img/upload', //upload.php script, node.js route, or servlet url
                 // method: 'POST' or 'PUT',
                 method: 'POST',

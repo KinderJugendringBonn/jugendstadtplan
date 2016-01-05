@@ -127,27 +127,19 @@
     <script type="text/javascript" src="/vendor/jquery-placeholder/jquery.placeholder.js"></script>
     <script type="text/javascript" src="/vendor/modernizr/modernizr.js"></script>
     <script type="text/javascript" src="/vendor/foundation/js/foundation.js"></script>
-    <script type="text/javascript" src="/vendor/rangy/rangy-core.js"></script>
-    <script type="text/javascript" src="/vendor/rangy/rangy-classapplier.js"></script>
-    <script type="text/javascript" src="/vendor/rangy/rangy-highlighter.js"></script>
-    <script type="text/javascript" src="/vendor/rangy/rangy-selectionsaverestore.js"></script>
-    <script type="text/javascript" src="/vendor/rangy/rangy-serializer.js"></script>
-    <script type="text/javascript" src="/vendor/rangy/rangy-textrange.js"></script>
     <script type="text/javascript" src="/vendor/leaflet/dist/leaflet-src.js"></script>
     <script type="text/javascript" src="/vendor/angular/angular.js"></script>
     <script type="text/javascript" src="/vendor/angular-foundation/mm-foundation.js"></script>
     <script type="text/javascript" src="/vendor/angular-foundation/mm-foundation-tpls.js"></script>
     <script type="text/javascript" src="/vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
     <script type="text/javascript" src="/vendor/angular-resource/angular-resource.js"></script>
-    <script type="text/javascript" src="/vendor/angular-sanitize/angular-sanitize.js"></script>
     <script type="text/javascript" src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
-    <script type="text/javascript" src="/vendor/angular-ui-utils/ui-utils.js"></script>
-    <script type="text/javascript" src="/vendor/ng-file-upload/angular-file-upload-shim.js"></script>
-    <script type="text/javascript" src="/vendor/ng-file-upload/angular-file-upload-html5-shim.js"></script>
-    <script type="text/javascript" src="/vendor/ng-file-upload/angular-file-upload.js"></script>
-    <script type="text/javascript" src="/vendor/textAngular/src/textAngular.js"></script>
-    <script type="text/javascript" src="/vendor/textAngular/src/textAngularSetup.js"></script>
-    <script type="text/javascript" src="/vendor/textAngular/src/textAngular-sanitize.js"></script>
+    <script type="text/javascript" src="/vendor/angular-ui-utils/index.js"></script>
+    <script type="text/javascript" src="/vendor/ng-file-upload/ng-file-upload-shim.js"></script>
+    <script type="text/javascript" src="/vendor/ng-file-upload/ng-file-upload.js"></script>
+    <script type="text/javascript" src="/vendor/textAngular/dist/textAngular-rangy.min.js"></script>
+    <script type="text/javascript" src="/vendor/textAngular/dist/textAngular-sanitize.min.js"></script>
+    <script type="text/javascript" src="/vendor/textAngular/dist/textAngular.min.js"></script>
     <script type="text/javascript" src="/assets/js/jugendstadtplan.js"></script>
   <?php } else { ?>
     <script type="text/javascript" src="/assets/js/jugendstadtplan.min.js"></script>
