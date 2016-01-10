@@ -1,5 +1,3 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
-    RewriteRule ^backend/(.*)$ /app_dev.php/$1 [P]
 </IfModule>
