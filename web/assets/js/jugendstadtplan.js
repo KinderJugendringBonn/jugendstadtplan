@@ -1,11 +1,11 @@
-angular.module( 'jugendstadtplan.ansprechpartner', [
-]);
 angular.module( 'jugendstadtplan.pins', [
-  'ui.router', 'jugendstadtplan.adresse', 'jugendstadtplan.ansprechpartner', 'jugendstadtplan.links', 'jugendstadtplan.termin'
+  'ui.router', 'jugendstadtplan.links', 'jugendstadtplan.ansprechpartner', 'jugendstadtplan.termin'
+]);
+angular.module( 'jugendstadtplan.links', [
 ]);
 angular.module( 'jugendstadtplan.adresse', [
 ]);
-angular.module( 'jugendstadtplan.links', [
+angular.module( 'jugendstadtplan.ansprechpartner', [
 ]);
 angular.module( 'jugendstadtplan.startseite', [
   'ui.router',
@@ -14,7 +14,7 @@ angular.module( 'jugendstadtplan.startseite', [
 angular.module( 'jugendstadtplan.termin', [
 ]);
 angular.module( 'jugendstadtplan.traeger', [
-  'ui.router', 'jugendstadtplan.adresse', 'jugendstadtplan.ansprechpartner', 'jugendstadtplan.links'
+  'ui.router', 'jugendstadtplan.links', 'jugendstadtplan.ansprechpartner'
 ]);
 var Jugendstadtplan = Jugendstadtplan || {};
 Jugendstadtplan.Controllers = angular.module('jugendstadtplan.controllers', []);
@@ -25,7 +25,7 @@ angular.module( 'jugendstadtplan', [
   'ui.router',
   'leaflet-directive',
   'textAngular',
-  'angularFileUpload',
+  'ngFileUpload',
   'jugendstadtplan.api',
   'jugendstadtplan.startseite',
   'jugendstadtplan.pins',
@@ -49,29 +49,86 @@ angular.module( 'jugendstadtplan', [
 }])
 
 ;
-Jugendstadtplan.Controllers.controller( 'AnsprechpartnerFormController', [ '$scope',
-    function($scope) {
+angular.module( 'plusOne', [] )
 
-        // Ansprechpartner
-        $scope.newAnsprechpartner = {};
-        $scope.addAnsprechpartner = function() {
-            if ($scope.model.ansprechpartner === undefined) {
-                $scope.model.ansprechpartner = [];
+.directive( 'plusOne', function() {
+  return {
+    link: function( scope, element, attrs ) {
+      gapi.plusone.render( element[0], {
+        "size": "medium",
+        "href": "http://bit.ly/ngBoilerplate"
+      });
+    }
+  };
+})
+
+;
+
+
+var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
+
+var backendPrefix = '/app_dev.php';
+
+jugendstadtplanApi.provider('Pin', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/pins';
+        return $resource(backendUrl, {}, {
+            get: {
+                method: 'GET',
+                url: backendUrl + '/:id',
+                params: { id:'@id'}
+            },
+            update: {
+                method: 'PUT',
+                url: backendUrl + '/update/:id',
+                params: { id:'@id'}
+            },
+            save: {
+                method: 'POST',
+                url: backendUrl + '/create'
+            },
+            delete: {
+                method: 'DELETE',
+                url: backendUrl + '/delete/:id',
+                params: { id:'@id'}
             }
-            $scope.model.ansprechpartner.push($scope.newAnsprechpartner);
-            $scope.newAnsprechpartner = {};
-        };
+        });
+    }];
+});
 
-        $scope.isAnsprechpartnerValid = function(ansprechpartner) {
-            if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
-                return false;
-            } else if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
-                return false;
+jugendstadtplanApi.provider('Traeger', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/traeger';
+        return $resource(backendUrl, {}, {
+            get: {
+                method: 'GET',
+                url: backendUrl + '/:id',
+                params: { id:'@id'}
+            },
+            update: {
+                method: 'PUT',
+                url: backendUrl + '/update/:id',
+                params: { id:'@id'}
+            },
+            save: {
+                method: 'POST',
+                url: backendUrl + '/create'
+            },
+            delete: {
+                method: 'DELETE',
+                url: backendUrl + '/delete/:id',
+                params: { id:'@id'}
             }
-            return true;
-        };
+        });
+    }];
+});
 
-    }]);
+jugendstadtplanApi.provider('Kategorie', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/kategorie';
+        return $resource(backendUrl);
+    }];
+});
 angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) {
   
   $stateProvider.state( 'Detail: Pin', {
@@ -255,11 +312,6 @@ Jugendstadtplan.Controllers.controller( 'PinsController', [ '$scope', '$location
     };
 
 }]);
-Jugendstadtplan.Controllers.controller( 'AdresseFormController', [ '$scope',
-    function($scope) {
-
-
-    }]);
 Jugendstadtplan.Controllers.controller( 'LinksFormController', [ '$scope',
     function($scope) {
 
@@ -277,6 +329,42 @@ Jugendstadtplan.Controllers.controller( 'LinksFormController', [ '$scope',
             if (link.titel === undefined || link.titel.length === 0) {
                 return false;
             } else if (link.url === undefined || link.url.length === 0) {
+                return false;
+            }
+            return true;
+        };
+
+    }]);
+Jugendstadtplan.Controllers.controller( 'AdresseFormController', [ '$scope',
+    function($scope) {
+
+        $scope.isAdresseValid = function(adresse) {
+            if (adresse.strasse === undefined || adresse.strasse.length === 0) {
+                return false;
+            } else if (adresse.ort === undefined || adresse.ort.length === 0) {
+                return false;
+            }
+            return true;
+        };
+
+    }]);
+Jugendstadtplan.Controllers.controller( 'AnsprechpartnerFormController', [ '$scope',
+    function($scope) {
+
+        // Ansprechpartner
+        $scope.newAnsprechpartner = {};
+        $scope.addAnsprechpartner = function() {
+            if ($scope.model.ansprechpartner === undefined) {
+                $scope.model.ansprechpartner = [];
+            }
+            $scope.model.ansprechpartner.push($scope.newAnsprechpartner);
+            $scope.newAnsprechpartner = {};
+        };
+
+        $scope.isAnsprechpartnerValid = function(ansprechpartner) {
+            if (ansprechpartner.name === undefined || ansprechpartner.name.length === 0) {
+                return false;
+            } else if (ansprechpartner.email === undefined || ansprechpartner.email.length === 0) {
                 return false;
             }
             return true;
@@ -466,7 +554,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
 
 });
 
-Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$location', 'Traeger', 'Kategorie', '$upload', function TraegerFormController( $scope, $location, Traeger, Kategorie, $upload ) {
+Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$location', 'Traeger', 'Kategorie', 'Upload', function TraegerFormController( $scope, $location, Traeger, Kategorie, Upload ) {
     $scope.kategorien = Kategorie.query();
     $scope.traeger = new Traeger();
     $scope.traegers = Traeger.query();
@@ -510,7 +598,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     // Bilder
     $scope.onFileSelect = function($files) {
         var doUpload = function(file) {
-            $upload.upload({
+            Upload.upload({
                 url: 'app_dev.php/img/upload', //upload.php script, node.js route, or servlet url
                 // method: 'POST' or 'PUT',
                 method: 'POST',
@@ -567,83 +655,3 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     };
 
 }]);
-angular.module( 'plusOne', [] )
-
-.directive( 'plusOne', function() {
-  return {
-    link: function( scope, element, attrs ) {
-      gapi.plusone.render( element[0], {
-        "size": "medium",
-        "href": "http://bit.ly/ngBoilerplate"
-      });
-    }
-  };
-})
-
-;
-
-
-var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
-
-var backendPrefix = '/app_dev.php';
-
-jugendstadtplanApi.provider('Pin', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/pins';
-        return $resource(backendUrl, {}, {
-            get: {
-                method: 'GET',
-                url: backendUrl + '/:id',
-                params: { id:'@id'}
-            },
-            update: {
-                method: 'PUT',
-                url: backendUrl + '/update/:id',
-                params: { id:'@id'}
-            },
-            save: {
-                method: 'POST',
-                url: backendUrl + '/create'
-            },
-            delete: {
-                method: 'DELETE',
-                url: backendUrl + '/delete/:id',
-                params: { id:'@id'}
-            }
-        });
-    }];
-});
-
-jugendstadtplanApi.provider('Traeger', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/traeger';
-        return $resource(backendUrl, {}, {
-            get: {
-                method: 'GET',
-                url: backendUrl + '/:id',
-                params: { id:'@id'}
-            },
-            update: {
-                method: 'PUT',
-                url: backendUrl + '/update/:id',
-                params: { id:'@id'}
-            },
-            save: {
-                method: 'POST',
-                url: backendUrl + '/create'
-            },
-            delete: {
-                method: 'DELETE',
-                url: backendUrl + '/delete/:id',
-                params: { id:'@id'}
-            }
-        });
-    }];
-});
-
-jugendstadtplanApi.provider('Kategorie', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/kategorie';
-        return $resource(backendUrl);
-    }];
-});
