@@ -65,3 +65,13 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+nelmio_cors:
+    paths:
+        '^/':
+            origin_regex: true
+            allow_origin: ['^http://(www\.)?jugendstadtplan\.(dev|de)']
+            allow_headers: ['X-Custom-Auth', 'Content-Type']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS']
+            max_age: 3600
+            hosts: ['^api\.jugendstadtplan\.(dev|de)']

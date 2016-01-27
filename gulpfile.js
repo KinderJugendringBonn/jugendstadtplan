@@ -4,12 +4,13 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
+var templateCache = require('gulp-angular-templatecache');
 
-var documentRoot = 'web';
+var documentRoot = 'public';
 var jsSourceRoot = documentRoot + '/src';
-var destinationDir = documentRoot + '/assets';
+var destinationDir = documentRoot + '/www';
 var jsDestination = destinationDir + '/js';
-var scssSourceRoot = 'scss';
+var scssSourceRoot = documentRoot + 'scss';
 var cssDestination = destinationDir + '/css';
 
 var jsSources = [
@@ -26,6 +27,15 @@ gulp.task('compile-javascripts', function() {
             .pipe(rename({ suffix: '.min' }))
             .pipe(uglify())
         .pipe(sourcemaps.write())
+        .pipe(gulp.dest(jsDestination));
+});
+
+gulp.task('compile-angular-templates', function () {
+    return gulp.src(jsSourceRoot + '/**/*.tpl.html')
+        .pipe(templateCache({
+            module: 'jugendstadtplan.templates',
+            standalone: true
+        }))
         .pipe(gulp.dest(jsDestination));
 });
 
@@ -46,8 +56,8 @@ gulp.task('compile-scss', function() {
         .pipe(gulp.dest(cssDestination));
 });
 
-gulp.task('default', ['compile-javascripts', 'compile-scss']);
+gulp.task('default', ['compile-javascripts', 'compile-angular-templates', 'compile-scss']);
 
 gulp.task('watch', function() {
-    gulp.watch([jsSources, scssSources], ['compile-javascripts', 'compile-scss']);
+    gulp.watch([jsSources, scssSources], ['compile-javascripts', 'compile-angular-templates', 'compile-scss']);
 });

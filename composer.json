@@ -20,7 +20,8 @@
         "willdurand/hateoas": "~2.3",
         "dunglas/angular-csrf-bundle": "~0.1",
         "doctrine/migrations": "dev-master",
-        "doctrine/doctrine-migrations-bundle": "^1.0"
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "nelmio/cors-bundle": "^1.4"
 
     },
     "require-dev": {

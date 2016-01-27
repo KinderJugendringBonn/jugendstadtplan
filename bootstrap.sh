@@ -12,7 +12,8 @@ sudo /etc/init.d/cachefilesd restart
 echo I am: $(whoami)
 
 sudo rm -fr /etc/apache2/sites-enabled/000-default.conf
-sudo ln -sf /var/www/conf/apache-vagrant.conf /etc/apache2/sites-enabled/010-jugendstadtplan.conf
+sudo ln -sf /var/www/conf/vagrant/api.jugendstadtplan.dev.conf /etc/apache2/sites-enabled/010-api.jugendstadtplan.dev.conf
+sudo ln -sf /var/www/conf/vagrant/www.jugendstadtplan.dev.conf /etc/apache2/sites-enabled/010-www.jugendstadtplan.dev.conf
 
 # Backend installieren
 cd /var/www

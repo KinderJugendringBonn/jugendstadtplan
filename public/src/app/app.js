@@ -8,6 +8,7 @@ angular.module( 'jugendstadtplan', [
   'leaflet-directive',
   'textAngular',
   'ngFileUpload',
+  'jugendstadtplan.templates',
   'jugendstadtplan.api',
   'jugendstadtplan.startseite',
   'jugendstadtplan.pins',

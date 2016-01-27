@@ -1,6 +1,6 @@
 var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
 
-var backendPrefix = '/app_dev.php';
+var backendPrefix = 'http://api.jugendstadtplan.dev';
 
 jugendstadtplanApi.provider('Pin', function() {
     this.$get = ['$resource', function ($resource) {

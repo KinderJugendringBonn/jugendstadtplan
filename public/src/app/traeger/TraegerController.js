@@ -5,7 +5,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
     views: {
       "main": {
         controller: 'TraegerController',
-        templateUrl: 'src/app/traeger/views/liste.tpl.html'
+        templateUrl: 'app/traeger/views/liste.tpl.html'
       }
     },
     data:{ pageTitle: 'Träger' }

@@ -5,7 +5,7 @@ angular.module('jugendstadtplan.startseite').config(function config( $stateProvi
     views: {
       "main": {
         controller: 'StartseiteController',
-        templateUrl: 'src/app/startseite/views/startseite.tpl.html'
+        templateUrl: 'app/startseite/views/startseite.tpl.html'
       }
     },
     data:{ pageTitle: 'Startseite' }
@@ -13,7 +13,7 @@ angular.module('jugendstadtplan.startseite').config(function config( $stateProvi
 
 });
 
-angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', function StartseiteController( $scope, $location, Pin ) {
+angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', '$templateCache', function StartseiteController( $scope, $location, Pin, $templateCache ) {
      angular.extend($scope, {
         center: {
             lat: 50.732829246726,

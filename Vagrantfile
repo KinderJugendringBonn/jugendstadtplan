@@ -19,9 +19,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network "private_network", ip: "192.168.33.10"
   # Alles kopieren ausser web/assets
-  config.vm.synced_folder ".", "/var/www", :rsync => true, rsync__exclude: [".hg/" "web/assets/"]
+  config.vm.synced_folder ".", "/var/www", :rsync => true, rsync__exclude: [".hg/" "public/www/"]
   # web/assets per NFS mounten, damit die aenderungen ueber `gulp compile` auch wieder zurueck kommen.
-  config.vm.synced_folder "web/assets", "/var/www/web/assets", :nfs => true, mount_options: ['vers=3', 'tcp', 'fsc', 'actimeo=2']
+  config.vm.synced_folder "public/www", "/var/www/public/www", :nfs => true, mount_options: ['vers=3', 'tcp', 'fsc', 'actimeo=2']
 
 #config.vm.provider :virtualbox do |vb|
 #  vb.gui = true

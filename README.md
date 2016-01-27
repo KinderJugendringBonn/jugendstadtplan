@@ -49,9 +49,13 @@ Für die Entwicklung sind folgende Werkzeuge notwendig:
 
     gulp
     
-Ein einfacher Aufruf von `gulp` kompiliert SCSS- und JavaScript-Dateien. Die Kompilate werden im DocumentRoot (`web`) abgelegt. Zudem werden die Kompilate mit unter Versionskontrolle gestellt, da das den Installationsprozess auf dem Server vereinfacht.
+Ein einfacher Aufruf von `gulp` kompiliert SCSS- und JavaScript-Dateien. Die Kompilate werden im DocumentRoot (`public/www`) abgelegt. Zudem werden die Kompilate mit unter Versionskontrolle gestellt, da das den Installationsprozess auf dem Server vereinfacht.
 
-Um dauerhaft alle SCSS und JavaScript-Dateien zu überwachen und ggf. neu zu kompilieren reicht ein Aufruf von `gulp watch`. Unter Umständen funktioniert dieser Befehl nur auf der Host-Maschine, da in der Vagrant aufgrund der NFS-Einbindung keine Änderungen erkannt werden.
+Um dauerhaft alle SCSS und JavaScript-Dateien zu überwachen und ggf. neu zu kompilieren reicht ein Aufruf von `gulp watch`.
+
+Die `public/www/index.php` ist unser Einstiegspunkt in die Applikation.
+
+Das Backend wird über api.jugendstadtplan.dev angesprochen. Dieses ist ein Standard-Symfony; es lassen sich also über `app/console` diverse Befehle über die Symfony-Console ausführen.
 
 ### Troubleshooting
 
@@ -65,4 +69,4 @@ Vielleicht ist sie gar nicht an. Ein `sudo /etc/init.d/mysql restart` sollte hel
 
 ## Betrieb
 
-Das DocumentRoot muss das `web`-Verzeichnis sein. Dort darf keine `.htaccess`-Datei liegen, die - wie das normalerweise in Symfony2 üblich ist - alle Requests auf die `app.php` umbiegt. Die `index.php` ist unser Einstiegspunkt in die Applikation.
+Das DocumentRoot für [www.jugendstadtplan.de](http://www.jugendstadtplan.de) muss das `public/www`-Verzeichnis sein. Für [api.jugendstadtplan.de](http://api.jugendstadtplan.de) muss das `web`-Verzeichnis konfiguriert sein.
