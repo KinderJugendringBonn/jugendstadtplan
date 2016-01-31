@@ -9,8 +9,8 @@ use Kjrb\Bundle\JugendstadtplanBundle\Entity\Termin;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\TerminWiederholung;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Pin;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,14 +22,16 @@ use Symfony\Component\HttpFoundation\Response;
 class PinController extends BaseController {
 
     /**
-    * @Route()
-    */
+     * @Route()
+     * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
+     */
     public function indexAction() {
         return $this->sendJsonResponse($this->getPinRepository()->findAll());
     }
 
     /**
      * @Route("/create", name="api_pin_create")
+     * @Security("is_granted('FEATURE_PIN_CRUD')")
      *
      * @param Request $request
      * @return Response
@@ -49,6 +51,7 @@ class PinController extends BaseController {
 
     /**
      * @Route("/update/{id}", name="api_pin_update")
+     * @Security("is_granted('FEATURE_PIN_CRUD')")
      *
      * @ParamConverter("pin", class="KjrbJugendstadtplanBundle:Pin")
      * @return Response
@@ -188,6 +191,7 @@ class PinController extends BaseController {
 
     /**
      * @Route("/delete/{id}", name="api_pin_delete")
+     * @Security("is_granted('FEATURE_PIN_CRUD')")
      *
      * @ParamConverter("pin", class="KjrbJugendstadtplanBundle:Pin")
      * @return Response
@@ -203,6 +207,7 @@ class PinController extends BaseController {
     /**
      * @Route("/{id}")
      * @ParamConverter("pin", class="KjrbJugendstadtplanBundle:Pin")
+     * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
      *
      * @param Pin $pin
      * @return Response

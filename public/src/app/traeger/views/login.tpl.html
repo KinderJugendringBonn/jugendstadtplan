@@ -1,0 +1,18 @@
+<form data-ng-submit="login(traeger)" novalidate="novalidate">
+    <fieldset>
+        <legend>Login</legend>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="traeger.email">Email</label>
+                <input id="traeger.email" type="text" data-ng-model="traeger.email" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-8 columns">
+                <label for="traeger.password">Passwort</label>
+                <input id="traeger.password" type="password" data-ng-model="traeger.password" required />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Einloggen</button>
+    </fieldset>
+</form>

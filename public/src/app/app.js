@@ -9,6 +9,7 @@ angular.module( 'jugendstadtplan', [
   'textAngular',
   'ngFileUpload',
   'jugendstadtplan.templates',
+  'jugendstadtplan.login',
   'jugendstadtplan.api',
   'jugendstadtplan.startseite',
   'jugendstadtplan.pins',

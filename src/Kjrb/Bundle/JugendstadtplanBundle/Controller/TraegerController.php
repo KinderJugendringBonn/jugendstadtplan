@@ -10,7 +10,7 @@ use Kjrb\Bundle\JugendstadtplanBundle\Entity\Link;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -23,6 +23,7 @@ class TraegerController extends BaseController {
 
     /**
      * @Route()
+     * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -32,6 +33,7 @@ class TraegerController extends BaseController {
 
     /**
      * @Route("/create", name="api_traeger_create")
+     * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -64,6 +66,7 @@ class TraegerController extends BaseController {
 
     /**
      * @Route("/update/{id}", name="api_traeger_update")
+     * @Security("is_granted('FEATURE_TRAEGER_CRUD')")
      *
      * @ParamConverter("traeger", class="KjrbJugendstadtplanBundle:Traeger")
      * @return Response
@@ -83,13 +86,21 @@ class TraegerController extends BaseController {
         $data = json_decode($rawData);
 
         if ($traeger === null) {
-            $traeger = new Traeger($data->email, $data->passwort);
+            $traeger = new Traeger($data->email);
+
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($traeger, $data->passwort);
+
+            $traeger->setPassword($encoded);
         } else {
             if (isset($data->email)) {
                 $traeger->setEmail($data->email);
             }
             if (isset($data->passwort)) {
-                $traeger->setPassword($data->passwort);
+                $encoder = $this->container->get('security.password_encoder');
+                $encoded = $encoder->encodePassword($traeger, $data->passwort);
+
+                $traeger->setPassword($encoded);
             }
         }
 
@@ -114,6 +125,7 @@ class TraegerController extends BaseController {
 
         // Kategorie
         if (isset($data->kategorie)) {
+            /** @var Kategorie $kategorie */
             $kategorie = $this->getKategorieRepository()->find($data->kategorie);
             $traeger->setKategorie($kategorie);
         }
@@ -163,6 +175,7 @@ class TraegerController extends BaseController {
 
     /**
      * @Route("/delete/{id}", name="api_traeger_delete")
+     * @Security("is_granted('FEATURE_TRAEGER_CRUD')")
      *
      * @ParamConverter("traeger", class="KjrbJugendstadtplanBundle:Traeger")
      * @return Response
@@ -178,6 +191,7 @@ class TraegerController extends BaseController {
     /**
      * @Route("/{id}", name="api_traeger_detail")
      * @ParamConverter("traeger", class="KjrbJugendstadtplanBundle:Traeger")
+     * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
      *
      * @param Traeger $traeger
      * @return \Symfony\Component\HttpFoundation\Response

@@ -2,23 +2,52 @@
 # http://symfony.com/doc/current/book/security.html
 security:
 
+    role_hierarchy:
+        ROLE_TRAEGER:
+            - FEATURE_TRAEGER_CRUD
+            - FEATURE_PIN_CRUD
+            - FEATURE_KATEGORIE_CRUD
+            - FEATURE_BILDER_CRUD
+
+    encoders:
+        Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger: bcrypt
+
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        traeger_user_provider:
+            entity:
+                class: KjrbJugendstadtplanBundle:Traeger
+                property: email
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern:  ^/authentication/traeger
+            stateless: true
+            anonymous: true
+            gfreeau_get_jwt:
+                authentication_provider: security.authentication.provider.dao
+                user_checker: security.user_checker
+                post_only: true
+                username_parameter: email
+                password_parameter: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
         main:
-            anonymous: ~
-            # activate different ways to authenticate
+            pattern:   .*
+            stateless: true
+            anonymous: true
+            lexik_jwt:
+                authorization_header:
+                    enabled: true
+                    prefix:  Bearer
+                query_parameter:
+                    enabled: true
+                    name:    bearer
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    access_control:
+        - { path: ^/authentication/traeger, roles: IS_AUTHENTICATED_ANONYMOUSLY }

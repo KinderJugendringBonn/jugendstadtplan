@@ -1,3 +1,6 @@
 jugendstadtplan:
     resource: "@KjrbJugendstadtplanBundle/Controller"
-    type:     annotation
+    type: annotation
+
+api_login_check:
+    path: /authentication/traeger_check

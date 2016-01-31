@@ -14,6 +14,7 @@ var scssSourceRoot = documentRoot + 'scss';
 var cssDestination = destinationDir + '/css';
 
 var jsSources = [
+    jsSourceRoot + '/**/*Service.js',
     jsSourceRoot + '/**/*Module.js',
     jsSourceRoot + '/**/*!(Module).js',
     jsSourceRoot + '/app.js'

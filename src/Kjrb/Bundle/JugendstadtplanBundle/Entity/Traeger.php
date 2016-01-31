@@ -4,12 +4,14 @@ namespace Kjrb\Bundle\JugendstadtplanBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
- * @ORM\Table()
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_TRAEGER_EMAIL", columns={"email"})})
  * @ORM\Entity(repositoryClass="Kjrb\Bundle\JugendstadtplanBundle\Entity\TraegerRepository")
  */
-class Traeger {
+class Traeger implements AdvancedUserInterface, \Serializable
+{
 
     /**
      * @var integer $id
@@ -23,18 +25,21 @@ class Traeger {
     /**
      * @var string $email
      *
-     * @ORM\Column()
+     * @ORM\Column(unique=true)
      */
     private $email;
 
     /**
-     * @var string hash
+     * @var string password
      *
      * @ORM\Column()
      */
-    private $hash;
+    private $password;
 
-    private $pepper = 'lkneeee# nn';
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
 
     /**
      * @var string $titel
@@ -92,9 +97,9 @@ class Traeger {
      */
     private $bilder;
 
-    public function __construct($email, $password) {
+    public function __construct($email) {
         $this->email = $email;
-        $this->hash = $this->getPasswordHash($password);
+        $this->isActive = true;
         $this->pins = new ArrayCollection();
         $this->adressen = new ArrayCollection();
         $this->ansprechpartner = new ArrayCollection();
@@ -126,15 +131,15 @@ class Traeger {
     /**
      * @return string
      */
-    public function getHash() {
-        return $this->hash;
+    public function getPassword() {
+        return $this->password;
     }
 
     /**
-     * @param string $hash
+     * @param string $password
      */
-    public function setHash($hash) {
-        $this->hash = $hash;
+    public function setPassword($password) {
+        $this->password = $password;
     }
 
     /**
@@ -277,25 +282,6 @@ class Traeger {
         return $this->pins;
     }
 
-    public function setPassword($password) {
-        $this->setHash($this->getPasswordHash($password));
-    }
-
-    public function isValidPassword($password) {
-        return $this->getPasswordHash($password) == $this->hash;
-    }
-
-    private function getPasswordHash($password) {
-        // @see http://php.net/crypt zur Erläuterung des Blowfish-spezifischen $cryptSalt
-        $blowFishSignal = '$2a$';
-        $blowFishCostParameter = 10;
-        $salt = substr(uniqid() . uniqid(), 0, 22); // Salz via Zufallsgenerator; Länge auf 22 Zeichen begrenzt, da Blowfish nicht mehr verwendet
-        $cryptSalt = $blowFishSignal . $blowFishCostParameter . '$' . $salt;
-        $encrypted = crypt($password . $this->pepper, $cryptSalt);
-
-        return $encrypted;
-    }
-
     /**
      * @return Bild[]
      */
@@ -318,6 +304,70 @@ class Traeger {
             $this->bilder->set($id, $bild);
         }
         $bild->setTraeger($this);
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->isActive
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->isActive
+            ) = unserialize($serialized);
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_TRAEGER');
+    }
+
+    /**
+     * No salt needed, when using bcrypt. @see https://github.com/symfony/symfony-docs/blob/2.8/cookbook/security/entity_provider.rst#creating-your-first-user
+     *
+     * @return null
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
     }
 
 }

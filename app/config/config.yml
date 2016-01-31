@@ -27,7 +27,8 @@ framework:
     trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
+        #handler_id:  ~
+        save_path: %kernel.root_dir%/var/sessions
     fragments:       ~
     http_method_override: true
 
@@ -66,12 +67,19 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+lexik_jwt_authentication:
+    private_key_path: %jwt_private_key_path%
+    public_key_path:  %jwt_public_key_path%
+    pass_phrase:      %jwt_key_pass_phrase%
+    token_ttl:        %jwt_token_ttl%
+
 nelmio_cors:
     paths:
         '^/':
-            origin_regex: true
-            allow_origin: ['^http://(www\.)?jugendstadtplan\.(dev|de)']
-            allow_headers: ['X-Custom-Auth', 'Content-Type']
+            allow_credentials: true
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS']
             max_age: 3600
-            hosts: ['^api\.jugendstadtplan\.(dev|de)']
+            hosts: ['^api\.jugendstadtplan(-bonn)?\.(dev|de)']
+            origin_regex: true
+            allow_origin: ['^http://(www\.)?jugendstadtplan(-bonn)?\.(dev|de)']
+            allow_headers: ['X-Custom-Auth', 'Content-Type', 'Origin', 'Authorization', 'Accept', 'Client-Security-Token', 'Accept-Encoding']

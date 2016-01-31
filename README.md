@@ -43,6 +43,17 @@ Mit einem `vagrant ssh` kann man sich dann in die virtuelle Maschine per SSH ein
 
 Jetzt kann man im Browser einfach [www.jugendstadtplan.dev](http://www.jugendstadtplan.dev) aufrufen, und die Webseite erscheint.
 
+6. Für die Authentifizierung muss ein Schlüssel generiert werden, da mit diesem das Javascript Web Token (JWT) signiert wird.
+Dazu muss man einfach folgende Befehle in der Shell eingeben: 
+
+        openssl genrsa -out app/var/jwt/private.pem -aes256 4096
+        openssl rsa -pubout -in app/var/jwt/private.pem -out app/var/jwt/public.pem
+
+Die Passphrase muss dann noch in der Konfiguration (app/config/parameters.yml) gespeichert werden.
+
+Für mehr Informationen siehe [hier](https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md).
+
+
 ## Entwicklung
 
 Für die Entwicklung sind folgende Werkzeuge notwendig:
@@ -61,7 +72,7 @@ Das Backend wird über api.jugendstadtplan.dev angesprochen. Dieses ist ein Stan
 
 #### Die Seite ist nicht erreichbar
 
-Es kann sein, dass der Webserver nicht automatisch gestartet wird. Dann reich ein einfaches `sudo apache2ctl restart` um ihn zu (neuzu-) starten.
+Es kann sein, dass der Webserver nicht automatisch gestartet wird. Dann reich ein einfaches `sudo apache2ctl restart` um ihn zu (neuzu-) starten. Falls das nicht hilft, muss evtl. ausserhalb der Virtuellen Maschine das DNS-Plugin neu gestartet werden `vagrant dns -r`.
 
 #### Die Datenbank ist nicht erreichbar
 

@@ -4,6 +4,7 @@ namespace Kjrb\Bundle\JugendstadtplanBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,6 +19,7 @@ class BilderController extends BaseController {
     /**
      * @Route("/upload", name="api_bild_upload")
      * @Method("POST")
+     * @Security("is_granted('FEATURE_BILDER_CRUD')")
      *
      * @return Response
      */
