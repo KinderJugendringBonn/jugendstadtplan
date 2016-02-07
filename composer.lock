@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f0e8838d1d8ff502444da50af3c20bd",
-    "content-hash": "2a4fdbb9a862a28037f3ae06ffcab714",
+    "hash": "f29806d6ab04ea0b42e6c2037b5d2a00",
+    "content-hash": "020a8fbb8aa5d35ce682bbf05a1cbcfb",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -763,7 +763,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/360ad927e2593deca126379a330704605ad0eeac",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/cdb33e47c00630555e555c8ad81f9e700723e782",
                 "reference": "5f6043bfdb8d18141444123e18d5d93dd0c80711",
                 "shasum": ""
             },
