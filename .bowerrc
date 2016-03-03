@@ -1,5 +1,5 @@
 {
-  "directory": "www/doc_root/vendor",
+  "directory": "public/www/vendor",
   "json": "bower.json"
 }
 
