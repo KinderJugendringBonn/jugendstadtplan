@@ -1,4 +1,4 @@
-angular.module('jugendstadtplan.traeger', ['jugendstadtplan.login']).config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
 
     $stateProvider.state( 'Login: Traeger', {
         url: '/traeger/login',
