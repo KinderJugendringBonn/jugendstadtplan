@@ -196,7 +196,7 @@ class Traeger implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param Adresse[] $adressen
+     * @param Adresse $adresse
      */
     public function addAdresse(Adresse $adresse) {
         $id = $adresse->getId();
