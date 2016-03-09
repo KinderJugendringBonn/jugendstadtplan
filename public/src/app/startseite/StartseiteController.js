@@ -13,7 +13,7 @@ angular.module('jugendstadtplan.startseite').config(function config( $stateProvi
 
 });
 
-angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', '$templateCache', function StartseiteController( $scope, $location, Pin, $templateCache ) {
+angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', function StartseiteController( $scope, $location, Pin ) {
      angular.extend($scope, {
         center: {
             lat: 50.732829246726,
