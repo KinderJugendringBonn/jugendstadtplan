@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "de067cf22abb6ec34bde0684d18abf4b",
-    "content-hash": "ef4b09311d51eb30876cdf50b6a4b651",
+    "hash": "e9b57dfaefce34298a72078a0f7280bd",
+    "content-hash": "0d5799e0506e9aaa77e7c6c470ce5163",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3224,32 +3224,30 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.5.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d"
+                "reference": "74accbbb50bddf170eb6e51165d2b0b3b225de82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d0190b156bcca848d401fb80f31f504f37141c8d",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/74accbbb50bddf170eb6e51165d2b0b3b225de82",
+                "reference": "74accbbb50bddf170eb6e51165d2b0b3b225de82",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
+                "ext-intl": "*",
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "~1.5"
-            },
-            "suggest": {
-                "ext-intl": "*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -3272,7 +3270,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-05-29 06:29:14"
+            "time": "2016-03-09 08:49:09"
         },
         {
             "name": "hautelook/alice-bundle",
@@ -3525,7 +3523,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "doctrine/migrations": 20
+        "doctrine/migrations": 20,
+        "fzaninotto/faker": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
