@@ -179,7 +179,7 @@ class Ansprechpartner {
     /**
      * @param Pin $pin
      */
-    public function setPin(Pin $pin) {
+    public function setPin(Pin $pin = null) {
         $this->pin = $pin;
     }
 
@@ -193,7 +193,7 @@ class Ansprechpartner {
     /**
      * @param Traeger $traeger
      */
-    public function setTraeger(Traeger $traeger) {
+    public function setTraeger(Traeger $traeger = null) {
         $this->traeger = $traeger;
     }
 

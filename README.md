@@ -2,6 +2,8 @@
 
 Das Projekt ist eine Single-Page-App auf Basis von Angular im Frontend und Symfony2 im Backend.
 
+![](images/Screenshot.png)
+
 ## Installation
 
 Für die Installation des Projektes sind eine Reihe von Befehlen notwendig.
@@ -67,6 +69,12 @@ Um dauerhaft alle SCSS und JavaScript-Dateien zu überwachen und ggf. neu zu kom
 Die `public/www/index.php` ist unser Einstiegspunkt in die Applikation.
 
 Das Backend wird über api.jugendstadtplan.dev angesprochen. Dieses ist ein Standard-Symfony; es lassen sich also über `app/console` diverse Befehle über die Symfony-Console ausführen.
+
+### Testdaten
+
+Testdaten können über folgendes Kommando generiert werden:
+
+        php app/console hautelook_alice:doctrine:fixtures:load -n
 
 ### Troubleshooting
 

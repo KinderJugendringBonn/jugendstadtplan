@@ -1,0 +1,5 @@
+Kjrb\Bundle\JugendstadtplanBundle\Entity\Adresse:
+    adresse_{1..90}:
+        __construct: [<streetName()>,<city()>]
+        plz: 50%? <postcode()>
+        sichtbar: <boolean()>

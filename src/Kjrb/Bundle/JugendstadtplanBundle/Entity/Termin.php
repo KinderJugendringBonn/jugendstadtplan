@@ -92,7 +92,7 @@ class Termin {
     /**
      * @param \DateTime $ende
      */
-    public function setEnde(\DateTime $ende) {
+    public function setEnde(\DateTime $ende = null) {
         $this->ende = $ende;
     }
 

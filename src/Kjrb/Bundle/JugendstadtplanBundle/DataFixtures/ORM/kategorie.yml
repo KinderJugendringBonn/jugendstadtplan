@@ -1,0 +1,37 @@
+Kjrb\Bundle\JugendstadtplanBundle\Entity\Kategorie:
+    kategorie_sport:
+        __construct: ['Sport', 'sport']
+        sichtbar: <boolean(80)>
+    kategorie_event:
+        __construct: ['Grossveranstaltung', 'event']
+        sichtbar: <boolean(80)>
+    kategorie_kultur:
+        __construct: ['Kino, Kunst, Kultur', 'kultur']
+        sichtbar: <boolean(80)>
+    kategorie_party:
+        __construct: ['Party', 'party']
+        sichtbar: <boolean(80)>
+    kategorie_essen:
+        __construct: ['Essen & Trinken', 'essen']
+        sichtbar: <boolean(80)>
+    kategorie_spielplatz:
+        __construct: ['Spielplätze', 'spielplatz']
+        sichtbar: <boolean(80)>
+    kategorie_orte:
+        __construct: ['Orte & Plätze', 'orte']
+        sichtbar: <boolean(80)>
+    kategorie_bildung:
+        __construct: ['Bildung', 'bildung']
+        sichtbar: <boolean(80)>
+    kategorie_jugendtreffs:
+        __construct: ['Jugendtreffs', 'jugendtreffs']
+        sichtbar: <boolean(80)>
+    kategorie_jugendgruppen:
+        __construct: ['Jugendgruppen', 'jugendgruppen']
+        sichtbar: <boolean(80)>
+    kategorie_konzerte:
+        __construct: ['Konzerte', 'konzerte']
+        sichtbar: <boolean(80)>
+    kategorie_beratung:
+        __construct: ['Hilfe & Beratung', 'beratung']
+        sichtbar: <boolean(80)>

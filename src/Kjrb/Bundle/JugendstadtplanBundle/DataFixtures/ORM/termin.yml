@@ -1,0 +1,7 @@
+Kjrb\Bundle\JugendstadtplanBundle\Entity\Termin:
+    termin_{1..40}:
+        __construct:
+            - <dateTimeBetween('-3 month', '+3 month')>
+        ende: 50%? <dateTimeBetween('-1 month', '+4 month')>
+        ganztaegig: <boolean(30)>
+        wiederholungen: <randomElements(array(@terminWiederholung*))>
