@@ -68,6 +68,12 @@ Die `public/www/index.php` ist unser Einstiegspunkt in die Applikation.
 
 Das Backend wird über api.jugendstadtplan.dev angesprochen. Dieses ist ein Standard-Symfony; es lassen sich also über `app/console` diverse Befehle über die Symfony-Console ausführen.
 
+### Testdaten
+
+Testdaten können über folgendes Kommando generiert werden:
+
+        php app/console hautelook_alice:doctrine:fixtures:load -n
+
 ### Troubleshooting
 
 #### Die Seite ist nicht erreichbar
