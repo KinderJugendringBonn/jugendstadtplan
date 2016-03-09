@@ -1,0 +1,6 @@
+Kjrb\Bundle\JugendstadtplanBundle\Entity\TerminWiederholung:
+    terminWiederholung_{1..30}:
+        __construct: [<numberBetween(0, 6)>]
+        wocheDesMonats: <numberBetween(0, 5)>
+        auchAnFeiertagen: <boolean()>
+        auchInDenFerien: <boolean()>

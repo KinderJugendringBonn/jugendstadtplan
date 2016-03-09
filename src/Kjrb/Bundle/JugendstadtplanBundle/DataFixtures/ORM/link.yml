@@ -1,0 +1,7 @@
+Kjrb\Bundle\JugendstadtplanBundle\Entity\Link:
+    link_{1..50}:
+        __construct: [<word()>,<url()>]
+        pin: 40%? <randomElement(array(@pin*))>
+        traeger: 40%? <randomElement(array(@traeger*))>
+        # Pin und Traeger sind hier definiert, weil dies die
+        # owning side der Relation ist!

@@ -1,0 +1,14 @@
+Kjrb\Bundle\JugendstadtplanBundle\Entity\Pin:
+    pin_{1..200}:
+        titel: <words(4, true)>
+        kategorie: <randomElement(array(@kategorie*))>
+        beschreibung: 70%? <text()>
+        barrierefreiheit: <boolean()>
+        latitude: <latitude(50.8099, 50.5875)>
+        longitude: <longitude(6.996, 7.208)>
+        kostenArt: 40%? <randomElement(array('Kostenlos', 'Kostenpflichtig'))>
+        kostenBemerkung: 30%? <sentence()>
+        anmeldepflichtig: <boolean()>
+        anmeldepflichtBemerkung: 30%? <sentence()>
+        mindestalter: 30%? <numberBetween(6, 21)>
+        termine: 30%? <randomElements(array(@termin_*))>

@@ -1,0 +1,11 @@
+Kjrb\Bundle\JugendstadtplanBundle\Entity\Ansprechpartner:
+    ansprechpartner_{1..50}:
+        __construct: [<name()>,<email()>]
+        telefonnummer: 50%? <phoneNumber()>
+        mobilnummer: 50%? <phoneNumber()>
+        bemerkung: 30%? <sentence()>
+        pin: 70%? <randomElement(array(@pin*))>
+        traeger: 60%? <randomElement(array(@traeger*))>
+        sichtbar: <boolean()>
+        # Pin und Traeger sind hier definiert, weil dies die
+        # owning side der Relation ist!
