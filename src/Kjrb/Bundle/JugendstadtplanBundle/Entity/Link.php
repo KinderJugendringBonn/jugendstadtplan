@@ -110,7 +110,7 @@ class Link {
     /**
      * @param Pin $pin
      */
-    public function setPin(Pin $pin) {
+    public function setPin(Pin $pin = null) {
         $this->pin = $pin;
     }
 
@@ -124,7 +124,7 @@ class Link {
     /**
      * @param Traeger $traeger
      */
-    public function setTraeger(Traeger $traeger) {
+    public function setTraeger(Traeger $traeger = null) {
         $this->traeger = $traeger;
     }
 
