@@ -2,6 +2,8 @@
 
 Das Projekt ist eine Single-Page-App auf Basis von Angular im Frontend und Symfony2 im Backend.
 
+![](images/Screenshot.png)
+
 ## Installation
 
 Für die Installation des Projektes sind eine Reihe von Befehlen notwendig.
