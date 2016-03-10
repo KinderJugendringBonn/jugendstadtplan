@@ -1,3 +1,6 @@
 angular.module( 'jugendstadtplan.traeger', [
-  'ui.router', 'jugendstadtplan.links', 'jugendstadtplan.ansprechpartner', 'jugendstadtplan.login'
+  'ui.router',
+  'jugendstadtplan.links',
+  'jugendstadtplan.ansprechpartner',
+  'jugendstadtplan.login'
 ]);

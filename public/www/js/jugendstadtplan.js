@@ -20,14 +20,17 @@ angular.module( 'jugendstadtplan.links', [
 angular.module( 'jugendstadtplan.pins', [
   'ui.router', 'jugendstadtplan.links', 'jugendstadtplan.ansprechpartner', 'jugendstadtplan.termin'
 ]);
-angular.module( 'jugendstadtplan.traeger', [
-  'ui.router', 'jugendstadtplan.links', 'jugendstadtplan.ansprechpartner', 'jugendstadtplan.login'
-]);
 angular.module( 'jugendstadtplan.termin', [
 ]);
 angular.module( 'jugendstadtplan.startseite', [
   'ui.router',
   'leaflet-directive'
+]);
+angular.module( 'jugendstadtplan.traeger', [
+  'ui.router',
+  'jugendstadtplan.links',
+  'jugendstadtplan.ansprechpartner',
+  'jugendstadtplan.login'
 ]);
 var Jugendstadtplan = Jugendstadtplan || {};
 Jugendstadtplan.Controllers = angular.module('jugendstadtplan.controllers', []);
@@ -64,115 +67,6 @@ angular.module( 'jugendstadtplan', [
 }])
 
 ;
-angular.module( 'plusOne', [] )
-
-.directive( 'plusOne', function() {
-  return {
-    link: function( scope, element, attrs ) {
-      gapi.plusone.render( element[0], {
-        "size": "medium",
-        "href": "http://bit.ly/ngBoilerplate"
-      });
-    }
-  };
-})
-
-;
-
-
-var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
-
-function LoginInterceptor($window){
-    return {
-        request: function(config) {
-            if ($window.localStorage.token) {
-                config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
-            }
-
-            return config;
-        }
-    }
-}
-
-var backendPrefix = 'http://api.jugendstadtplan.dev';
-
-jugendstadtplanApi.provider('Pin', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/pins';
-        return $resource(backendUrl, {}, {
-            get: {
-                method: 'GET',
-                url: backendUrl + '/:id',
-                params: { id:'@id'}
-            },
-            update: {
-                method: 'PUT',
-                url: backendUrl + '/update/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
-            },
-            save: {
-                method: 'POST',
-                url: backendUrl + '/create',
-                interceptor: LoginInterceptor
-            },
-            delete: {
-                method: 'DELETE',
-                url: backendUrl + '/delete/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
-            }
-        });
-    }];
-});
-
-jugendstadtplanApi.provider('Traeger', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/traeger';
-        return $resource(backendUrl, {}, {
-            get: {
-                method: 'GET',
-                url: backendUrl + '/:id',
-                params: { id:'@id'}
-            },
-            update: {
-                method: 'PUT',
-                url: backendUrl + '/update/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
-            },
-            save: {
-                method: 'POST',
-                url: backendUrl + '/create'
-            },
-            delete: {
-                method: 'DELETE',
-                url: backendUrl + '/delete/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
-            },
-            login: {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                url: backendPrefix + '/authentication/traeger_check',
-                transformRequest: function (data, headersGetter) {
-                    // Transform JSON into regular form values
-                    var str = [];
-                    for (var d in data)
-                        str.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
-                    return str.join("&");
-                }
-            }
-        });
-    }];
-});
-
-jugendstadtplanApi.provider('Kategorie', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/kategorie';
-        return $resource(backendUrl);
-    }];
-});
 Jugendstadtplan.Controllers.controller( 'AnsprechpartnerFormController', [ '$scope',
     function($scope) {
 
@@ -402,6 +296,119 @@ Jugendstadtplan.Controllers.controller( 'PinsController', [ '$scope', '$location
     };
 
 }]);
+Jugendstadtplan.Controllers.controller( 'TerminFormController', [ '$scope',
+    function($scope) {
+
+        // Wochentage
+        $scope.wochentage = [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ];
+
+
+        // Termin
+        $scope.newTermin = {};
+        $scope.addTermin = function() {
+            if ($scope.pin.termine === undefined) {
+                $scope.pin.termine = [];
+            }
+            $scope.pin.termine.push($scope.newTermin);
+            $scope.newTermin = {};
+        };
+
+        $scope.isTerminValid = function(termin) {
+            if (termin.beginn === undefined || termin.beginn === 0) {
+                return false;
+            } else if (termin.ganztaegig !== true && (termin.beginn_uhrzeit === undefined || termin.beginn_uhrzeit === 0)) {
+                return false;
+            }
+            return true;
+        };
+
+
+        // Wiederholung
+        $scope.woche_des_monats = [
+            { id: 0, label: 'Jede Woche' },
+            { id: 1, label: 'Jede 1. Woche' },
+            { id: 2, label: 'Jede 2. Woche' },
+            { id: 3, label: 'Jede 3. Woche' },
+            { id: 4, label: 'Jede 4. Woche' },
+            { id: 5, label: 'Jede 5. Woche' }
+        ];
+        $scope.newWiederholung = {};
+        $scope.addWiederholung = function() {
+            if ($scope.newTermin.wiederholungen === undefined) {
+                $scope.newTermin.wiederholungen = [];
+            }
+            $scope.newTermin.wiederholungen.push($scope.newWiederholung);
+            $scope.newWiederholung = {};
+        };
+
+        $scope.isWiederholungValid = function(wiederholung) {
+            if (wiederholung.wochentag === undefined || wiederholung.wochentag === 0) {
+                return false;
+            }
+            return true;
+        };
+
+    }]);
+angular.module('jugendstadtplan.startseite').config(function config( $stateProvider ) {
+  
+  $stateProvider.state( 'Startseite', {
+    url: '/startseite',
+    views: {
+      "main": {
+        controller: 'StartseiteController',
+        templateUrl: 'app/startseite/views/startseite.tpl.html'
+      }
+    },
+    data:{ pageTitle: 'Startseite' }
+  });
+
+});
+
+angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', function StartseiteController( $scope, $location, Pin ) {
+     angular.extend($scope, {
+        center: {
+            lat: 50.732829246726,
+            lng: 7.0937004090117,
+            zoom: 13
+        },
+        defaults: {
+            scrollWheelZoom: false
+        }
+    });
+
+    $scope.markers = [];
+
+    Pin.query(function(pins) {
+        angular.forEach(pins, function(item) {
+            if (item.longitude != null) {
+                var marker = {
+                    lat: item.latitude,
+                    lng: item.longitude,
+                    title: item.titel,
+                    message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/pin/' + item.id + '">Mehr</a></small>'
+                };
+                $scope.markers.push(marker);
+            }
+        });
+    });
+
+}]);
+angular.module( 'plusOne', [] )
+
+.directive( 'plusOne', function() {
+  return {
+    link: function( scope, element, attrs ) {
+      gapi.plusone.render( element[0], {
+        "size": "medium",
+        "href": "http://bit.ly/ngBoilerplate"
+      });
+    }
+  };
+})
+
+;
+
+
 angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
   
   $stateProvider.state( 'Liste: Traeger', {
@@ -623,100 +630,96 @@ Jugendstadtplan.Controllers.controller( 'TraegerLoginController', [ '$scope', '$
     };
 }]);
 
-Jugendstadtplan.Controllers.controller( 'TerminFormController', [ '$scope',
-    function($scope) {
+var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
 
-        // Wochentage
-        $scope.wochentage = [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ];
-
-
-        // Termin
-        $scope.newTermin = {};
-        $scope.addTermin = function() {
-            if ($scope.pin.termine === undefined) {
-                $scope.pin.termine = [];
+function LoginInterceptor($window){
+    return {
+        request: function(config) {
+            if ($window.localStorage.token) {
+                config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
             }
-            $scope.pin.termine.push($scope.newTermin);
-            $scope.newTermin = {};
-        };
 
-        $scope.isTerminValid = function(termin) {
-            if (termin.beginn === undefined || termin.beginn === 0) {
-                return false;
-            } else if (termin.ganztaegig !== true && (termin.beginn_uhrzeit === undefined || termin.beginn_uhrzeit === 0)) {
-                return false;
-            }
-            return true;
-        };
-
-
-        // Wiederholung
-        $scope.woche_des_monats = [
-            { id: 0, label: 'Jede Woche' },
-            { id: 1, label: 'Jede 1. Woche' },
-            { id: 2, label: 'Jede 2. Woche' },
-            { id: 3, label: 'Jede 3. Woche' },
-            { id: 4, label: 'Jede 4. Woche' },
-            { id: 5, label: 'Jede 5. Woche' }
-        ];
-        $scope.newWiederholung = {};
-        $scope.addWiederholung = function() {
-            if ($scope.newTermin.wiederholungen === undefined) {
-                $scope.newTermin.wiederholungen = [];
-            }
-            $scope.newTermin.wiederholungen.push($scope.newWiederholung);
-            $scope.newWiederholung = {};
-        };
-
-        $scope.isWiederholungValid = function(wiederholung) {
-            if (wiederholung.wochentag === undefined || wiederholung.wochentag === 0) {
-                return false;
-            }
-            return true;
-        };
-
-    }]);
-angular.module('jugendstadtplan.startseite').config(function config( $stateProvider ) {
-  
-  $stateProvider.state( 'Startseite', {
-    url: '/startseite',
-    views: {
-      "main": {
-        controller: 'StartseiteController',
-        templateUrl: 'app/startseite/views/startseite.tpl.html'
-      }
-    },
-    data:{ pageTitle: 'Startseite' }
-  });
-
-});
-
-angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', function StartseiteController( $scope, $location, Pin ) {
-     angular.extend($scope, {
-        center: {
-            lat: 50.732829246726,
-            lng: 7.0937004090117,
-            zoom: 13
-        },
-        defaults: {
-            scrollWheelZoom: false
+            return config;
         }
-    });
+    }
+}
 
-    $scope.markers = [];
+var backendPrefix = 'http://api.jugendstadtplan.dev';
 
-    Pin.query(function(pins) {
-        angular.forEach(pins, function(item) {
-            if (item.longitude != null) {
-                var marker = {
-                    lat: item.latitude,
-                    lng: item.longitude,
-                    title: item.titel,
-                    message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/pin/' + item.id + '">Mehr</a></small>'
-                };
-                $scope.markers.push(marker);
+jugendstadtplanApi.provider('Pin', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/pins';
+        return $resource(backendUrl, {}, {
+            get: {
+                method: 'GET',
+                url: backendUrl + '/:id',
+                params: { id:'@id'}
+            },
+            update: {
+                method: 'PUT',
+                url: backendUrl + '/update/:id',
+                params: { id:'@id'},
+                interceptor: LoginInterceptor
+            },
+            save: {
+                method: 'POST',
+                url: backendUrl + '/create',
+                interceptor: LoginInterceptor
+            },
+            delete: {
+                method: 'DELETE',
+                url: backendUrl + '/delete/:id',
+                params: { id:'@id'},
+                interceptor: LoginInterceptor
             }
         });
-    });
+    }];
+});
 
-}]);
+jugendstadtplanApi.provider('Traeger', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/traeger';
+        return $resource(backendUrl, {}, {
+            get: {
+                method: 'GET',
+                url: backendUrl + '/:id',
+                params: { id:'@id'}
+            },
+            update: {
+                method: 'PUT',
+                url: backendUrl + '/update/:id',
+                params: { id:'@id'},
+                interceptor: LoginInterceptor
+            },
+            save: {
+                method: 'POST',
+                url: backendUrl + '/create'
+            },
+            delete: {
+                method: 'DELETE',
+                url: backendUrl + '/delete/:id',
+                params: { id:'@id'},
+                interceptor: LoginInterceptor
+            },
+            login: {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                url: backendPrefix + '/authentication/traeger_check',
+                transformRequest: function (data, headersGetter) {
+                    // Transform JSON into regular form values
+                    var str = [];
+                    for (var d in data)
+                        str.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
+                    return str.join("&");
+                }
+            }
+        });
+    }];
+});
+
+jugendstadtplanApi.provider('Kategorie', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/kategorie';
+        return $resource(backendUrl);
+    }];
+});
