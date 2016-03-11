@@ -1,4 +1,4 @@
-angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(['$stateProvider', function config( $stateProvider ) {
 
     $stateProvider.state( 'Form: Traeger', {
         url: '/traeger/create',
@@ -11,7 +11,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
         data:{ pageTitle: 'Träger erstellen' }
     });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$location', 'Traeger', 'Kategorie', 'Upload', function TraegerFormController( $scope, $location, Traeger, Kategorie, Upload ) {
     $scope.kategorien = Kategorie.query();

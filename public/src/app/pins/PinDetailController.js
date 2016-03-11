@@ -1,4 +1,4 @@
-angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.pins').config(['$stateProvider', function config( $stateProvider ) {
   
   $stateProvider.state( 'Detail: Pin', {
     url: '/pin/{id:[0-9]+}',
@@ -16,7 +16,7 @@ angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) 
     data:{ pageTitle: 'Pin' }
   });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'PinDetailController', [ '$scope', 'pinDetail', function PinDetailController( $scope, pinDetail ) {
     $scope.markers = [];

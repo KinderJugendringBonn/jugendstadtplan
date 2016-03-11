@@ -1,4 +1,4 @@
-angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(['$stateProvider', function config( $stateProvider ) {
 
     $stateProvider.state( 'Login: Traeger', {
         url: '/traeger/login',
@@ -11,7 +11,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
         data:{ pageTitle: 'Einloggen' }
     });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'TraegerLoginController', [ '$scope', '$state', '$window', 'LoginService', 'Traeger', function TraegerLoginController( $scope, $state, $window, LoginService, Traeger) {
 
