@@ -23,17 +23,17 @@ angular.module( 'jugendstadtplan.pins', [
 ]);
 angular.module( 'jugendstadtplan.links', [
 ]);
-angular.module( 'jugendstadtplan.startseite', [
-  'ui.router',
-  'leaflet-directive'
-]);
 angular.module( 'jugendstadtplan.termin', [
 ]);
 angular.module( 'jugendstadtplan.traeger', [
   'ui.router',
+  'jugendstadtplan.login',
   'jugendstadtplan.links',
-  'jugendstadtplan.ansprechpartner',
-  'jugendstadtplan.login'
+  'jugendstadtplan.ansprechpartner'
+]);
+angular.module( 'jugendstadtplan.startseite', [
+  'ui.router',
+  'leaflet-directive'
 ]);
 var Jugendstadtplan = Jugendstadtplan || {};
 Jugendstadtplan.Controllers = angular.module('jugendstadtplan.controllers', []);
@@ -54,9 +54,9 @@ angular.module( 'jugendstadtplan', [
   'jugendstadtplan.controllers'
 ])
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
+.config([ '$stateProvider', '$urlRouterProvider', function myAppConfig( $stateProvider, $urlRouterProvider ) {
   $urlRouterProvider.otherwise( '/startseite' );
-})
+}])
 
 .run( function run () {
 })
@@ -70,115 +70,6 @@ angular.module( 'jugendstadtplan', [
 }])
 
 ;
-angular.module( 'plusOne', [] )
-
-.directive( 'plusOne', function() {
-  return {
-    link: function( scope, element, attrs ) {
-      gapi.plusone.render( element[0], {
-        "size": "medium",
-        "href": "http://bit.ly/ngBoilerplate"
-      });
-    }
-  };
-})
-
-;
-
-
-var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
-
-function LoginInterceptor($window){
-    return {
-        request: function(config) {
-            if ($window.localStorage.token) {
-                config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
-            }
-
-            return config;
-        }
-    }
-}
-
-var backendPrefix = 'http://api.jugendstadtplan.dev';
-
-jugendstadtplanApi.provider('Pin', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/pins';
-        return $resource(backendUrl, {}, {
-            get: {
-                method: 'GET',
-                url: backendUrl + '/:id',
-                params: { id:'@id'}
-            },
-            update: {
-                method: 'PUT',
-                url: backendUrl + '/update/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
-            },
-            save: {
-                method: 'POST',
-                url: backendUrl + '/create',
-                interceptor: LoginInterceptor
-            },
-            delete: {
-                method: 'DELETE',
-                url: backendUrl + '/delete/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
-            }
-        });
-    }];
-});
-
-jugendstadtplanApi.provider('Traeger', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/traeger';
-        return $resource(backendUrl, {}, {
-            get: {
-                method: 'GET',
-                url: backendUrl + '/:id',
-                params: { id:'@id'}
-            },
-            update: {
-                method: 'PUT',
-                url: backendUrl + '/update/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
-            },
-            save: {
-                method: 'POST',
-                url: backendUrl + '/create'
-            },
-            delete: {
-                method: 'DELETE',
-                url: backendUrl + '/delete/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
-            },
-            login: {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                url: backendPrefix + '/authentication/traeger_check',
-                transformRequest: function (data, headersGetter) {
-                    // Transform JSON into regular form values
-                    var str = [];
-                    for (var d in data)
-                        str.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
-                    return str.join("&");
-                }
-            }
-        });
-    }];
-});
-
-jugendstadtplanApi.provider('Kategorie', function() {
-    this.$get = ['$resource', function ($resource) {
-        var backendUrl = backendPrefix + '/kategorie';
-        return $resource(backendUrl);
-    }];
-});
 Jugendstadtplan.Controllers.controller( 'AnsprechpartnerFormController', [ '$scope',
     function($scope) {
 
@@ -202,7 +93,7 @@ Jugendstadtplan.Controllers.controller( 'AnsprechpartnerFormController', [ '$sco
         };
 
     }]);
-angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.pins').config(['$stateProvider', function config( $stateProvider ) {
   
   $stateProvider.state( 'Detail: Pin', {
     url: '/pin/{id:[0-9]+}',
@@ -220,7 +111,7 @@ angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) 
     data:{ pageTitle: 'Pin' }
   });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'PinDetailController', [ '$scope', 'pinDetail', function PinDetailController( $scope, pinDetail ) {
     $scope.markers = [];
@@ -262,7 +153,7 @@ Jugendstadtplan.Controllers.controller( 'PinDetailController', [ '$scope', 'pinD
         }
     );
 }]);
-angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.pins').config(['$stateProvider', function config( $stateProvider ) {
 
     $stateProvider.state( 'Form: Pin', {
         url: '/pin/create',
@@ -275,7 +166,7 @@ angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) 
         data:{ pageTitle: 'Pin erstellen' }
     });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$location', 'Pin', 'Traeger', 'Kategorie', function PinFormController( $scope, $location, Pin, Traeger, Kategorie ) {
     $scope.kategorien = Kategorie.query();
@@ -362,7 +253,7 @@ Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$locat
 
 
 }]);
-angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.pins').config([ '$stateProvider', function config( $stateProvider ) {
   
   $stateProvider.state( 'Liste: Pin', {
     url: '/pins',
@@ -375,7 +266,7 @@ angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) 
     data:{ pageTitle: 'Pins' }
   });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'PinsController', [ '$scope', '$location', 'Pin', function PinsController( $scope, $location, Pin ) {
     $scope.pins = Pin.query();
@@ -408,50 +299,6 @@ Jugendstadtplan.Controllers.controller( 'LinksFormController', [ '$scope',
         };
 
     }]);
-angular.module('jugendstadtplan.startseite').config(function config( $stateProvider ) {
-  
-  $stateProvider.state( 'Startseite', {
-    url: '/startseite',
-    views: {
-      "main": {
-        controller: 'StartseiteController',
-        templateUrl: 'app/startseite/views/startseite.tpl.html'
-      }
-    },
-    data:{ pageTitle: 'Startseite' }
-  });
-
-});
-
-angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', function StartseiteController( $scope, $location, Pin ) {
-     angular.extend($scope, {
-        center: {
-            lat: 50.732829246726,
-            lng: 7.0937004090117,
-            zoom: 13
-        },
-        defaults: {
-            scrollWheelZoom: false
-        }
-    });
-
-    $scope.markers = [];
-
-    Pin.query(function(pins) {
-        angular.forEach(pins, function(item) {
-            if (item.longitude != null) {
-                var marker = {
-                    lat: item.latitude,
-                    lng: item.longitude,
-                    title: item.titel,
-                    message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/pin/' + item.id + '">Mehr</a></small>'
-                };
-                $scope.markers.push(marker);
-            }
-        });
-    });
-
-}]);
 Jugendstadtplan.Controllers.controller( 'TerminFormController', [ '$scope',
     function($scope) {
 
@@ -505,7 +352,7 @@ Jugendstadtplan.Controllers.controller( 'TerminFormController', [ '$scope',
         };
 
     }]);
-angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(['$stateProvider', function config( $stateProvider ) {
   
   $stateProvider.state( 'Liste: Traeger', {
     url: '/traeger',
@@ -518,7 +365,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
     data:{ pageTitle: 'Träger' }
   });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'TraegerController', [ '$scope', '$location', 'Traeger', function TraegerController( $scope, $location, Traeger ) {
     $scope.traeger = Traeger.query();
@@ -528,7 +375,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerController', [ '$scope', '$locat
     };
 
 }]);
-angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(['$stateProvider', function config( $stateProvider ) {
   
   $stateProvider.state( 'Detail: Traeger', {
     url: '/traeger/{id:[0-9]+}',
@@ -546,7 +393,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
     data:{ pageTitle: 'Träger' }
   });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'TraegerDetailController', [ '$scope', 'traegerDetail', function TraegerDetailController( $scope, traegerDetail ) {
     $scope.traeger = traegerDetail;
@@ -576,7 +423,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerDetailController', [ '$scope', '
         });
     });
 }]);
-angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(['$stateProvider', function config( $stateProvider ) {
 
     $stateProvider.state( 'Form: Traeger', {
         url: '/traeger/create',
@@ -589,7 +436,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
         data:{ pageTitle: 'Träger erstellen' }
     });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$location', 'Traeger', 'Kategorie', 'Upload', function TraegerFormController( $scope, $location, Traeger, Kategorie, Upload ) {
     $scope.kategorien = Kategorie.query();
@@ -692,7 +539,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerFormController', [ '$scope', '$l
     };
 
 }]);
-angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(['$stateProvider', function config( $stateProvider ) {
 
     $stateProvider.state( 'Login: Traeger', {
         url: '/traeger/login',
@@ -705,7 +552,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
         data:{ pageTitle: 'Einloggen' }
     });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'TraegerLoginController', [ '$scope', '$state', '$window', 'LoginService', 'Traeger', function TraegerLoginController( $scope, $state, $window, LoginService, Traeger) {
 
@@ -724,4 +571,158 @@ Jugendstadtplan.Controllers.controller( 'TraegerLoginController', [ '$scope', '$
                 }
             });
     };
+}]);
+
+var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
+
+function LoginInterceptor($window){
+    return {
+        request: function(config) {
+            if ($window.localStorage.token) {
+                config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
+            }
+
+            return config;
+        }
+    }
+}
+
+var backendPrefix = 'http://api.jugendstadtplan.dev';
+
+jugendstadtplanApi.provider('Pin', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/pins';
+        return $resource(backendUrl, {}, {
+            get: {
+                method: 'GET',
+                url: backendUrl + '/:id',
+                params: { id:'@id'}
+            },
+            update: {
+                method: 'PUT',
+                url: backendUrl + '/update/:id',
+                params: { id:'@id'},
+                interceptor: LoginInterceptor
+            },
+            save: {
+                method: 'POST',
+                url: backendUrl + '/create',
+                interceptor: LoginInterceptor
+            },
+            delete: {
+                method: 'DELETE',
+                url: backendUrl + '/delete/:id',
+                params: { id:'@id'},
+                interceptor: LoginInterceptor
+            }
+        });
+    }];
+});
+
+jugendstadtplanApi.provider('Traeger', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/traeger';
+        return $resource(backendUrl, {}, {
+            get: {
+                method: 'GET',
+                url: backendUrl + '/:id',
+                params: { id:'@id'}
+            },
+            update: {
+                method: 'PUT',
+                url: backendUrl + '/update/:id',
+                params: { id:'@id'},
+                interceptor: LoginInterceptor
+            },
+            save: {
+                method: 'POST',
+                url: backendUrl + '/create'
+            },
+            delete: {
+                method: 'DELETE',
+                url: backendUrl + '/delete/:id',
+                params: { id:'@id'},
+                interceptor: LoginInterceptor
+            },
+            login: {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                url: backendPrefix + '/authentication/traeger_check',
+                transformRequest: function (data, headersGetter) {
+                    // Transform JSON into regular form values
+                    var str = [];
+                    for (var d in data)
+                        str.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
+                    return str.join("&");
+                }
+            }
+        });
+    }];
+});
+
+jugendstadtplanApi.provider('Kategorie', function() {
+    this.$get = ['$resource', function ($resource) {
+        var backendUrl = backendPrefix + '/kategorie';
+        return $resource(backendUrl);
+    }];
+});
+angular.module( 'plusOne', [] )
+
+.directive( 'plusOne', function() {
+  return {
+    link: function( scope, element, attrs ) {
+      gapi.plusone.render( element[0], {
+        "size": "medium",
+        "href": "http://bit.ly/ngBoilerplate"
+      });
+    }
+  };
+})
+
+;
+
+
+angular.module('jugendstadtplan.startseite').config(['$stateProvider', function config( $stateProvider ) {
+  
+  $stateProvider.state( 'Startseite', {
+    url: '/startseite',
+    views: {
+      "main": {
+        controller: 'StartseiteController',
+        templateUrl: 'app/startseite/views/startseite.tpl.html'
+      }
+    },
+    data:{ pageTitle: 'Startseite' }
+  });
+
+}]);
+
+angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', function StartseiteController( $scope, $location, Pin ) {
+     angular.extend($scope, {
+        center: {
+            lat: 50.732829246726,
+            lng: 7.0937004090117,
+            zoom: 13
+        },
+        defaults: {
+            scrollWheelZoom: false
+        }
+    });
+
+    $scope.markers = [];
+
+    Pin.query(function(pins) {
+        angular.forEach(pins, function(item) {
+            if (item.longitude != null) {
+                var marker = {
+                    lat: item.latitude,
+                    lng: item.longitude,
+                    title: item.titel,
+                    message: '<h3>' + item.titel + '</h3>' + item.beschreibung + '<small><a href="' + '/#/pin/' + item.id + '">Mehr</a></small>'
+                };
+                $scope.markers.push(marker);
+            }
+        });
+    });
+
 }]);

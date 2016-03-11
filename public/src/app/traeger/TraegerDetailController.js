@@ -1,4 +1,4 @@
-angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(['$stateProvider', function config( $stateProvider ) {
   
   $stateProvider.state( 'Detail: Traeger', {
     url: '/traeger/{id:[0-9]+}',
@@ -16,7 +16,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
     data:{ pageTitle: 'Träger' }
   });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'TraegerDetailController', [ '$scope', 'traegerDetail', function TraegerDetailController( $scope, traegerDetail ) {
     $scope.traeger = traegerDetail;

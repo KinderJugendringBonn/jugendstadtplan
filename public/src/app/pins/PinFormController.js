@@ -1,4 +1,4 @@
-angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.pins').config(['$stateProvider', function config( $stateProvider ) {
 
     $stateProvider.state( 'Form: Pin', {
         url: '/pin/create',
@@ -11,7 +11,7 @@ angular.module('jugendstadtplan.pins').config(function config( $stateProvider ) 
         data:{ pageTitle: 'Pin erstellen' }
     });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$location', 'Pin', 'Traeger', 'Kategorie', function PinFormController( $scope, $location, Pin, Traeger, Kategorie ) {
     $scope.kategorien = Kategorie.query();

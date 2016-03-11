@@ -1,4 +1,4 @@
-angular.module('jugendstadtplan.traeger').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.traeger').config(['$stateProvider', function config( $stateProvider ) {
   
   $stateProvider.state( 'Liste: Traeger', {
     url: '/traeger',
@@ -11,7 +11,7 @@ angular.module('jugendstadtplan.traeger').config(function config( $stateProvider
     data:{ pageTitle: 'Träger' }
   });
 
-});
+}]);
 
 Jugendstadtplan.Controllers.controller( 'TraegerController', [ '$scope', '$location', 'Traeger', function TraegerController( $scope, $location, Traeger ) {
     $scope.traeger = Traeger.query();

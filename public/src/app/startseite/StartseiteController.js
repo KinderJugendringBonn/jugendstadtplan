@@ -1,4 +1,4 @@
-angular.module('jugendstadtplan.startseite').config(function config( $stateProvider ) {
+angular.module('jugendstadtplan.startseite').config(['$stateProvider', function config( $stateProvider ) {
   
   $stateProvider.state( 'Startseite', {
     url: '/startseite',
@@ -11,7 +11,7 @@ angular.module('jugendstadtplan.startseite').config(function config( $stateProvi
     data:{ pageTitle: 'Startseite' }
   });
 
-});
+}]);
 
 angular.module('jugendstadtplan.startseite').controller( 'StartseiteController', [ '$scope', '$location', 'Pin', function StartseiteController( $scope, $location, Pin ) {
      angular.extend($scope, {

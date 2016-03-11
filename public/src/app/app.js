@@ -17,9 +17,9 @@ angular.module( 'jugendstadtplan', [
   'jugendstadtplan.controllers'
 ])
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
+.config([ '$stateProvider', '$urlRouterProvider', function myAppConfig( $stateProvider, $urlRouterProvider ) {
   $urlRouterProvider.otherwise( '/startseite' );
-})
+}])
 
 .run( function run () {
 })
