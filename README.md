@@ -88,4 +88,4 @@ Vielleicht ist sie gar nicht an. Ein `sudo /etc/init.d/mysql restart` sollte hel
 
 ## Betrieb
 
-Das DocumentRoot für [www.jugendstadtplan.de](http://www.jugendstadtplan.de) muss das `public/www`-Verzeichnis sein. Für [api.jugendstadtplan.de](http://api.jugendstadtplan.de) muss das `web`-Verzeichnis konfiguriert sein.
+Das DocumentRoot für [www.jugendstadtplan-bonn.de](http://www.jugendstadtplan-bonn.de) muss das `public/www`-Verzeichnis sein. Für [api.jugendstadtplan-bonn.de](http://api.jugendstadtplan-bonn.de) muss das `web`-Verzeichnis konfiguriert sein.
