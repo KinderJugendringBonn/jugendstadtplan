@@ -15,6 +15,9 @@ sudo rm -fr /etc/apache2/sites-enabled/000-default.conf
 sudo ln -sf /var/www/conf/vagrant/api.jugendstadtplan.dev.conf /etc/apache2/sites-enabled/010-api.jugendstadtplan.dev.conf
 sudo ln -sf /var/www/conf/vagrant/www.jugendstadtplan.dev.conf /etc/apache2/sites-enabled/010-www.jugendstadtplan.dev.conf
 
+# PHP Einstellungen setzen
+sudo sh -c 'echo "always_populate_raw_post_data=-1" > /etc/php5/apache2/conf.d/raw_post_data.ini'
+
 # Backend installieren
 cd /var/www
 composer install
