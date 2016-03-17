@@ -42,7 +42,7 @@ class TraegerController extends BaseController {
 
         // TODO: Checks!
 
-        if (!$this->getTraegerRepository()->findByEmail($traeger->getEmail())) {
+        if ($traeger !== null && !$this->getTraegerRepository()->findByEmail($traeger->getEmail())) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($traeger);
             $em->flush();
@@ -85,13 +85,15 @@ class TraegerController extends BaseController {
         $rawData = file_get_contents("php://input");
         $data = json_decode($rawData);
 
-        if ($traeger === null) {
+        if ($traeger === null && isset($data->email)) {
             $traeger = new Traeger($data->email);
 
-            $encoder = $this->container->get('security.password_encoder');
-            $encoded = $encoder->encodePassword($traeger, $data->passwort);
+            if (isset($data->password)) {
+                $encoder = $this->container->get('security.password_encoder');
+                $encoded = $encoder->encodePassword($traeger, $data->passwort);
 
-            $traeger->setPassword($encoded);
+                $traeger->setPassword($encoded);
+            }
         } else {
             if (isset($data->email)) {
                 $traeger->setEmail($data->email);
@@ -151,7 +153,9 @@ class TraegerController extends BaseController {
             }
         }
 
-        $traeger->setTitel($data->titel);
+        if (isset($data->titel)) {
+            $traeger->setTitel($data->titel);
+        }
         if (isset($data->beschreibung)) {
             $traeger->setBeschreibung($data->beschreibung);
         }
