@@ -1,10 +1,12 @@
 Kjrb\Bundle\JugendstadtplanBundle\Entity\Traeger:
     traeger_{1..50}:
         __construct: [<email()>]
-        password: <password()>
+        password: $2y$10$7XNGO9EYXzLYreGmGZKbNuMRBVncxYAL7Xk6eEOA974aIeEDqHah.
         titel: <words(5, true)>
         isActive: <boolean()>
         beschreibung: 50%? <text()>
         kategorie: <randomElement(array(@kategorie*))>
         adressen: 80%? <randomElements(array(@adresse*))>
         pins: 90%? <randomElements(array(@pin*))>
+
+# The Password is "test" for all users!
