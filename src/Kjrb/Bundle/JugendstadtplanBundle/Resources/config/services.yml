@@ -1,0 +1,22 @@
+services:
+
+    kjrb.jugendstadtplan.pin_repository:
+        class: Kjrb\Bundle\JugendstadtplanBundle\Entity\PinRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - 'KjrbJugendstadtplanBundle:Pin'
+
+    kjrb.jugendstadtplan.traeger_repository:
+        class: Kjrb\Bundle\JugendstadtplanBundle\Entity\TraegerRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - 'KjrbJugendstadtplanBundle:Traeger'
+
+    kjrb.jugendstadtplan.kategorie_repository:
+        class: Kjrb\Bundle\JugendstadtplanBundle\Entity\KategorieRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - 'KjrbJugendstadtplanBundle:Kategorie'
