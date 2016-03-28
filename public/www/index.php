@@ -79,9 +79,9 @@
     <div class="row">
         <aside class="large-2 columns">
             <div class="sidebar">
-            <a href="#/traeger/create" class="button">Registrieren</a>
-            <a href="#/traeger/login" class="button">Einloggen</a>
-            <a href="#/pin/create" class="button success">Pin anlegen</a>
+                <a href="#/traeger/create" class="button">Registrieren</a>
+                <a href="#/traeger/login" class="button">Einloggen</a>
+                <a href="#/pin/create" class="button success">Pin anlegen</a>
             </div>
         </aside>
 
