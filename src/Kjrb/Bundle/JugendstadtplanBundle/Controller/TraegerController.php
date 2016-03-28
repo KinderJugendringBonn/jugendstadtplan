@@ -28,7 +28,7 @@ class TraegerController extends BaseController {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction() {
-        return $this->sendJsonResponse($this->getTraegerRepository()->findAll());
+        return $this->sendJsonResponse($this->getTraegerRepository()->findAllActivated());
     }
 
     /**
