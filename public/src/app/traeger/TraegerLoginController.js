@@ -20,7 +20,7 @@ Jugendstadtplan.Controllers.controller( 'TraegerLoginController', [ '$scope', '$
     $scope.login = function() {
         $scope.traeger.$login()
             .then(function(response) {
-                $window.localStorage.token = response.token;
+                $window.localStorage.jspToken = response.token;
 
                 var decoded = jwtHelper.decodeToken(response.token);
 
