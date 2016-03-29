@@ -1,6 +1,6 @@
 var jugendstadtplanLogin = angular.module('jugendstadtplan.login', []);
 
-jugendstadtplanLogin.service('LoginService', function() {
+jugendstadtplanLogin.service('LoginService', ['$window', function($window) {
     var authenticated = false;
     var traeger = null;
 
@@ -13,6 +13,12 @@ jugendstadtplanLogin.service('LoginService', function() {
             authenticated = loggedIn;
         },
 
+        logout: function() {
+            traeger = null;
+            authenticated = false;
+            $window.localStorage.removeItem('jspToken');
+        },
+
         setJugendstadtplanUser: function(user) {
             traeger = user;
         },
@@ -21,4 +27,4 @@ jugendstadtplanLogin.service('LoginService', function() {
             return traeger;
         }
     }
-});
+}]);

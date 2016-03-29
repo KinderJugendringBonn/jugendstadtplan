@@ -25,7 +25,7 @@ angular.module( 'jugendstadtplan', [
 .run( function run () {
 })
 
-.controller( 'AppCtrl', [ '$scope', 'LoginService', function AppCtrl($scope, LoginService){
+.controller( 'AppCtrl', [ '$scope', 'LoginService', '$state', function AppCtrl($scope, LoginService, $state){
 
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
@@ -39,6 +39,12 @@ angular.module( 'jugendstadtplan', [
   
   $scope.getJugendstadtplanUser = function() {
     return LoginService.getJugendstadtplanUser();
+  };
+
+  $scope.logout = function() {
+    LoginService.logout();
+
+    $state.go('Startseite');
   };
 
 }])

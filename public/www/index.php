@@ -82,6 +82,7 @@
                 <a href="#/traeger/create" class="button">Registrieren</a>
                 <a href="#/traeger/login" class="button">Einloggen</a>
                 <a href="#/pin/create" class="button success">Pin anlegen</a>
+                <button ng-show="isLoggedIn()" ng-click="logout()">Ausloggen</button>
                 <span ng-show="isLoggedIn()">Eingeloggt als: {{ getJugendstadtplanUser().titel }}</span>
             </div>
         </aside>
