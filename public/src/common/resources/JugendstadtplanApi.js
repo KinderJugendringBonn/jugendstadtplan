@@ -1,18 +1,20 @@
-var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource']);
+var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource', 'angular-jwt']);
 
-function LoginInterceptor($window){
-    return {
-        request: function(config) {
-            if ($window.localStorage.token) {
-                config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
-            }
+jugendstadtplanApi.config(['$httpProvider', 'jwtInterceptorProvider', function($httpProvider, jwtInterceptorProvider) {
 
-            return config;
+    jwtInterceptorProvider.tokenGetter = ['config', function(config) {
+        // Skip authentication for any requests ending in .html
+        if (config.url.substr(config.url.length - 5) == '.html') {
+            return null;
         }
-    }
-}
 
-var backendPrefix = 'http://api.jugendstadtplan.dev';
+        return localStorage.getItem('jspToken');
+    }];
+
+    $httpProvider.interceptors.push('jwtInterceptor');
+}]);
+
+var backendPrefix = 'http://api.jugendstadtplan.dev/app_dev.php';
 
 jugendstadtplanApi.provider('Pin', function() {
     this.$get = ['$resource', function ($resource) {
@@ -21,24 +23,22 @@ jugendstadtplanApi.provider('Pin', function() {
             get: {
                 method: 'GET',
                 url: backendUrl + '/:id',
-                params: { id:'@id'}
+                params: { id:'@id'},
+                skipAuthorization: true
             },
             update: {
                 method: 'PUT',
                 url: backendUrl + '/update/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
+                params: { id:'@id'}
             },
             save: {
                 method: 'POST',
-                url: backendUrl + '/create',
-                interceptor: LoginInterceptor
+                url: backendUrl + '/create'
             },
             delete: {
                 method: 'DELETE',
                 url: backendUrl + '/delete/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
+                params: { id:'@id'}
             }
         });
     }];
@@ -51,26 +51,27 @@ jugendstadtplanApi.provider('Traeger', function() {
             get: {
                 method: 'GET',
                 url: backendUrl + '/:id',
-                params: { id:'@id'}
+                params: { id:'@id'},
+                skipAuthorization: true
             },
             update: {
                 method: 'PUT',
                 url: backendUrl + '/update/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
+                params: { id:'@id'}
             },
             save: {
                 method: 'POST',
-                url: backendUrl + '/create'
+                url: backendUrl + '/create',
+                skipAuthorization: true
             },
             delete: {
                 method: 'DELETE',
                 url: backendUrl + '/delete/:id',
-                params: { id:'@id'},
-                interceptor: LoginInterceptor
+                params: { id:'@id'}
             },
             login: {
                 method: 'POST',
+                skipAuthorization: true,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 url: backendPrefix + '/authentication/traeger_check',
                 transformRequest: function (data, headersGetter) {
