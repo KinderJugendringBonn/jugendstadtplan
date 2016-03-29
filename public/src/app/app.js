@@ -8,7 +8,7 @@ angular.module( 'jugendstadtplan', [
   'leaflet-directive',
   'textAngular',
   'ngFileUpload',
-  'jwt-decode',
+  'angular-jwt',
   'jugendstadtplan.templates',
   'jugendstadtplan.login',
   'jugendstadtplan.api',

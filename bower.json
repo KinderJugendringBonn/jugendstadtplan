@@ -14,6 +14,6 @@
     "ng-file-upload": "^11.0",
     "angular-foundation": "^0.8",
     "foundation": "^5.5",
-    "angular-jwt-decode": "~1.0.1"
+    "angular-jwt": "~0.0.9"
   }
 }

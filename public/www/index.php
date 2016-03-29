@@ -127,9 +127,8 @@
     <script type="text/javascript" src="/vendor/modernizr/modernizr.js"></script>
     <script type="text/javascript" src="/vendor/foundation/js/foundation.js"></script>
     <script type="text/javascript" src="/vendor/leaflet/dist/leaflet-src.js"></script>
-    <script type="text/javascript" src="/vendor/jwt-decode/build/jwt-decode.min.js"></script>
     <script type="text/javascript" src="/vendor/angular/angular.js"></script>
-    <script type="text/javascript" src="/vendor/angular-jwt-decode/angular-jwt-decode.js"></script>
+    <script type="text/javascript" src="/vendor/angular-jwt/dist/angular-jwt.min.js"></script>
     <script type="text/javascript" src="/vendor/angular-foundation/mm-foundation.js"></script>
     <script type="text/javascript" src="/vendor/angular-foundation/mm-foundation-tpls.js"></script>
     <script type="text/javascript" src="/vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
