@@ -13,6 +13,7 @@
     "font-awesome": "^4.5",
     "ng-file-upload": "^11.0",
     "angular-foundation": "^0.8",
-    "foundation": "^5.5"
+    "foundation": "^5.5",
+    "angular-jwt-decode": "~1.0.1"
   }
 }
