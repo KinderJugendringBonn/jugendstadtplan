@@ -8,6 +8,7 @@ angular.module( 'jugendstadtplan', [
   'leaflet-directive',
   'textAngular',
   'ngFileUpload',
+  'jwt-decode',
   'jugendstadtplan.templates',
   'jugendstadtplan.login',
   'jugendstadtplan.api',
@@ -34,7 +35,11 @@ angular.module( 'jugendstadtplan', [
 
   $scope.isLoggedIn = function() {
     return LoginService.isLoggedIn();
-  }
+  };
+  
+  $scope.getJugendstadtplanUser = function() {
+    return LoginService.getJugendstadtplanUser();
+  };
 
 }])
 
