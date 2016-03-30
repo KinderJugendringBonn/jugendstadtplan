@@ -1,0 +1,30 @@
+services:
+
+    # Checks permissions for features
+    # (http://marc.weistroff.net/2012/01/09/simple-feature-flags-symfony2)
+    kjrb.jugendstadtplan.feature_voter:
+        class: "%security.access.role_hierarchy_voter.class%"
+        arguments:
+            - "@security.role_hierarchy"
+            - "FEATURE_"
+        public: false
+        tags:
+            - { name: security.voter }
+
+    kjrb.jugendstadtplan.pin_repository:
+        class: Kjrb\Bundle\JugendstadtplanBundle\Entity\PinRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - 'KjrbJugendstadtplanBundle:Pin'
+
+    kjrb.jugendstadtplan.traeger_repository:
+        class: Kjrb\Bundle\JugendstadtplanBundle\Entity\TraegerRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - 'KjrbJugendstadtplanBundle:Traeger'
+
+    kjrb.jugendstadtplan.kategorie_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - 'KjrbJugendstadtplanBundle:Kategorie'
