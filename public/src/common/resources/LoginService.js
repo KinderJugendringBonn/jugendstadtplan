@@ -9,11 +9,11 @@ jugendstadtplanLogin.service('LoginService', ['$window', 'jwtHelper', function($
     LoginService.getToken = function(){
         var token = $window.localStorage.getItem('jspToken');
         if (token !== undefined) {
-            return JSON.parse(token);
+            return token;
         }
     };
     LoginService.setToken = function(token) {
-        $window.localStorage.setItem('jspToken', JSON.stringify(token));
+        $window.localStorage.setItem('jspToken', token);
     };
 
     LoginService.isTokenExpired = function() {
