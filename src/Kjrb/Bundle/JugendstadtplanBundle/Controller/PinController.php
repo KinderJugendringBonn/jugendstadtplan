@@ -184,7 +184,9 @@ class PinController extends BaseController {
             }
         }
 
-        if (isset($data->traeger) && $traeger = $this->getTraegerRepository()->find($data->traeger)) {
+        $rawTraeger = $this->get('security.token_storage')->getToken()->getUser();
+
+        if ($traeger = $this->getTraegerRepository()->find($rawTraeger)) {
             $pin->setTraeger($traeger);
         }
     }
