@@ -33,6 +33,9 @@ angular.module( 'jugendstadtplan', [
     }
   });
 
+  // Reinitalize LoginService
+  LoginService.init();
+
   $scope.isLoggedIn = function() {
     return LoginService.isLoggedIn();
   };

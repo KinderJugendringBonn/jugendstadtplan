@@ -2,13 +2,13 @@ var jugendstadtplanApi = angular.module('jugendstadtplan.api', ['ngResource', 'a
 
 jugendstadtplanApi.config(['$httpProvider', 'jwtInterceptorProvider', function($httpProvider, jwtInterceptorProvider) {
 
-    jwtInterceptorProvider.tokenGetter = ['config', function(config) {
+    jwtInterceptorProvider.tokenGetter = ['config', 'LoginService', function(config, LoginService) {
         // Skip authentication for any requests ending in .html
         if (config.url.substr(config.url.length - 5) == '.html') {
             return null;
         }
 
-        return localStorage.getItem('jspToken');
+        return LoginService.getToken();
     }];
 
     $httpProvider.interceptors.push('jwtInterceptor');
