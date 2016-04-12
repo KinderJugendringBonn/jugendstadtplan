@@ -79,9 +79,11 @@
     <div class="row">
         <aside class="large-2 columns">
             <div class="sidebar">
-            <a href="#/traeger/create" class="button">Registrieren</a>
-            <a href="#/traeger/login" class="button">Einloggen</a>
-            <a href="#/pin/create" class="button success">Pin anlegen</a>
+                <a href="#/traeger/create" class="button">Registrieren</a>
+                <a href="#/traeger/login" class="button">Einloggen</a>
+                <a href="#/pin/create" class="button success">Pin anlegen</a>
+                <button ng-show="isLoggedIn()" ng-click="logout()">Ausloggen</button>
+                <span ng-show="isLoggedIn()">Eingeloggt als: {{ getJugendstadtplanUser().titel }}</span>
             </div>
         </aside>
 
@@ -127,6 +129,7 @@
     <script type="text/javascript" src="/vendor/foundation/js/foundation.js"></script>
     <script type="text/javascript" src="/vendor/leaflet/dist/leaflet-src.js"></script>
     <script type="text/javascript" src="/vendor/angular/angular.js"></script>
+    <script type="text/javascript" src="/vendor/angular-jwt/dist/angular-jwt.min.js"></script>
     <script type="text/javascript" src="/vendor/angular-foundation/mm-foundation.js"></script>
     <script type="text/javascript" src="/vendor/angular-foundation/mm-foundation-tpls.js"></script>
     <script type="text/javascript" src="/vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>

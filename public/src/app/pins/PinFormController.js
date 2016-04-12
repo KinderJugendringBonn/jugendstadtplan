@@ -13,11 +13,10 @@ angular.module('jugendstadtplan.pins').config(['$stateProvider', function config
 
 }]);
 
-Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$location', 'Pin', 'Traeger', 'Kategorie', function PinFormController( $scope, $location, Pin, Traeger, Kategorie ) {
+Jugendstadtplan.Controllers.controller( 'PinFormController', [ '$scope', '$location', 'Pin', 'Traeger', 'Kategorie', 'LoginService', function PinFormController( $scope, $location, Pin, Traeger, Kategorie, LoginService ) {
     $scope.kategorien = Kategorie.query();
     $scope.pin = new Pin();
     $scope.pins = Pin.query();
-    $scope.traegers = Traeger.query();
 
     angular.extend($scope, {
         center: {

@@ -28,3 +28,8 @@ services:
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments:
             - 'KjrbJugendstadtplanBundle:Kategorie'
+
+    kjrb.jugendstadtplan.event.jwt_created_listener:
+        class: Kjrb\Bundle\JugendstadtplanBundle\EventListener\JWTCreatedListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }

@@ -13,15 +13,14 @@ angular.module('jugendstadtplan.traeger').config(['$stateProvider', function con
 
 }]);
 
-Jugendstadtplan.Controllers.controller( 'TraegerLoginController', [ '$scope', '$state', '$window', 'LoginService', 'Traeger', function TraegerLoginController( $scope, $state, $window, LoginService, Traeger) {
+Jugendstadtplan.Controllers.controller( 'TraegerLoginController', [ '$scope', '$state', '$window', 'LoginService', 'jwtHelper', 'Traeger', function TraegerLoginController( $scope, $state, $window, LoginService, jwtHelper, Traeger) {
 
     $scope.traeger = new Traeger();
 
     $scope.login = function() {
         $scope.traeger.$login()
             .then(function(response) {
-                $window.localStorage.token = response.token;
-                LoginService.setLoggedIn(true);
+                LoginService.login(response.token);
 
                 $state.go('Startseite');
             }, function(error) {

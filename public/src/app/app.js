@@ -8,6 +8,7 @@ angular.module( 'jugendstadtplan', [
   'leaflet-directive',
   'textAngular',
   'ngFileUpload',
+  'angular-jwt',
   'jugendstadtplan.templates',
   'jugendstadtplan.login',
   'jugendstadtplan.api',
@@ -24,12 +25,31 @@ angular.module( 'jugendstadtplan', [
 .run( function run () {
 })
 
-.controller( 'AppCtrl', [ '$scope', '$location', function AppCtrl( $scope, $location ){
+.controller( 'AppCtrl', [ '$scope', 'LoginService', '$state', function AppCtrl($scope, LoginService, $state){
+
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Jugendstadtplan' ;
     }
   });
+
+  // Reinitalize LoginService
+  LoginService.init();
+
+  $scope.isLoggedIn = function() {
+    return LoginService.isLoggedIn();
+  };
+  
+  $scope.getJugendstadtplanUser = function() {
+    return LoginService.getJugendstadtplanUser();
+  };
+
+  $scope.logout = function() {
+    LoginService.logout();
+
+    $state.go('Startseite');
+  };
+
 }])
 
 ;
