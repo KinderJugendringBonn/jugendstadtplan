@@ -21,3 +21,5 @@ npm-debug.log
 web/environment.php
 app/SymfonyRequirements.php
 app/check.php
+public/www/vendor
+app/var/jwt/*
