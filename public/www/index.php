@@ -36,8 +36,6 @@
       </div>
       <div class="social-media-container-top large-3 columns">
           <a href="https://de-de.facebook.com/jugendstadtplanbonn">
-              <img src="/img/facebook-icon_inaktiv.png" data-ng-mouseenter="active = true" data-ng-mouseleave="active = false" data-ng-hide="active" data-ng-init="active = false" />
-              <img src="/img/facebook-icon_aktiv.png" data-ng-mouseenter="active = true" data-ng-mouseleave="active = false" data-ng-show="active" data-ng-init="active = false" />
               Facebook
           </a>
       </div>
