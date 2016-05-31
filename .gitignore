@@ -22,4 +22,5 @@ web/environment.php
 app/SymfonyRequirements.php
 app/check.php
 public/www/vendor
+public/www/js
 app/var/jwt/*
